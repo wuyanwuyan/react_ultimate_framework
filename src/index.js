@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import BasicExample from './page/BasicExample';
-import './css/index.css';
+import './css/reset.css';
+
+import './page/test.scss';
 
 class Ctest extends React.Component{
     constructor(props){

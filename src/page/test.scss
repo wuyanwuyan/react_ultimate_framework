@@ -1,0 +1,16 @@
+$blue : red;
+
+body{
+  background-color: $blue;
+  display: flex;
+  transform: scaleX(1);
+}
+
+@custom-media --small-viewport (max-width: 30em);
+
+@media (--small-viewport) {
+  /* styles for small viewport */
+  body{
+   background-color: orange;
+  }
+}

@@ -3,6 +3,10 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const extractCssPlugin = new ExtractTextPlugin({
+    filename: "[name].css"
+});
+
 var babelConfig = require("./config/babel.config");
 module.exports = {
     entry: {
@@ -24,10 +28,21 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|scss)$/,
-                use: ExtractTextPlugin.extract({
+                test: /\.(css|scss|pcss)$/,
+                use: extractCssPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    },{
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                    ]
                 })
             },
             {
@@ -51,7 +66,7 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({inject: 'body', template: './src/index.html'}),
-        new ExtractTextPlugin("styles.css"),
+        extractCssPlugin,
     ],
     devtool: 'source-map'
 }
