@@ -1,0 +1,31 @@
+{
+  "name": "react_ultimate_framework",
+  "version": "1.0.0",
+  "description": "react ultimate framework for fast start",
+  "main": "index.js",
+  "repository": "git@github.com:wuyanwuyan/react_ultimate_framework.git",
+  "author": "claude <xxs1992@foxmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack",
+    "clean": "rm -rf ./dist"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.1"
+  }
+}
