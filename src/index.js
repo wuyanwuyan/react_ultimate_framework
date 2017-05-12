@@ -12,7 +12,7 @@ class Ctest extends React.Component{
     }
 
     render(){
-        return <div>hello ooooo!</div>
+        return <div>hello ooo222oo!</div>
     }
 }
 

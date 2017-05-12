@@ -7,12 +7,12 @@ var babelConfig = require("./config/babel.config");
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        home: './src/index.js'
+        home: ['./src/index.js']
     },
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'js/[name].js',
-        publicPath: "./"
+        publicPath: "/"
     },
 
     module: {

@@ -7,8 +7,9 @@
   "author": "claude <xxs1992@foxmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack",
-    "clean": "rm -rf ./dist"
+    "start": "webpack-dev-server --inline --hot",
+    "clean": "rm -rf ./dist",
+    "build": "webpack"
   },
   "dependencies": {
     "react": "^15.5.4",
@@ -27,6 +28,7 @@
     "html-webpack-plugin": "^2.28.0",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "^2.5.1"
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
