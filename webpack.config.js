@@ -1,8 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var babelConfig = require("./config/babel.config");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var babelConfig = require("./config/babel.config");
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
@@ -11,7 +12,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'js/[name].js',
-        publicPath: "/"
+        publicPath: "./"
     },
 
     module: {
@@ -23,7 +24,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader"
@@ -33,7 +34,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 7186, // inline base64 if <= 7K
+                    limit: 7186,
                     name: 'static/images/[name].[ext]'
                 }
             },
@@ -41,7 +42,7 @@ module.exports = {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 7186, // inline base64 if <= 7K
+                    limit: 7186,
                     name: 'static/fonts/[name].[ext]'
                 }
             }
@@ -49,6 +50,7 @@ module.exports = {
     },
 
     plugins: [
+        new HtmlWebpackPlugin({inject: 'body', template: './src/index.html'}),
         new ExtractTextPlugin("styles.css"),
     ],
     devtool: 'source-map'

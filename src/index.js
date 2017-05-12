@@ -1,4 +1,7 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
+
+import './css/index.css';
 
 class Ctest extends React.Component{
     constructor(props){
@@ -12,3 +15,6 @@ class Ctest extends React.Component{
         return <div>hello ooooo!</div>
     }
 }
+
+
+ReactDOM.render(<Ctest />,document.getElementById("react-container"));
