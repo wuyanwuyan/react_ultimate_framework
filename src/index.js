@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-
+import BasicExample from './page/BasicExample';
 import './css/index.css';
 
 class Ctest extends React.Component{
@@ -17,4 +17,4 @@ class Ctest extends React.Component{
 }
 
 
-ReactDOM.render(<Ctest />,document.getElementById("react-container"));
+ReactDOM.render(<BasicExample />,document.getElementById("react-container"));
