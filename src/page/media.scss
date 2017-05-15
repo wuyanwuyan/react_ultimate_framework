@@ -2,6 +2,41 @@
   color: black;
 }
 
-#img-container{
+.img-container{
 
+}
+
+.ul{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+$wh : 140px;
+.image_container {
+  width: $wh;
+  height: $wh;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.img_inner{
+  position: relative;
+  overflow: hidden;
+  border: 1px gray solid;
+  height: 100%;
+  &:hover{
+    cursor: pointer;
+    box-shadow: #4500ff;
+    transform: scale(1.06);
+    z-index: 2;
+  }
+}
+
+.img{
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }

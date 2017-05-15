@@ -14,12 +14,39 @@ import {
 } from 'react-router-dom';
 import classNames from 'classnames';
 import ImgUpload from '../decorator/ImgUpload';
+import LookImgDetail from '../decorator/lookImgDetail';
 import style from './media.scss';
 
 class Media extends React.Component {
     constructor(props) {
         super(props);
 
+    }
+
+    _handleImgClick = (data) => () => {
+        this.props.openImgDetailDialog(data);
+    }
+
+    _renderImages = (data) => {
+        for (var i = 0; i < 100; i++) {
+            data[i] = {
+                url: "http://growing.cqaso.com/wp-content/uploads/2017/05/timg-9-1.jpg",
+                name: Math.random(),
+                key: i
+            }
+        }
+        const ret = data.map((v) => {
+            return (
+                <li className={style.image_container} key={v.key} onClick={this._handleImgClick(v)}>
+                    <div className={style.img_inner}>
+                        <img src={v.url} className={style.img}/>
+                    </div>
+
+                </li>
+            );
+        });
+
+        return ret;
     }
 
     render() {
@@ -41,15 +68,17 @@ class Media extends React.Component {
                             <Button label="搜索"/>
                         </InputGroup>
                     </div>
-                    <div id="img-container">
 
-                    </div>
                 </div>
-
+                <div className={style.img_container}>
+                    <ul className={style.ul}>
+                        {this._renderImages([])}
+                    </ul>
+                </div>
             </div>
 
         )
     }
 }
 
-export default ImgUpload(Media);
+export default LookImgDetail(ImgUpload(Media));
