@@ -1,0 +1,14 @@
+.loginWrapper{
+  width: 100vw;
+  height: 100vh;
+
+  background: linear-gradient(270deg, #4500ff, #c5b2f8, #61a279);
+  background-size: 600% 600%;
+  animation: AnimationName 30s ease infinite;
+}
+
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}

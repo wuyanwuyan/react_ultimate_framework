@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import BasicExample from './page/BasicExample';
+import Login from './page/login';
+import Layout from './layout/Layout';
 import './css/reset.css';
-
-import './page/test.scss';
+import './css/index.scss';
+import './css/utilities.scss';
 
 class Ctest extends React.Component{
     constructor(props){
@@ -14,9 +15,9 @@ class Ctest extends React.Component{
     }
 
     render(){
-        return <div>hello ooo222oo!</div>
+        return <div>hello 33ooo233322oo!</div>
     }
 }
 
 
-ReactDOM.render(<BasicExample />,document.getElementById("react-container"));
+ReactDOM.render(<Layout />,document.getElementById("react-container"));

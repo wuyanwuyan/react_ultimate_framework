@@ -1,0 +1,32 @@
+@import "../css/variables";
+@import "../css/utilities";
+
+.nav_and_content {
+  display: flex;
+}
+
+.sider {
+  margin-top: 0px;
+  min-height: calc(100vh - #{$header-height});
+}
+
+.subMenuItem {
+  background-color: $munubar-backgroud-color;
+}
+
+.menuItem {
+  padding-left: px2rem(46px);
+}
+
+.selected {
+  box-shadow: inset 0 0 4px #000000;
+  background-color: #08599b;
+  color: white;
+  font-weight: bolder;
+}
+
+.main_content {
+  padding: 15px;
+  overflow: auto;
+}
+
