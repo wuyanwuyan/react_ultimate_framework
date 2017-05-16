@@ -1,11 +1,16 @@
 import React from 'react';
 import {header} from './header.scss';
-import classNames from 'classnames'
+import classNames from 'classnames';
+import profile from '../utils/profile';
+
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
+        if(!profile.get())
+            window.location.href = '/login';
 
     }
+
 
     render() {
         return (

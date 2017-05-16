@@ -7,8 +7,9 @@ import Dialog from 'react-cqtoolbox/lib/dialog';
 import Editor from '../component/Editor';
 
 import style from './write.scss';
-
-export default class Write extends React.Component {
+import ArticlePreview from '../decorator/ArticlePreview';
+import {API_addArticle} from '../utils/api';
+class Write extends React.Component {
     state = {
         title: ""
     }
@@ -16,6 +17,36 @@ export default class Write extends React.Component {
 
     _handleTitleChange = (title) => {
         this.setState({title})
+    }
+
+    componentDidMount() {
+
+    }
+
+    publishArticle = () => {
+        const {title} = this.state;
+        const content = this.editor.getValue();
+        if (!title || !content) {
+            Dialog.error({content: "标题或正文不能为空！"})
+            return;
+        }
+        var categoryId = "1,2,3"
+        var postData = {
+            title, content, categoryId
+        }
+
+        Dialog.confirm({
+            content: <strong style={{color: "red"}}>确认发布新文章?</strong>,
+            onConfirm: () => {
+                API_addArticle(postData).then(data => {
+                    if (data === true) {
+                        Dialog.success({
+                            context:"发布成功"
+                        })
+                    }
+                })
+            }
+        });
     }
 
     render() {
@@ -40,8 +71,8 @@ export default class Write extends React.Component {
                     </div>
                     <div className="margin-left-bg">
                         <section className="section-warpper">
-                            <div className="section-title">
-                                <h2>发布</h2>
+                            <div className="section-title border-bottom-line">
+                                <h2>操作</h2>
                             </div>
 
                             <div className="padding-sm">
@@ -50,11 +81,9 @@ export default class Write extends React.Component {
                                     <Button label="预览" primary/>
                                 </div>
                                 <div>
-                                    <Button label="发布" raised accent/>
+                                    <Button label="发布" raised accent onClick={this.publishArticle}/>
                                 </div>
                             </div>
-
-
                         </section>
                     </div>
                 </div>
@@ -62,3 +91,5 @@ export default class Write extends React.Component {
         )
     }
 }
+
+export default ArticlePreview(Write);

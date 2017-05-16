@@ -33,9 +33,6 @@ export function fetchPost(url, data = {}, options = {type: 'form', method: 'POST
         }
     }
 
-    formData.append("iddddd","source");
-
-
     const requestUrl = config.backend.url + url;
 
     const headers = {};

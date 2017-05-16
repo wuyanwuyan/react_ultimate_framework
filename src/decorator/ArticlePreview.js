@@ -10,17 +10,19 @@ import Table from 'react-cqtoolbox/lib/table';
 import Dialog from 'react-cqtoolbox/lib/dialog';
 import {API_uploadImage} from '../utils/api';
 import $ from 'jquery';
-const ImgUpload = Component =>
-    class ImgUploadComp extends React.Component {
+import ArticleContent from '../component/ArticleContent';
+
+const ArticlePreview = Component =>
+    class ArticlePreviewComp extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
                 active: false,
+                article:{}
             };
 
             this.actions = [
-                {label: '上传', onClick: this.handleSubmit},
-                {label: '取消', onClick: this.handleDialogClose}
+                {label: '关闭', onClick: this.handleDialogClose}
             ];
         }
 
@@ -28,31 +30,9 @@ const ImgUpload = Component =>
             this.setState({active: false});
         }
 
-        openImgUploadDialog = () => {
-            this.setState({active: true});
-        }
-
-        handleSubmit = () => {
-            const files = this.refs.file.files;
-            var formData = new FormData();
-            if (files.length === 0) return;
-            for (var i = 0; i < files.length; i++) {
-                formData.append('image', files[i]);
-            }
-
-            API_uploadImage(formData).then(data => {
-
-            })
-            // window.fetch("upload",{
-            //     method:"post",
-            //     body:formData
-            // });
-
-
-            // var x = new XMLHttpRequest();
-            // x.open('POST', "/upload");
-            // x.send(formData);
-
+        openPreview = (data,option = {}) => {
+            var article = Object.assign(data,option);
+            this.setState({article,active:true});
         }
 
         render() {
@@ -65,21 +45,18 @@ const ImgUpload = Component =>
                         actions={this.actions}
                         active={state.active}
                         onEscKeyDown={this.handleDialogClose}
-                        onOverlayClick={this.handleDialogClose}>
+                        onOverlayClick={this.handleDialogClose}
+                        title="预览">
                         <div>
-
-                            <form>
-                                <input ref='file' multiple type="file" name='upload' accept="image/*"></input>
-                            </form>
-
+                           <ArticleContent {...state.article} />
                         </div>
                     </Dialog>
                     <Component
                         {...props}
-                        openImgUploadDialog={this.openImgUploadDialog}/>
+                        openPreview={this.openPreview}/>
                 </div>
             )
         }
     }
 
-export default ImgUpload;
+export default ArticlePreview;

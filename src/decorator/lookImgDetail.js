@@ -8,20 +8,19 @@ import {DateRangeSelect} from 'react-cqtoolbox/lib/date_select';
 import Select from 'react-cqtoolbox/lib/select';
 import Table from 'react-cqtoolbox/lib/table';
 import Dialog from 'react-cqtoolbox/lib/dialog';
-import {uploadFile} from '../utils/api';
-import $ from 'jquery';
+import {API_uploadImage} from '../utils/api';
+import style from './lookImgDetail.scss';
 const LookImgDetail = Component =>
     class Comp extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
                 active: false,
-                imgData:{}
+                imgData: {}
             };
 
             this.actions = [
-                {label: '确定', onClick: this.handleSubmit},
-                {label: '取消', onClick: this.handleDialogClose}
+                {label: '确定', onClick: this.handleDialogClose}
             ];
         }
 
@@ -30,25 +29,52 @@ const LookImgDetail = Component =>
         }
 
         openImgDetailDialog = (data) => {
-            this.setState({active: true,imgData:data});
+            this.setState({active: true, imgData: data});
         }
 
-        handleSubmit = () => {
+        copyImgLink = (url) => () => {
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", url);
+        }
+
+        delelteImg = (imgData) => () => {
+            Dialog.confirm({
+                content: <strong style={{color: "red"}}>确认删除该图片?</strong>,
+                onConfirm: () => {
+                    console.log(imgData);
+                }
+            })
         }
 
         render() {
             const props = this.props;
-            const state = this.state;
+            const {active, imgData} = this.state;
             return (
                 <div>
                     <Dialog
                         className="overflowAuto"
                         actions={this.actions}
-                        active={state.active}
+                        active={active}
                         onEscKeyDown={this.handleDialogClose}
                         onOverlayClick={this.handleDialogClose}>
-                        <div>
-                            <img src={state.imgData.url} />
+                        <div className="flex">
+                            <div className={style.img_container}>
+                                <img src={imgData.url}/>
+                            </div>
+                            <div className="margin-left-bg" style={{maxWidth:"400px"}}>
+                                <div className="margin-bottom-md">
+                                    <p><em>文件名： </em>{imgData.name}</p>
+                                    <p><em>url： </em>{imgData.url}</p>
+                                </div>
+                                <div className="flex-column flex_center_h">
+                                    <div className="margin-bottom-sm">
+                                        <Button raised primary label="复制图片链接" onClick={this.copyImgLink(imgData.url)}/>
+                                    </div>
+                                    <div className="">
+                                        <Button raised accent label="删除图片" onClick={this.delelteImg(imgData)}/>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </Dialog>
                     <Component

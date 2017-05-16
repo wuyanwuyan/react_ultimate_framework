@@ -1,7 +1,13 @@
 import React from 'react';
 import Header from './Header'
 import Menubar from './Menubar';
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch
+} from 'react-router-dom';
+import Login from '../page/login';
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
@@ -10,10 +16,16 @@ export default class Layout extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header/>
-                <Menubar/>
-            </div>
+            <Router>
+                    <Switch>
+                        <Route exact path='/login' component={ () => <Login />}/>
+                        <Route component={() => (
+                            <div>
+                                <Header/>
+                                <Menubar/>
+                            </div>) }/>
+                    </Switch>
+            </Router>
         )
     }
 }

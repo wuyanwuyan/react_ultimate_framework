@@ -42,7 +42,7 @@ class Editor extends React.Component {
     render () {
         return (
             <div>
-                <textarea ref='textarea' placeholder="消息内容..." />
+                <textarea ref='textarea' placeholder="文章内容..." />
             </div>
         );
     }

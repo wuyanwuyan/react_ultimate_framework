@@ -12,7 +12,7 @@ import {FormItem} from 'react-cqtoolbox/lib/form';
 import {Section} from 'react-cqtoolbox/lib/section';
 import {Checkbox} from 'react-cqtoolbox/lib/checkbox';
 import classNames from 'classnames';
-
+import { withRouter } from 'react-router'
 class Login extends Component {
 
     state = {
@@ -43,7 +43,7 @@ class Login extends Component {
         API_login(_profile).then(data => {
             if (data.user) {
                 this.state.checked ? Profile.login(data) : Profile.loginBySession(data);
-                this.props.router.push('/userList');
+                window.location.href = '/articles';
             } else if (data.status === 0) {
                 this.props.addNotification('密码错误~', 'error');
             } else if (data.status === -1) {

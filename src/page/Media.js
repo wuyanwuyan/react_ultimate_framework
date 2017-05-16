@@ -16,30 +16,37 @@ import classNames from 'classnames';
 import ImgUpload from '../decorator/ImgUpload';
 import LookImgDetail from '../decorator/lookImgDetail';
 import style from './media.scss';
+import {API_ugetImages} from '../utils/api';
+
+
+const prefix = "http://cqaso.oss-cn-shanghai.aliyuncs.com/"
 
 class Media extends React.Component {
-    constructor(props) {
-        super(props);
-
+    state = {
+        allImg: []
     }
 
-    _handleImgClick = (data) => () => {
-        this.props.openImgDetailDialog(data);
+
+    componentDidMount() {
+        API_ugetImages().then(allImg => {
+            this.setState({allImg});
+        })
     }
 
-    _renderImages = (data) => {
-        for (var i = 0; i < 100; i++) {
-            data[i] = {
-                url: "http://growing.cqaso.com/wp-content/uploads/2017/05/timg-9-1.jpg",
-                name: Math.random(),
-                key: i
-            }
-        }
-        const ret = data.map((v) => {
+    _handleImgClick = (v) => () => {
+        this.props.openImgDetailDialog({
+            url: prefix + v,
+            name: v
+
+        });
+    }
+
+    _renderImages = (allImg = []) => {
+        const ret = allImg.map((v, i) => {
             return (
-                <li className={style.image_container} key={v.key} onClick={this._handleImgClick(v)}>
+                <li className={style.image_container} key={i} onClick={this._handleImgClick(v)}>
                     <div className={style.img_inner}>
-                        <img src={v.url} className={style.img}/>
+                        <img src={prefix + v} className={style.img}/>
                     </div>
 
                 </li>
@@ -50,6 +57,7 @@ class Media extends React.Component {
     }
 
     render() {
+        const {allImg} = this.state;
         return (
             <div className={style.media}>
                 <div className="flex_center_v margin-bottom-bg">
@@ -72,7 +80,7 @@ class Media extends React.Component {
                 </div>
                 <div className={style.img_container}>
                     <ul className={style.ul}>
-                        {this._renderImages([])}
+                        {this._renderImages(allImg || [])}
                     </ul>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 const config = {
     backend: {
         url: process.env.NODE_ENV === 'development' ?
-            'http://localhost:8087/' :
-            'http://localhost:8087/',
+            '//121.40.106.106:8080/' :
+            '//121.40.106.106:8080/',
     },
 };
 
