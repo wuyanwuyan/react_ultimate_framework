@@ -1,7 +1,6 @@
 import React from 'react';
 import Simditor from 'simditor';
 import $ from 'jquery';
-import 'simditor/styles/simditor.css';
 import autobind from 'autobind-decorator';
 
 class Editor extends React.Component {

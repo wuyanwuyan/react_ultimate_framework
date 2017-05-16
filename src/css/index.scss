@@ -26,12 +26,12 @@ a {
 }
 
 .section-title {
-  padding-left: 10px;
-  height: 26px;
+  padding: 15px;
   line-height: 26px;
   font-size: px2rem(14px);
 }
 
 .article-plain-content {
   min-width: 670px;
+  max-width: 800px;
 }

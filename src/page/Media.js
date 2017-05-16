@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import ImgUpload from '../decorator/ImgUpload';
 import LookImgDetail from '../decorator/lookImgDetail';
 import style from './media.scss';
-import {API_ugetImages} from '../utils/api';
+import {API_getImages} from '../utils/api';
 
 
 const prefix = "http://cqaso.oss-cn-shanghai.aliyuncs.com/"
@@ -28,7 +28,7 @@ class Media extends React.Component {
 
 
     componentDidMount() {
-        API_ugetImages().then(allImg => {
+        API_getImages().then(allImg => {
             this.setState({allImg});
         })
     }

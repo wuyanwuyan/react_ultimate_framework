@@ -11,7 +11,7 @@ import Dialog from 'react-cqtoolbox/lib/dialog';
 import {API_uploadImage} from '../utils/api';
 import $ from 'jquery';
 import ArticleContent from '../component/ArticleContent';
-
+import '../css/simditor.css';
 const ArticlePreview = Component =>
     class ArticlePreviewComp extends React.Component {
         constructor(props) {
@@ -45,8 +45,7 @@ const ArticlePreview = Component =>
                         actions={this.actions}
                         active={state.active}
                         onEscKeyDown={this.handleDialogClose}
-                        onOverlayClick={this.handleDialogClose}
-                        title="预览">
+                        onOverlayClick={this.handleDialogClose}>
                         <div>
                            <ArticleContent {...state.article} />
                         </div>

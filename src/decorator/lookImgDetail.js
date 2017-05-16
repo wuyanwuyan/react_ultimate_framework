@@ -8,7 +8,7 @@ import {DateRangeSelect} from 'react-cqtoolbox/lib/date_select';
 import Select from 'react-cqtoolbox/lib/select';
 import Table from 'react-cqtoolbox/lib/table';
 import Dialog from 'react-cqtoolbox/lib/dialog';
-import {API_uploadImage} from '../utils/api';
+import {API_uploadImage,API_deleteImages} from '../utils/api';
 import style from './lookImgDetail.scss';
 const LookImgDetail = Component =>
     class Comp extends React.Component {
@@ -40,7 +40,9 @@ const LookImgDetail = Component =>
             Dialog.confirm({
                 content: <strong style={{color: "red"}}>确认删除该图片?</strong>,
                 onConfirm: () => {
-                    console.log(imgData);
+                    API_deleteImages(imgData.name).then(data => {
+                        console.log(data)
+                    })
                 }
             })
         }

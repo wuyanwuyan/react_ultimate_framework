@@ -1,10 +1,14 @@
+import './css/reset.css';
+import './css/index.scss';
+import './css/utilities.scss';
+import 'simditor/styles/simditor.css';
+import './css/simditor.css';
+
 import React from 'react'
 import ReactDOM from 'react-dom';
 import Login from './page/login';
 import Layout from './layout/Layout';
-import './css/reset.css';
-import './css/index.scss';
-import './css/utilities.scss';
+
 
 class Ctest extends React.Component{
     constructor(props){

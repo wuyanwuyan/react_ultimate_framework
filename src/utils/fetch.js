@@ -27,7 +27,7 @@ export function fetchPost(url, data = {}, options = {type: 'form', method: 'POST
 
     if (data instanceof FormData) {
         formData = data;
-    }else{
+    } else {
         for (const [key, value] of Object.entries(data)) {
             formData.append(key, value);
         }
@@ -45,7 +45,7 @@ export function fetchPost(url, data = {}, options = {type: 'form', method: 'POST
         headers['X-Auth-Token'] = profile.token;
     }
     const res = fetch(requestUrl, {
-        method: options.method,
+        method: "POST",
         headers,
         body: options.type === 'form' ? formData : typeof data === 'object' ? JSON.stringify(data) : data,
     });
@@ -56,19 +56,62 @@ export function fetchPost(url, data = {}, options = {type: 'form', method: 'POST
     )(res);
 }
 
-export function fetchDelete(url, word) {
+export function fetchPut(url, data = {}, options = {type: 'form', method: 'PUT'}) {
+    const profile = Profile.get();
+    console.log('%c' + url, 'color: green');
+
+    let formData = new FormData();
+
+    if (data instanceof FormData) {
+        formData = data;
+    } else {
+        for (const [key, value] of Object.entries(data)) {
+            formData.append(key, value);
+        }
+    }
+
+    const requestUrl = config.backend.url + url;
+
+    const headers = {};
+    if (options.type === 'json') {
+        headers.Accept = 'application/json';
+        headers['Content-Type'] = 'application/json';
+    }
+
+    if (profile) {
+        headers['X-Auth-Token'] = profile.token;
+    }
+    const res = fetch(requestUrl, {
+        method: 'PUT',
+        headers,
+        body: options.type === 'form' ? formData : typeof data === 'object' ? JSON.stringify(data) : data,
+    });
+
+    return compose(
+        formatJson,
+        catchError,
+    )(res);
+}
+
+export function fetchDelete(url, word, options = {type: 'form'}) {
     const profile = Profile.get();
 
     console.log('%c' + url, 'color: green');
 
     const requestUrl = window.encodeURI(config.backend.url + url);
 
+    const headers = {};
+    if (options.type === 'json') {
+        headers.Accept = 'application/json';
+        headers['Content-Type'] = 'application/json';
+    }
+
+    headers['X-Auth-Token'] = profile && profile.token;
+
     const res = fetch(requestUrl, {
         method: 'DELETE',
-        headers: {
-            'X-Auth-Token': profile && profile.token,
-        },
-        body: word,
+        headers: headers,
+        body: options.type === "json" ? JSON.stringify(word) : word,
     });
 
     return compose(

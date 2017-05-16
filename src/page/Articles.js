@@ -9,15 +9,21 @@ import {DateRangeSelect} from 'react-cqtoolbox/lib/date_select';
 import Table from 'react-cqtoolbox/lib/table';
 import Dialog from 'react-cqtoolbox/lib/dialog';
 import style from './articleList.scss';
-import {API_getArticle, API_deleteArticle} from '../utils/api';
+import {API_getArticle, API_deleteArticle, API_getCategorys} from '../utils/api';
 import ArticlePreview from '../decorator/ArticlePreview';
+import {observer} from 'mobx-react';
+import {withRouter} from 'react-router'
 import {
     BrowserRouter as Router,
     Route,
     Link
 } from 'react-router-dom';
+import store from '../store/store';
 import classNames from 'classnames';
 
+@observer
+@withRouter
+@ArticlePreview
 class ArticleList extends React.Component {
     state = {
         articles: []
@@ -25,6 +31,7 @@ class ArticleList extends React.Component {
 
     componentDidMount() {
         this._refreshArticle();
+        store.updateCategory();
     }
 
     _refreshArticle() {
@@ -48,6 +55,13 @@ class ArticleList extends React.Component {
         })
     }
 
+    _editArticle = (id) => () => {
+        const props = this.props;
+        store.editArticleId = id;
+        props.history.push("/write");
+        // window.location.href = `/write#${id}`;
+    }
+
     _deleteArticle = (id) => () => {
         Dialog.confirm({
             content: <strong style={{color: "red"}}>确认删除该文章?</strong>,
@@ -62,23 +76,34 @@ class ArticleList extends React.Component {
 
     }
 
-    _renderArticles(articles = []) {
-        articles.map((v, i) => {
+    _renderArticles = (articles = []) => {
+        const dataSource = articles.map((v, i) => {
             v.key = i;
+            return v;
         });
-        const dataSource = articles;
         const columns = [
             {
                 title: '标题',
                 field: 'title',
                 key: 'title',
-                render: (field, {title,id}, index) => (<a onClick={this._lookArticle(id)}>{title}</a>)
+                render: (field, {title, id}, index) => (<a title={id} onClick={this._lookArticle(id)}>{title}</a>)
 
             }, {
                 title: '分类目录',
                 field: 'category',
                 key: 'category',
-                render: (field, {categoryIds}, index) => (categoryIds.join(","))
+                render: (field, {categoryIds}, index) => {
+                    var ret = [];
+                    for (var cateId of categoryIds) {
+                        for (var value of store.category) {
+                            if (value.id == cateId) {
+                                ret.push(value.type);
+                            }
+                        }
+                    }
+
+                    return ret.join(",");
+                }
             }, {
                 title: '阅读量',
                 field: 'readNum',
@@ -88,7 +113,7 @@ class ArticleList extends React.Component {
                 title: '评论',
                 field: 'comment',
                 key: 'comment',
-                render: (field, {categoryIds}, index) => (categoryIds.join(","))
+                render: (field, {categoryIds}, index) => ("0")
             }, {
                 title: '日期',
                 field: 'time',
@@ -98,11 +123,12 @@ class ArticleList extends React.Component {
                 title: '操作',
                 field: 'op',
                 key: 'op',
+                width: "140px",
                 render: (field, {id}, index) => {
                     return (
                         <div>
-                            <Button label="删除" onClick={this._deleteArticle(id)}/>
-                            <Button label="编辑"/>
+                            <Button label="编辑" onClick={this._editArticle(id)}/>
+                            <Button raised accent label="删除" onClick={this._deleteArticle(id)}/>
                         </div>
                     );
                 }
@@ -142,9 +168,8 @@ class ArticleList extends React.Component {
                 </div>
 
             </div>
-
         )
     }
 }
 
-export default ArticlePreview(ArticleList);
+export default ArticleList;

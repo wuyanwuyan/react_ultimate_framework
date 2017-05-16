@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import 'simditor/styles/simditor.css';
+
 export default class ArticleContent extends React.Component {
     constructor(props) {
         super(props);
@@ -8,17 +8,20 @@ export default class ArticleContent extends React.Component {
     }
 
     render() {
-        const {title,content,category,time} = this.props;
+        const {title, content, category, time} = this.props;
         return (
-            <div className="article-plain-content">
-                <h1>{title}</h1>
-                <div>
-                  <span>{moment(time).format('YYYY-MM-DD')}</span>
-                    <span>{category}</span>
+            <div className="article-plain-content section-wrapper">
+                <div className="article-title">
+                    <h1>{title}</h1>
+                    <div className="article-more-info">
+                        <span>{moment(time).format('YYYY-MM-DD')}</span>
+                        <span>{category}</span>
+                    </div>
                 </div>
-                <div dangerouslySetInnerHTML={{__html:content}}>
+                <div className="simditor">
+                    <div className="simditor-body" dangerouslySetInnerHTML={{__html: content}}>
+                    </div>
                 </div>
-
             </div>
         )
     }
