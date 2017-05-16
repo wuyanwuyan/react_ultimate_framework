@@ -10,7 +10,7 @@ export default class ArticleContent extends React.Component {
     render() {
         const {title, content, category, time} = this.props;
         return (
-            <div className="article-plain-content section-wrapper">
+            <div className="article-plain-content">
                 <div className="article-title">
                     <h1>{title}</h1>
                     <div className="article-more-info">

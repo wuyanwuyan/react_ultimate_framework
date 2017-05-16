@@ -13,6 +13,9 @@ import {API_addArticle, API_getArticle, API_updateArticle} from '../utils/api';
 import store from '../store/store';
 import classNames from 'classnames';
 
+
+const DESC_MAX_LENGTH = 80;
+
 @observer
 @EditCategory
 @ArticlePreview
@@ -57,17 +60,24 @@ class Write extends React.Component {
         this.props.openEditCategory();
     }
 
-    previewArticle = () => {
+    _validate = () => {
         const {title} = this.state;
         const content = this.editor.getValue();
         if (!title || !content) {
             Dialog.error({content: "标题或正文不能为空！"})
-            return;
+            return false;
         }
         if (this.state.checkIds.length === 0) {
             Dialog.error({content: "请为文章选择一个分类！"})
-            return;
+            return false;
         }
+        return true;
+    }
+
+    previewArticle = () => {
+        const {title} = this.state;
+        const content = this.editor.getValue();
+        if(!this._validate()) return;
         var categoryIds = this.state.checkIds;
         var postData = {
             title, content, categoryIds
@@ -78,17 +88,13 @@ class Write extends React.Component {
     publishArticle = () => {
         const {title, isEdit, articleId} = this.state;
         const content = this.editor.getValue();
-        if (!title || !content) {
-            Dialog.error({content: "标题或正文不能为空！"})
-            return;
-        }
-        if (this.state.checkIds.length === 0) {
-            Dialog.error({content: "请为文章选择一个分类！"})
-            return;
-        }
+        if(!this._validate()) return;
         var categoryIds = this.state.checkIds;
+        var innerTxt = document.querySelector(".simditor-body").innerText;
+        innerTxt = innerTxt.replace(/\s+/g," ");
+        var desc = innerTxt.substr(0,DESC_MAX_LENGTH);
         var postData = {
-            title, content, categoryIds
+            title, content, categoryIds,desc
         }
 
         if (isEdit) {
