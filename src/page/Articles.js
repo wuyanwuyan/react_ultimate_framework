@@ -9,7 +9,7 @@ import {DateRangeSelect} from 'react-cqtoolbox/lib/date_select';
 import Table from 'react-cqtoolbox/lib/table';
 import Dialog from 'react-cqtoolbox/lib/dialog';
 import style from './articleList.scss';
-import {API_getArticle, API_deleteArticle, API_getCategorys} from '../utils/api';
+import {API_getArticleByArticleId, API_deleteArticle, API_getCategorys, API_AllgetArticle} from '../utils/api';
 import ArticlePreview from '../decorator/ArticlePreview';
 import {observer} from 'mobx-react';
 import {withRouter} from 'react-router'
@@ -26,7 +26,10 @@ import classNames from 'classnames';
 @ArticlePreview
 class ArticleList extends React.Component {
     state = {
-        articles: []
+        articles: [],
+        page: 1,
+        total: 0,
+        limit: 10
     }
 
     componentDidMount() {
@@ -34,23 +37,26 @@ class ArticleList extends React.Component {
         store.updateCategory();
     }
 
-    _refreshArticle() {
-        API_getArticle().then(data => {
-            data = data.sort(function (a, b) {
+    _refreshArticle(page = 1) {
+        API_AllgetArticle(-1, page, this.state.limit).then(data => {
+            data.contents.sort(function (a, b) {
                 return b.time - a.time
             });
             this.setState({
-                articles: data
+                articles: data.contents,
+                page: page,
+                total: data.total
             })
         });
     }
 
-    _onPageChange = () => {
-
+    _onPageChange = (page) => {
+        this.setState({page});
+        this._refreshArticle(page);
     }
 
     _lookArticle = (id) => () => {
-        API_getArticle(id).then(data => {
+        API_getArticleByArticleId(id).then(data => {
             this.props.openPreview(data);
         })
     }
@@ -76,12 +82,33 @@ class ArticleList extends React.Component {
 
     }
 
+    // state 全部：-1 草稿：0 已发布：1
     _renderArticles = (articles = []) => {
         const dataSource = articles.map((v, i) => {
             v.key = i;
             return v;
         });
+        const {limit, page} = this.state;
+        const STATE = {
+            "-1" : "全部",
+            "0" : "草稿",
+            "1" : "已发布"
+        }
         const columns = [
+            {
+                title: '序号',
+                field: 'index',
+                key: 'index',
+                render: (field, {title, id}, index) => (limit *(page-1) + index +1)
+
+            },
+            {
+                title: '状态',
+                field: 'state',
+                key: 'state',
+                render: (field, {state}, index) => (STATE[state])
+
+            },
             {
                 title: '标题',
                 field: 'title',
@@ -138,11 +165,11 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        const {articles} = this.state;
+        const {articles, page, total, limit} = this.state;
         return (
             <div>
                 <div className={classNames(style.article_list, "flex_center_v", "margin-bottom-sm")}>
-                    <h2 className="margin-right-sm">文章列表</h2>
+                    <h2 className="margin-right-sm">文章列表：共{total}篇</h2>
                     <Link to="/write"><Button icon="book" label="写文章" primary></Button></Link>
                 </div>
                 <div className="flex_center_v">
@@ -162,8 +189,8 @@ class ArticleList extends React.Component {
 
                 <div className="flex_center_h">
                     <Pagination
-                        currentPage={1}
-                        totalPages={1}
+                        currentPage={page}
+                        totalPages={Math.max(1, Math.ceil(total / limit))}
                         onChange={this._onPageChange}/>
                 </div>
 

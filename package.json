@@ -8,9 +8,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client.config.js",
+    "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
     "clean": "rm -rf ./dist",
-    "build": "webpack --config=./config/webpack_client.config.js"
+    "build": "webpack --config=./config/webpack_client_production.config.js",
+    "server" : "node server"
   },
   "dependencies": {
     "autobind-decorator": "^1.4.0",

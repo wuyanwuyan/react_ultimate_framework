@@ -9,12 +9,17 @@ import {observer} from 'mobx-react';
 import style from './write.scss';
 import ArticlePreview from '../decorator/ArticlePreview';
 import EditCategory from '../decorator/EditCategory';
-import {API_addArticle, API_getArticle, API_updateArticle} from '../utils/api';
+import {API_addArticle, API_getArticleByArticleId, API_updateArticle} from '../utils/api';
 import store from '../store/store';
 import classNames from 'classnames';
 
 
 const DESC_MAX_LENGTH = 80;
+const STATE = {
+    "-1" : "全部",
+    "0" : "草稿",
+    "1" : "已发布"
+}
 
 @observer
 @EditCategory
@@ -39,12 +44,12 @@ class Write extends React.Component {
     componentDidMount() {
         const {isEdit, articleId} = this.state;
         if (isEdit) {
-            API_getArticle(articleId).then(data => {
+            API_getArticleByArticleId(articleId).then(data => {
                 store.editArticleId = undefined;
                 this.editor.setValue(data.content);
                 this.setState({
                     title: data.title,
-                    checkIds:data.categoryIds
+                    checkIds: data.categoryIds
                 })
             })
         }
@@ -74,10 +79,12 @@ class Write extends React.Component {
         return true;
     }
 
+
+
     previewArticle = () => {
         const {title} = this.state;
         const content = this.editor.getValue();
-        if(!this._validate()) return;
+        if (!this._validate()) return;
         var categoryIds = this.state.checkIds;
         var postData = {
             title, content, categoryIds
@@ -85,16 +92,53 @@ class Write extends React.Component {
         this.props.openPreview(postData, {time: (new Date()).getTime()})
     }
 
+    saveArticle = () => {
+
+        const {title, isEdit, articleId} = this.state;
+        const content = this.editor.getValue();
+        if (!this._validate()) return;
+        var categoryIds = this.state.checkIds;
+
+        var innerTxt = document.querySelector(".simditor-body").innerText;
+        innerTxt = innerTxt.replace(/\s+/g, " ");
+        var desc = innerTxt.substr(0, DESC_MAX_LENGTH);
+
+        var firstImg = document.querySelector(".simditor-body img");
+
+        var thumbnail = firstImg ? firstImg.src : "http://cqaso.com/dist/8ff7b64b26945ed2d2394147fab4145a.jpg";
+        var postData = {
+            title, content, categoryIds, desc, thumbnail,state:0
+        }
+
+        Dialog.confirm({
+            content: <strong style={{color: "red"}}>确认保存为草稿?</strong>,
+            onConfirm: () => {
+                API_addArticle(postData).then(data => {
+                    if (data) {
+                        Dialog.success({
+                            content: "保存成功"
+                        })
+                    }
+                })
+            }
+        });
+    }
+
     publishArticle = () => {
         const {title, isEdit, articleId} = this.state;
         const content = this.editor.getValue();
-        if(!this._validate()) return;
+        if (!this._validate()) return;
         var categoryIds = this.state.checkIds;
+
         var innerTxt = document.querySelector(".simditor-body").innerText;
-        innerTxt = innerTxt.replace(/\s+/g," ");
-        var desc = innerTxt.substr(0,DESC_MAX_LENGTH);
+        innerTxt = innerTxt.replace(/\s+/g, " ");
+        var desc = innerTxt.substr(0, DESC_MAX_LENGTH);
+
+        var firstImg = document.querySelector(".simditor-body img");
+
+        var thumbnail = firstImg ? firstImg.src : "http://cqaso.com/dist/8ff7b64b26945ed2d2394147fab4145a.jpg";
         var postData = {
-            title, content, categoryIds,desc
+            title, content, categoryIds, desc, thumbnail,state:1
         }
 
         if (isEdit) {
@@ -107,7 +151,7 @@ class Write extends React.Component {
             content: <strong style={{color: "red"}}>确认发布新文章?</strong>,
             onConfirm: () => {
                 API_func(postData).then(data => {
-                    if (data === true) {
+                    if (data) {
                         Dialog.success({
                             content: "发布成功"
                         })
@@ -136,7 +180,7 @@ class Write extends React.Component {
         var cate = store.category;
         return cate.map((v, i) => {
             return (<Checkbox key={i} checked={this.state.checkIds.indexOf(v.id) !== -1} label={v.type}
-                             onChange={this._onCheck(v.id)}/>)
+                              onChange={this._onCheck(v.id)}/>)
         })
 
     }
@@ -181,7 +225,7 @@ class Write extends React.Component {
 
                             <div className="padding-sm">
                                 <div className="flex-space-between margin-bottom-sm">
-                                    <Button label="保存草稿"/>
+                                    <Button label="保存草稿" onClick={this.saveArticle}/>
                                     <Button label="预览" primary onClick={this.previewArticle}/>
                                 </div>
                                 <div>

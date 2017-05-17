@@ -11,12 +11,15 @@ export function API_login(data) {
 
 
 // -------------- 文章操作
-export function API_getArticle(id) {
-    if (id !== undefined) {
-        return fetchGet(`column/articles/${id}`);
-    } else {
-        return fetchGet("column/articles")
-    }
+
+export function API_AllgetArticle(state = -1, page = 1, limit = 10) {
+    var query = {state,offset: (page - 1) * limit, limit};
+    return fetchGet("column/articles", query);
+}
+
+export function API_getArticleByArticleId(id) {
+    return fetchGet(`column/articles/${id}`);
+
 }
 
 export function API_addArticle(data) {
@@ -45,13 +48,13 @@ export function API_deleteCategory(id) {
 
 // ----------------------------------- 图片操作
 export function API_uploadImage(data) {
-    return fetchPost("image/uploadImage", data)
+    return fetchPost("column/image/uploadImage", data)
 }
 
 export function API_getImages(data) {
-    return fetchGet("image/getImages")
+    return fetchGet("column/image/getImages")
 }
 
 export function API_deleteImages(id) {
-    return fetchDelete(`image/deleteImages`, [id], {type: "json"});
+    return fetchDelete(`column/image/deleteImages`, [id], {type: "json"});
 }

@@ -47,7 +47,7 @@ const EditCategory = Component =>
             if (!type) return;
 
             API_addCategory(type).then(data => {
-                if(data===true){
+                if(data){
                     store.updateCategory()
                     Dialog.success({
                         content:"添加成功！"
