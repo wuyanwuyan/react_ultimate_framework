@@ -43,7 +43,7 @@ const ImgUpload = Component =>
             API_uploadImage(formData).then(data => {
 
                 window.location.reload();
-                
+
             })
             // window.fetch("upload",{
             //     method:"post",
