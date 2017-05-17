@@ -51,8 +51,9 @@ export function API_uploadImage(data) {
     return fetchPost("column/image/uploadImage", data)
 }
 
-export function API_getImages(data) {
-    return fetchGet("column/image/getImages")
+export function API_getImages(offset = 0,limit = 50) {
+    var query = {offset,limit};
+    return fetchGet("column/image/getImages",query);
 }
 
 export function API_deleteImages(id) {

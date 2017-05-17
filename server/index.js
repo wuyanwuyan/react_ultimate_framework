@@ -1,20 +1,20 @@
 var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
-var webpackDevOptions = require('../config/webpack_client_dev.config.js');
+var webpackDevConfig = require('../config/webpack_client_dev.config.js');
 
 var app = express();
 
-var compiler = webpack(webpackDevOptions);
+var compiler = webpack(webpackDevConfig);
 
 
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 
 if (process.env.NODE_ENV !== "production") {
 
     let webpackDevOptions = {
         noInfo: false,
-        publicPath: webpackDevOptions.output.publicPath,
+        publicPath: webpackDevConfig.output.publicPath,
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
@@ -47,7 +47,13 @@ if (process.env.NODE_ENV !== "production") {
         })
     })
 } else {
+
     app.use(express.static('dist'));
+
+    app.get('*', function (req, res, next) {
+        const filename = path.resolve(__dirname, '../dist/index.html');
+        res.sendFile(filename);
+    });
 }
 
 const port = 8087;

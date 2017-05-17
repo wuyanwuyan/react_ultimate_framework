@@ -7,11 +7,11 @@
   "author": "claude <xxs1992@foxmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server",
+    "start": "node server/index.js",
     "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
     "clean": "rm -rf ./dist",
     "build": "webpack --config=./config/webpack_client_production.config.js",
-    "server" : "node server"
+    "server" : "node server.js"
   },
   "dependencies": {
     "autobind-decorator": "^1.4.0",

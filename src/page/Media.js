@@ -23,13 +23,18 @@ const prefix = "http://cqaso.oss-cn-shanghai.aliyuncs.com/"
 
 class Media extends React.Component {
     state = {
-        allImg: []
+        allImg:[],
+        limit: 50,
+        offset: 0,
+        total: 0
     }
 
 
     componentDidMount() {
-        API_getImages().then(allImg => {
-            this.setState({allImg});
+        API_getImages().then(data => {
+            var allImg = this.state.allImg;
+            allImg = allImg.concat(data.contents);
+            this.setState({...data,allImg});
         })
     }
 

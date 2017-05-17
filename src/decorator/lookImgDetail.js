@@ -41,7 +41,9 @@ const LookImgDetail = Component =>
                 content: <strong style={{color: "red"}}>确认删除该图片?</strong>,
                 onConfirm: () => {
                     API_deleteImages(imgData.name).then(data => {
-                        console.log(data)
+                        if(data){
+                            window.location.reload();
+                        }
                     })
                 }
             })
