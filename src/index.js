@@ -19,9 +19,9 @@ class Ctest extends React.Component{
     }
 
     render(){
-        return <div>hello 33ooo233322oo!</div>
+        return <div style={{color:"red"}}>hello hah22a222h!</div>
     }
 }
 
 
-ReactDOM.render(<Layout />,document.getElementById("react-container"));
+ReactDOM.render(<Ctest />,document.getElementById("react-container"));

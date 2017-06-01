@@ -1,60 +1,87 @@
 var path = require('path');
-var express = require('express');
+var fs = require('fs');
+var Koa = require('koa');
+var koaRouter = require('koa-router');
+var bodyParser = require('koa-bodyparser');
 var webpack = require('webpack');
+var devMiddleware = require('../plugin/devMiddleware');
+var hotMiddleware = require('../plugin/hotMiddleware');
 var webpackDevConfig = require('../config/webpack_client_dev.config.js');
 
-var app = express();
+
+var app = new Koa();
+const router = new koaRouter();
 
 var compiler = webpack(webpackDevConfig);
 
-
 // process.env.NODE_ENV = "production";
 
-if (process.env.NODE_ENV !== "production") {
 
-    let webpackDevOptions = {
-        noInfo: false,
-        publicPath: webpackDevConfig.output.publicPath,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
-        stats: {
-            colors: true,
-            hash: false
-        }
-    };
+let webpackDevOptions = {
+    noInfo: false,
+    publicPath: webpackDevConfig.output.publicPath,
+    stats: {
+        colors: true,
+        hash: false
+    }
+};
 
-    app.use(require('webpack-dev-middleware')(compiler, webpackDevOptions));
-    app.use(require('webpack-hot-middleware')(compiler));
+app.use(bodyParser());
+
+app.use(devMiddleware(compiler, webpackDevOptions));
+app.use(hotMiddleware(compiler));
 
 
-    app.get('/', function (req, res, next) {
-        const filename = path.resolve(webpackDevOptions.output.path, 'index.html');
-        res.sendFile(filename);
+app.use(require('koa-static')(compiler.outputPath));
 
-    });
+app.use(router.routes());
 
 
-    app.use('*', function (req, res, next) {
-        const filename = path.join(compiler.outputPath, 'index.html')
-        compiler.outputFileSystem.readFile(filename, (err, result) => {
+router.get('/', async (ctx, next) => {
+
+    const filename = path.join(compiler.outputPath, "index.html");
+
+    console.log("fffssss : ", filename);
+
+    var result = await new Promise(function (resolve, reject) {
+        compiler.outputFileSystem.readFile(filename, 'utf8' ,function (err, result) {
             if (err) {
-                return next(err)
+
+                reject(err);
             }
-            res.set('content-type', 'text/html')
-            res.send(result)
-            res.end()
-        })
+            resolve(result)
+        });
     })
-} else {
 
-    app.use(express.static('dist'));
+    ctx.type = "html";
+    ctx.body = result;
+});
 
-    app.get('*', function (req, res, next) {
-        const filename = path.resolve(__dirname, '../dist/index.html');
-        res.sendFile(filename);
-    });
-}
+
+router.get('*', async (ctx, next) => {
+
+    console.log(ctx.path,ctx.url);
+
+    const filename = path.join(compiler.outputPath, ctx.path);
+
+    console.log("fffssss : ", filename);
+
+    var result = await new Promise(function (resolve, reject) {
+        compiler.outputFileSystem.readFile(filename, 'utf8' ,function (err, result) {
+            if (err) {
+                reject(err);
+            }
+            resolve(result)
+        });
+    })
+
+    ctx.type = "html";
+    ctx.body = result;
+
+    await next();
+
+
+});
 
 const port = 8087;
 app.listen(port, function (err) {

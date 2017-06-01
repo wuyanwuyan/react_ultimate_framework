@@ -20,7 +20,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <div className={classNames(header,"flex_center_v","flex-space-between","padding-left-md")}>
-                <h1><em>cqaso专栏</em>后台管理系统</h1>
+                <h1><em>cqaso专栏</em>后台管理系统222</h1>
                 <a className="margin_left_auto" onClick={this.loginOut}>退出</a>
             </div>
         )

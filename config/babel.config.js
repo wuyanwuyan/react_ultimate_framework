@@ -1,6 +1,6 @@
 module.exports = {
     dev_client: {
-        presets: ["es2015", "stage-0", "react"],
+        presets: ["es2015", "stage-0", "react","react-hmre"],
         "plugins": ["transform-decorators-legacy", "transform-runtime"],
         cacheDirectory: true
     },

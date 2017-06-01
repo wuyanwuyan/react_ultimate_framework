@@ -3,7 +3,6 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var babelConfig = require("./babel.config").dev_client;
-
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
