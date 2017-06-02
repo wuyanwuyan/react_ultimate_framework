@@ -112,6 +112,15 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            __CLIENT__: true,
+            __SERVER__: false,
+            __PRODUCTION__: false,
+            __DEV__: true,
+            "process.env": {
+                NODE_ENV: '"development"'
+            },
+        }),
         new HtmlWebpackPlugin({inject: 'body', template: './src/index.html'}),
         extractCssPlugin,
         new webpack.optimize.CommonsChunkPlugin({

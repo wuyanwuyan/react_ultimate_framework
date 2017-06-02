@@ -11,6 +11,7 @@ module.exports = {
     },
 
     dev_server: {
+        presets: ["react"],
         "plugins": ["transform-decorators-legacy", "transform-runtime"],
         cacheDirectory: true
     }

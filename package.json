@@ -9,8 +9,9 @@
   "scripts": {
     "start": "node server/index.js",
     "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf ./dist && rm -rf ./server_dist",
     "build": "webpack --config=./config/webpack_client_production.config.js",
+    "build_server_dev": "webpack --config=./config/webpack_server_dev.config.js",
     "server": "node server.js"
   },
   "dependencies": {
@@ -46,7 +47,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.24.1",
+    "chokidar": "^1.7.0",
     "css-loader": "^0.28.1",
+    "express-to-koa": "^1.0.5",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
@@ -61,6 +64,7 @@
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-node-externals": "^1.6.0"
   }
 }
