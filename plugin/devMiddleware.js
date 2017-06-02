@@ -15,27 +15,39 @@ function middleware(doIt, req, res) {
 }
 
 module.exports = function(compiler, option){
-    const doIt = expressMiddleware(compiler, option);
+    const expressMiddleware = expressMiddleware(compiler, option);
 
     function koaMiddleware(ctx, next) {
-        const req = ctx.req;
 
-        ctx.webpack = doIt;
+        // return next().then(function () {
+        //     middleware(expressMiddleware, ctx.req, {
+        //         end(content) {
+        //             ctx.body = content;
+        //         },
+        //         setHeader() {
+        //             ctx.set.apply(ctx, arguments);
+        //         }
+        //     });
+        // });
 
-        return next().then(function () {
-            middleware(doIt, req, {
-                end(content) {
-                    ctx.body = content;
+        return async (ctx, next) => {
+            await expressMiddleware(ctx.req, {
+                end: (content) => {
+                    ctx.body = content
                 },
-                setHeader() {
-                    ctx.set.apply(ctx, arguments);
+                setHeader: (name, value) => {
+                    ctx.set(name, value)
                 }
-            });
-        });
+            }, next)
+        }
+
+
+
+
     }
 
-    Object.keys(doIt).forEach(function(p){
-        koaMiddleware[p] = doIt[p];
+    Object.keys(expressMiddleware).forEach(function(p){
+        koaMiddleware[p] = expressMiddleware[p];
     });
 
     return koaMiddleware;

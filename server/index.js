@@ -4,8 +4,12 @@ var Koa = require('koa');
 var koaRouter = require('koa-router');
 var bodyParser = require('koa-bodyparser');
 var webpack = require('webpack');
+
 var devMiddleware = require('../plugin/devMiddleware');
-var hotMiddleware = require('../plugin/hotMiddleware');
+// var hotMiddleware = require('../plugin/hotMiddleware');
+
+// var devMiddleware = require('koa-webpack-middleware').devMiddleware;
+var hotMiddleware = require('koa-webpack-middleware').hotMiddleware;
 var webpackDevConfig = require('../config/webpack_client_dev.config.js');
 
 
@@ -31,40 +35,34 @@ app.use(bodyParser());
 app.use(devMiddleware(compiler, webpackDevOptions));
 app.use(hotMiddleware(compiler));
 
-
-app.use(require('koa-static')(compiler.outputPath));
-
 app.use(router.routes());
 
 
-router.get('/', async (ctx, next) => {
+router.get('*', async (ctx, next) => {
 
-    const filename = path.join(compiler.outputPath, "index.html");
+    const filename = path.join(compiler.outputPath, ctx.url);
 
-    console.log("fffssss : ", filename);
+    try{
+        var result = await new Promise(function (resolve, reject) {
+            compiler.outputFileSystem.readFile(filename, 'utf8' ,function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result)
+            });
+        })
+    }catch (err){
+        await next();
+    }
 
-    var result = await new Promise(function (resolve, reject) {
-        compiler.outputFileSystem.readFile(filename, 'utf8' ,function (err, result) {
-            if (err) {
+    ctx.body = "33333";
 
-                reject(err);
-            }
-            resolve(result)
-        });
-    })
-
-    ctx.type = "html";
-    ctx.body = result;
 });
 
 
 router.get('*', async (ctx, next) => {
 
-    console.log(ctx.path,ctx.url);
-
-    const filename = path.join(compiler.outputPath, ctx.path);
-
-    console.log("fffssss : ", filename);
+    const filename = path.join(compiler.outputPath, 'index.html');
 
     var result = await new Promise(function (resolve, reject) {
         compiler.outputFileSystem.readFile(filename, 'utf8' ,function (err, result) {
@@ -76,10 +74,9 @@ router.get('*', async (ctx, next) => {
     })
 
     ctx.type = "html";
-    ctx.body = result;
+    ctx.body = "33333";
 
     await next();
-
 
 });
 
