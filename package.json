@@ -12,7 +12,10 @@
     "clean": "rm -rf ./dist && rm -rf ./server_dist",
     "build": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_dev": "webpack --config=./config/webpack_server_dev.config.js",
-    "server": "node server.js"
+    "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
+    "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
+    "deploy-dev": "pm2 deploy ecosystem.config.js dev",
+    "deploy-pro": "pm2 deploy ecosystem.config.js production",
   },
   "dependencies": {
     "autobind-decorator": "^1.4.0",

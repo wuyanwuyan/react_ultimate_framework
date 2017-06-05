@@ -14,7 +14,7 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // webpa
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        home: [hotMiddlewareScript, './src/index.js']
+        index: [hotMiddlewareScript, './src/index.js']
     },
     output: {
         path: path.resolve(ROOT_PATH, './dist'),

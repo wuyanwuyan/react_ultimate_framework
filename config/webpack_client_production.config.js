@@ -13,11 +13,11 @@ const extractCssPlugin = new ExtractTextPlugin({
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        home: ['./src/index.js']
+        index: ['./src/index.js']
     },
     output: {
-        path: path.resolve(ROOT_PATH, './dist'),
-        filename: 'js/[name].[hash].js',
+        path: path.resolve(ROOT_PATH, './release/client'),
+        filename: 'js/[name].[chunkhash].js',
         publicPath: "./"
     },
 
@@ -42,7 +42,8 @@ module.exports = {
                         options: {
                             importLoaders: 1,
                             modules: true,
-                            localIdentName: '[name]_[local]-[hash:4]'
+                            localIdentName: '[name]_[local]-[hash:4]',
+                            minimize: true
                         }
                     }, {
                         loader: 'postcss-loader',
@@ -51,12 +52,12 @@ module.exports = {
                                 require('autoprefixer')
                             ]
                         }
-                    },{
+                    }, {
                         loader: 'sass-loader'
                     }
                     ]
                 })
-            },{
+            }, {
                 test: /\.(css|scss)$/,
                 include: [
                     path.resolve(__dirname, '../src/css'),
@@ -65,7 +66,10 @@ module.exports = {
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [{
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: {
+                            minimize: true
+                        }
                     }, {
                         loader: 'postcss-loader',
                         options: {
@@ -73,7 +77,7 @@ module.exports = {
                                 require('autoprefixer')
                             ]
                         }
-                    },{
+                    }, {
                         loader: 'sass-loader'
                     }
                     ]
@@ -113,8 +117,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor']
         }),
-        new webpack.optimize.DedupePlugin(), // 查找相等或近似的模块，去除重复的代码，避免在最终生成的文件中出现重复的模块
-        new webpack.optimize.OccurenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
+        new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
         new webpack.optimize.UglifyJsPlugin(
             {
                 compress: {warnings: false, drop_console: true},

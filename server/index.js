@@ -20,6 +20,10 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
         app.use(expressHotMiddleware);
     }
 
+    if (process.env.NODE_ENV === "production") {
+        app.use(require('koa-static')(__dirname +'/client'));
+    }
+
     app.use(bodyParser());
 
     var indexRoute = require('./routes/index');

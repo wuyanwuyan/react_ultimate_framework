@@ -23,4 +23,4 @@ class Ctest extends React.Component{
     }
 }
 
-ReactDOM.render(<Ctest />,document.getElementById("react-container"));
+ReactDOM.render(<Layout />,document.getElementById("react-container"));

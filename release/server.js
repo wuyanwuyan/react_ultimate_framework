@@ -1,4 +1,3 @@
-module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -64,14 +63,14 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const koaRouter = __webpack_require__(6);
+const koaRouter = __webpack_require__(7);
 let router = new koaRouter();
 
 console.log("require index router2222222!");
@@ -111,6 +110,12 @@ module.exports = require("koa-bodyparser");
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-static");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
@@ -130,9 +135,13 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
         }
     });
 
-    if (true) {
+    if (false) {
         app.use(expressDevMiddleware);
         app.use(expressHotMiddleware);
+    }
+
+    if (true) {
+        app.use(__webpack_require__(5)(__dirname + '/client'));
     }
 
     app.use(bodyParser());
@@ -144,7 +153,7 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
         ctx.redirect("/");
     });
 
-    const port = __webpack_require__.i({"NODE_ENV":"development"}).PORT || 8087;
+    const port = __webpack_require__.i({"NODE_ENV":"production"}).PORT || 8087;
 
     var server = __webpack_require__(2).createServer(app.callback());
 
@@ -159,18 +168,17 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
     return server;
 };
 
-if (false) {
+if (true) {
     serverEntry();
 }
 
 module.exports = serverEntry;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=server.js.map
