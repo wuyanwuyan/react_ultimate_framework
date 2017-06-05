@@ -5,7 +5,7 @@ var babelConfig = require("./babel.config").dev_server;
 const ROOT_PATH = process.cwd();
 
 module.exports = {
-    entry: './server/entry.js',
+    entry: './server/index.js',
     output: {
         path: path.resolve(ROOT_PATH, './server_dist'),
         filename: 'server.js',

@@ -64,36 +64,109 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const koaRouter = __webpack_require__(2);
+const koaRouter = __webpack_require__(6);
 let router = new koaRouter();
+
+console.log("require index router2222222!");
+
 router.get('/fake', async ctx => {
+
+    console.log("fake ctx :", ctx.url);
     ctx.type = 'html';
-    ctx.body = "fake";
+    ctx.body = "11fake ff ll222l";
 });
 
 module.exports = router;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var indexRoute = __webpack_require__(0);
-
-console.log("f333ff222ff");
-
-module.exports = app => {
-    app.use(indexRoute.routes());
-};
+module.exports = require("fs");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-bodyparser");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
+
+    const Koa = __webpack_require__(3);
+    const fs = __webpack_require__(1);
+    const bodyParser = __webpack_require__(4);
+
+    const app = new Koa();
+
+    // error handle
+    app.use(async function (ctx, next) {
+        try {
+            await next();
+        } catch (e) {
+            app.emit('error', e, ctx);
+        }
+    });
+
+    if (true) {
+        app.use(expressDevMiddleware);
+        app.use(expressHotMiddleware);
+    }
+
+    app.use(bodyParser());
+
+    var indexRoute = __webpack_require__(0);
+    app.use(indexRoute.routes());
+
+    app.use(async ctx => {
+        ctx.redirect("/");
+    });
+
+    const port = __webpack_require__.i({"NODE_ENV":"development"}).PORT || 8087;
+
+    var server = __webpack_require__(2).createServer(app.callback());
+
+    server.listen(port, function (err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(`Listening at http://localhost:${port}`);
+    });
+
+    return server;
+};
+
+if (false) {
+    serverEntry();
+}
+
+module.exports = serverEntry;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-router");

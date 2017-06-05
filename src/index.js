@@ -14,7 +14,7 @@ class Ctest extends React.Component{
     constructor(props){
         super(props);
         let a = 1;
-        a = 34;
+        a = 342221221;
         console.log(a);
     }
 
@@ -23,4 +23,4 @@ class Ctest extends React.Component{
     }
 }
 
-ReactDOM.render(<Layout />,document.getElementById("react-container"));
+ReactDOM.render(<Ctest />,document.getElementById("react-container"));
