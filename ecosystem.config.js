@@ -27,8 +27,8 @@ module.exports = {
       user : 'node',
       host : '127.0.0.1',
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
+      repo : 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
+      path : '/Users/claude/Desktop',
       'post-deploy' : 'yarn install && pm2 reload ecosystem.config.js --env production'
     },
     dev : {
