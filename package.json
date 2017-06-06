@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node dev/index.js",
     "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
-    "clean": "rm -rf ./dist && rm -rf ./server_dist",
-    "build": "webpack --config=./config/webpack_client_production.config.js",
+    "clean": "rm -rf ./dist && rm -rf ./server_dist && rm -rf ./release",
+    "build": "npm run build_client_pro && npm run build_server_pro",
     "build_server_dev": "webpack --config=./config/webpack_server_dev.config.js",
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
