@@ -34,8 +34,9 @@ module.exports = {
                     "port": "6677"
                 }
             ],
+            "post-setup": "ls -la",
             ref: 'origin/master',
-            repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
+            repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
             path: '/home/xiangsheng/react_ultimate_framework',
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
         },
