@@ -34,7 +34,7 @@ module.exports = {
                     "port": "22"
                 }
             ],
-            ref: 'origin/master',
+            ref: 'master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/Users/claude/Desktop',
             "post-setup": "ls -la",
@@ -51,7 +51,7 @@ module.exports = {
                     "port": "22"
                 }
             ],
-            ref: 'origin/master',
+            ref: 'master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/var/www/development',
             'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
