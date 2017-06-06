@@ -10,4 +10,11 @@ router.get('/fake', async (ctx) => {
     ctx.body = "11fake ff ll222l";
 });
 
+
+router.get('/utm', async (ctx) => {
+
+    ctx.type = 'html';
+    ctx.body = "utm";
+});
+
 module.exports = router;
