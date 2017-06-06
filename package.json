@@ -14,6 +14,7 @@
     "build_server_dev": "webpack --config=./config/webpack_server_dev.config.js",
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
+    "pm2_local": "pm2 startOrRestart ecosystem.config.js",
     "deploy-dev": "pm2 deploy ecosystem.config.js dev",
     "deploy-pro": "pm2 deploy ecosystem.config.js production"
   },

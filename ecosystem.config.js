@@ -4,13 +4,11 @@ module.exports = {
      * http://pm2.keymetrics.io/docs/usage/application-declaration/
      */
     apps: [
-
         // First application
         {
             name: 'react_ultimate_framework',
             script: 'release/server.js',
-            watch: true,
-            instances: 3,
+            instances: 2,
             error_file:"./logs/app-err.log",//错误输出日志
             out_file:"./logs/app-out.log",  //日志
             log_date_format:"YYYY-MM-DD HH:mm Z", //日期格式
@@ -29,21 +27,21 @@ module.exports = {
      */
     deploy: {
         production: {
-            user: 'claude',
+            user: 'xiangsheng',
             host: [
                 {
-                    "host": "localhost",
-                    "port": "22"
+                    "host": "120.55.94.127",
+                    "port": "6677"
                 }
             ],
             ref: 'origin/master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/Users/claude/Documents/react_ultimate_framework',
+            path: '/home/xiangsheng/react_ultimate_framework',
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
         },
         dev: {
             user: 'node',
-            host: '212.83.163.1',
+            host: 'localhost',
             ref: 'origin/master',
             repo: 'git@github.com:repo.git',
             path: '/var/www/development',
