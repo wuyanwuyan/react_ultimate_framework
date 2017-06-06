@@ -36,7 +36,7 @@ module.exports = {
             ],
             ref: 'origin/master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/home/xiangsheng/react_ultimate_framework22',
+            path: '/home/xiangsheng/react_ultimate_framework',
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
         },
         dev: {
