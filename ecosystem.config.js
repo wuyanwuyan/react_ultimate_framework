@@ -52,7 +52,7 @@ module.exports = {
             ],
             ref: 'origin/master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/var/www/development/react_ultimate_framework',
+            path: '/var/www/dev/react_ultimate_framework',
             'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
@@ -60,3 +60,5 @@ module.exports = {
         }
     }
 };
+
+// 第一次部署，要 pm2 deploy ecosystem.config.js production setup

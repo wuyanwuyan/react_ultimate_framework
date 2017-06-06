@@ -42,7 +42,7 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
             console.log(err);
             return;
         }
-        console.log(`Listening at http://localhost:${port}`);
+        console.log('✅ Listening at http://localhost:%s',port);
     });
 
     return server;
