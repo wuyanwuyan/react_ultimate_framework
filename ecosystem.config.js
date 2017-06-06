@@ -7,20 +7,14 @@ module.exports = {
 
     // First application
     {
-      name      : 'API',
-      script    : 'app.js',
+      name      : 'react_ultimate_framework',
+      script    : 'index.js',
       env: {
         COMMON_VARIABLE: 'true'
       },
       env_production : {
         NODE_ENV: 'production'
       }
-    },
-
-    // Second application
-    {
-      name      : 'WEB',
-      script    : 'web.js'
     }
   ],
 
@@ -31,7 +25,7 @@ module.exports = {
   deploy : {
     production : {
       user : 'node',
-      host : '212.83.163.1',
+      host : '127.0.0.1',
       ref  : 'origin/master',
       repo : 'git@github.com:repo.git',
       path : '/var/www/production',

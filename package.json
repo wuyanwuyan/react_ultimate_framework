@@ -15,7 +15,7 @@
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
     "deploy-dev": "pm2 deploy ecosystem.config.js dev",
-    "deploy-pro": "pm2 deploy ecosystem.config.js production",
+    "deploy-pro": "pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
     "autobind-decorator": "^1.4.0",
