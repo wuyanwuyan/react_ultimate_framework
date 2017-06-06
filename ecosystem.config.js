@@ -9,9 +9,9 @@ module.exports = {
             name: 'react_ultimate_framework',
             script: 'release/server.js',
             instances: 2,
-            error_file:"./logs/app-err.log",//错误输出日志
-            out_file:"./logs/app-out.log",  //日志
-            log_date_format:"YYYY-MM-DD HH:mm Z", //日期格式
+            error_file: "./logs/app-err.log",//错误输出日志
+            out_file: "./logs/app-out.log",  //日志
+            log_date_format: "YYYY-MM-DD HH:mm Z", //日期格式
             env: {
                 COMMON_VARIABLE: 'true'
             },
@@ -38,13 +38,21 @@ module.exports = {
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/Users/claude/Desktop',
             "post-setup": "ls -la",
-            'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
+            'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production',
+            env: {
+                "NODE_ENV": "production"
+            }
         },
         dev: {
-            user: 'node',
-            host: 'localhost',
+            user: 'claude',
+            host: [
+                {
+                    "host": "localhost",
+                    "port": "22"
+                }
+            ],
             ref: 'origin/master',
-            repo: 'git@github.com:repo.git',
+            repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/var/www/development',
             'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
             env: {
