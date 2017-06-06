@@ -2819,13 +2819,6 @@ koa-static@^3.0.0:
     debug "*"
     koa-send "^3.2.0"
 
-koa-webpack-middleware@^1.0.5:
-  version "1.0.5"
-  resolved "http://registry.npm.taobao.org/koa-webpack-middleware/download/koa-webpack-middleware-1.0.5.tgz#2f868a36ff46b7d51a1c446e3ac094a3455b9f53"
-  dependencies:
-    webpack-dev-middleware "1.10.2"
-    webpack-hot-middleware "2.18.0"
-
 koa@^2.2.0:
   version "2.2.0"
   resolved "http://registry.npm.taobao.org/koa/download/koa-2.2.0.tgz#b055933187849d540ad8b9f731baaa4be97c652d"
@@ -5099,7 +5092,7 @@ wbuf@^1.1.0, wbuf@^1.4.0:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-webpack-dev-middleware@1.10.2, webpack-dev-middleware@^1.10.2:
+webpack-dev-middleware@^1.10.2:
   version "1.10.2"
   resolved "http://registry.npm.taobao.org/webpack-dev-middleware/download/webpack-dev-middleware-1.10.2.tgz#2e252ce1dfb020dbda1ccb37df26f30ab014dbd1"
   dependencies:
@@ -5130,7 +5123,7 @@ webpack-dev-server@^2.4.5:
     webpack-dev-middleware "^1.10.2"
     yargs "^6.0.0"
 
-webpack-hot-middleware@2.18.0, webpack-hot-middleware@^2.18.0:
+webpack-hot-middleware@^2.18.0:
   version "2.18.0"
   resolved "http://registry.npm.taobao.org/webpack-hot-middleware/download/webpack-hot-middleware-2.18.0.tgz#a16bb535b83a6ac94a78ac5ebce4f3059e8274d3"
   dependencies:
