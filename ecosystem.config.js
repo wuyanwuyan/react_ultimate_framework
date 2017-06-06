@@ -9,7 +9,11 @@ module.exports = {
         {
             name: 'react_ultimate_framework',
             script: 'release/server.js',
+            watch: true,
             instances: 3,
+            error_file:"./logs/app-err.log",//错误输出日志
+            out_file:"./logs/app-out.log",  //日志
+            log_date_format:"YYYY-MM-DD HH:mm Z", //日期格式
             env: {
                 COMMON_VARIABLE: 'true'
             },
@@ -34,7 +38,7 @@ module.exports = {
             ],
             ref: 'origin/master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/Users/claude/Desktop',
+            path: '/Users/claude/Documents/react_ultimate_framework',
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
         },
         dev: {
