@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd014c19-4fa0-43d3-962e-1a1e38db51a9" name="Default" comment="11">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ecosystem.config.js" afterPath="$PROJECT_DIR$/ecosystem.config.js" />
-    </list>
+    <list default="true" id="fd014c19-4fa0-43d3-962e-1a1e38db51a9" name="Default" comment="11" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -36,8 +31,8 @@
       <file leaf-file-name="ecosystem.config.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ecosystem.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="20" lean-forward="true" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+            <state relative-caret-position="405">
+              <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -67,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/src/css/simditor.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="232">
-              <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+              <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -77,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <marker date="1496713750000" expanded="true" signature="2162:2654" ph="{&quot;autoprefixer&quot;: &quot;^7.0.1&quot;...}" />
               </folding>
@@ -579,15 +574,16 @@
       <workItem from="1496625507514" duration="17477000" />
       <workItem from="1496656650985" duration="5692000" />
       <workItem from="1496663818425" duration="1343000" />
-      <workItem from="1496711977073" duration="933000" />
+      <workItem from="1496711977073" duration="3437000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144182000" />
+    <option name="totallyTimeSpent" value="146686000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16166404" sideWeight="0.6886931" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -881,7 +877,7 @@
     <entry file="file://$PROJECT_DIR$/src/css/simditor.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -905,7 +901,7 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <marker date="1496713750000" expanded="true" signature="2162:2654" ph="{&quot;autoprefixer&quot;: &quot;^7.0.1&quot;...}" />
           </folding>
@@ -914,8 +910,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ecosystem.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="20" lean-forward="true" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        <state relative-caret-position="405">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
           <folding />
         </state>
       </provider>
