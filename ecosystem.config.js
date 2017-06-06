@@ -27,17 +27,17 @@ module.exports = {
      */
     deploy: {
         production: {
-            user: 'xiangsheng',
+            user: 'claude',
             host: [
                 {
-                    "host": "120.55.94.127",
-                    "port": "6677"
+                    "host": "localhost",
+                    "port": "22"
                 }
             ],
-            "post-setup": "ls -la",
             ref: 'origin/master',
-            repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
-            path: '/home/xiangsheng/react_ultimate_framework',
+            repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
+            path: '/Users/claude/Desktop',
+            "post-setup": "ls -la",
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
         },
         dev: {
