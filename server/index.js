@@ -1,8 +1,11 @@
-var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
+import Koa from 'koa';
+import fs from 'fs';
+import bodyParser from 'koa-bodyparser';
+import indexRoute  from './routes/index';
+import http from 'http';
 
-    const Koa = require('koa');
-    const fs = require('fs');
-    const bodyParser = require('koa-bodyparser');
+export default function serverEntry(expressDevMiddleware, expressHotMiddleware) {
+
 
     const app = new Koa();
 
@@ -21,13 +24,14 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
     }
 
     if (process.env.NODE_ENV === "production") {
-        app.use(require('koa-static')(__dirname +'/client'));
+        app.use(require('koa-static')(__dirname + '/client'));
     }
 
     app.use(bodyParser());
 
-    var indexRoute = require('./routes/index');
+
     app.use(indexRoute.routes());
+
 
     app.use(async (ctx) => {
         ctx.redirect("/");
@@ -35,14 +39,14 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
 
     const port = process.env.PORT || 8087;
 
-    var server = require('http').createServer(app.callback());
+    var server = http.createServer(app.callback());
 
     server.listen(port, function (err) {
         if (err) {
             console.log(err);
             return;
         }
-        console.log('✅ Listening at http://localhost:%s',port);
+        console.log('✅ Listening at http://localhost:%s', port);
     });
 
     return server;
@@ -52,10 +56,3 @@ var serverEntry = function (expressDevMiddleware, expressHotMiddleware) {
 if (process.env.NODE_ENV === "production") {
     serverEntry();
 }
-
-module.exports = serverEntry;
-
-
-
-
-

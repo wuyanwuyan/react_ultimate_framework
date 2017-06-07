@@ -62,7 +62,7 @@ serverCompiler.plugin('done', stats => {
 
         var bundlePath = path.join(serverCompiler.options.output.path, serverCompiler.options.output.filename);
 
-        var serverEntry = require(bundlePath);
+        var serverEntry = require(bundlePath).default;
 
 
         console.log("require entry done!!!");

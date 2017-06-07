@@ -1,7 +1,6 @@
-const koaRouter = require('koa-router');
+import koaRouter from 'koa-router';
+import userRouter from './users';
 let router = new koaRouter();
-
-console.log("require index router2222222!");
 
 router.get('/fake', async (ctx) => {
 
@@ -17,4 +16,6 @@ router.get('/utm', async (ctx) => {
     ctx.body = "utm";
 });
 
-module.exports = router;
+router.use(userRouter.routes());
+
+export default router;
