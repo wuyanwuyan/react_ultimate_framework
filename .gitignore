@@ -1,6 +1,7 @@
 node_modules
-release
+dist
 server_dist
+release
 logs
 .idea
 .idea/workspace.xml

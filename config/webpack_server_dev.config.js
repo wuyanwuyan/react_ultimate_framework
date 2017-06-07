@@ -31,7 +31,8 @@ module.exports = {
             __PRODUCTION__: false,
             __DEV__: true,
             "process.env": {
-                NODE_ENV: '"development"'
+                NODE_ENV: '"development"',
+                PORT:8087
             },
         }),
     ],

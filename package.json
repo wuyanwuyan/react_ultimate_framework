@@ -11,6 +11,7 @@
     "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
     "clean": "rm -rf ./dist && rm -rf ./server_dist && rm -rf ./release",
     "build": "npm run build_client_pro && npm run build_server_pro",
+    "build_client_dev": "webpack --config=./config/webpack_client_dev.config.js",
     "build_server_dev": "webpack --config=./config/webpack_server_dev.config.js",
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
@@ -41,6 +42,7 @@
     "simditor": "^2.3.6"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.0.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",

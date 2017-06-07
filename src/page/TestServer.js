@@ -8,8 +8,8 @@ export default class TestServer extends React.Component {
 
     render() {
         return (
-            <div color="red">
-                server_side
+            <div style={{color:"red"}}>
+                serer_and_client
             </div>
         )
     }

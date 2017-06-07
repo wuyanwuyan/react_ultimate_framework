@@ -1,8 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var babelConfig = require("./babel.config").pro_client;
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const babelConfig = require("./babel.config").pro_client;
 
 const ROOT_PATH = process.cwd();
 
@@ -10,10 +10,40 @@ const extractCssPlugin = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
+var htmlPlugins = [
+    new HtmlWebpackPlugin({inject: true, template: './src/index.html', chunks: ["vendor","commons", "index"]})
+]
+
+var plugins = [
+    new webpack.DefinePlugin({
+        __CLIENT__: true,
+        __SERVER__: false,
+        __PRODUCTION__: true,
+        __DEV__: false,
+        'process.env': {
+            NODE_ENV: '"production"'
+        }
+    }),
+    new HtmlWebpackPlugin({inject: true, template: './src/index.html',chunks:["vendor","index"]}),
+    new HtmlWebpackPlugin({inject: true, template: './src/users.html',chunks:["vendor","users"]}),
+    extractCssPlugin,
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js', minChunks: Infinity,}),
+    new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
+    new webpack.optimize.UglifyJsPlugin(
+        {
+            compress: {warnings: false, drop_console: true},
+            output: {comments: false},
+        }
+    )
+];
+
+plugins = plugins.concat(htmlPlugins);
+
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        index: ['./src/index.js']
+        index: ['./src/index.js'],
+        users: ['./src/userIndex.js']
     },
     output: {
         path: path.resolve(ROOT_PATH, './release/client'),
@@ -102,27 +132,5 @@ module.exports = {
         ]
     },
 
-    plugins: [
-        new webpack.DefinePlugin({
-            __CLIENT__: true,
-            __SERVER__: false,
-            __PRODUCTION__: true,
-            __DEV__: false,
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new HtmlWebpackPlugin({inject: 'body', template: './src/index.html'}),
-        extractCssPlugin,
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor']
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
-        new webpack.optimize.UglifyJsPlugin(
-            {
-                compress: {warnings: false, drop_console: true},
-                output: {comments: false},
-            }
-        )
-    ]
+    plugins: plugins
 }

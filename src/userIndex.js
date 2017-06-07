@@ -11,7 +11,7 @@ import TestServer from './page/TestServer';
 import Layout from './layout/Layout';
 
 
-class Ctest extends React.Component{
+class Ctest1 extends React.Component{
     constructor(props){
         super(props);
         let a = 1;
@@ -24,4 +24,4 @@ class Ctest extends React.Component{
     }
 }
 
-ReactDOM.render(<TestServer />,document.getElementById("react-container"));
+ReactDOM.render(<Layout />,document.getElementById("react-container"));

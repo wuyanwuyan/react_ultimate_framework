@@ -126,7 +126,7 @@ function compose(...funcs) {
 
 function formatJson(promise) {
     return promise.then(res => {
-        if (res.status === 401) window.location.href = '/login';   //Unauthorized
+        // if (res.status === 401) window.location.href = '/login';   //Unauthorized
         if (!res.ok) {
             const err = new Error(res.statusText);
             err.res = res;
