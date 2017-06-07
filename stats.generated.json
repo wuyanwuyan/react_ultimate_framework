@@ -1,8 +1,4 @@
 {
-  "users": {
-    "js": "/js/users.js",
-    "css": "/users.css"
-  },
   "index": {
     "js": "/js/index.js",
     "css": "/index.css"

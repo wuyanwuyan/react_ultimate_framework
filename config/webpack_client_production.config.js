@@ -25,7 +25,6 @@ var plugins = [
         }
     }),
     new HtmlWebpackPlugin({inject: true, template: './src/index.html',chunks:["vendor","index"]}),
-    new HtmlWebpackPlugin({inject: true, template: './src/users.html',chunks:["vendor","users"]}),
     extractCssPlugin,
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js', minChunks: Infinity,}),
     new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
@@ -43,7 +42,6 @@ module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
         index: ['./src/index.js'],
-        users: ['./src/userIndex.js']
     },
     output: {
         path: path.resolve(ROOT_PATH, './release/client'),

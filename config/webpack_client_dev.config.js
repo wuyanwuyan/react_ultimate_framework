@@ -10,9 +10,11 @@ const extractCssPlugin = new ExtractTextPlugin({
     filename: "[name].css"
 });
 
-
 var htmlPlugins = [
-    new HtmlWebpackPlugin({inject: true, template: './src/index.html'})
+    new HtmlWebpackPlugin({
+        inject: true,
+        template: './src/index.html'
+    })
 ]
 
 var plugins = [
@@ -39,8 +41,7 @@ const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // web
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom'],
-        index: [hotMiddlewareScript, './src/index.js'],
-        users: [hotMiddlewareScript, './src/userIndex.js']
+        index: [hotMiddlewareScript, './src/index.js']
     },
     output: {
         path: path.resolve(ROOT_PATH, './dist'),
