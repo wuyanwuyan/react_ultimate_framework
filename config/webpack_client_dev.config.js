@@ -13,7 +13,8 @@ const extractCssPlugin = new ExtractTextPlugin({
 var htmlPlugins = [
     new HtmlWebpackPlugin({
         inject: true,
-        template: './src/index.html'
+        template: './src/index.hbs',
+        filename: 'index.hbs'
     })
 ]
 
