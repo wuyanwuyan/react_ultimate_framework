@@ -20,6 +20,64 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 options: babelConfig
+            },
+            {
+                test: /\.(css|scss)$/,
+                exclude: [
+                    path.resolve(__dirname, '../src/css'),
+                    /simditor/,
+                ],
+                use: [
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                            localIdentName: '[name]_[local]-[hash:3]'
+                        }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')
+                            ]
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                    }
+                ]
+            }, {
+                test: /\.(css|scss)$/,
+                include: [
+                    path.resolve(__dirname, '../src/css'),
+                    /simditor/,
+                ],
+                use: [
+                    {
+                        loader: "isomorphic-style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')
+                            ]
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
             }
         ]
     },
@@ -32,7 +90,7 @@ module.exports = {
             __DEV__: true,
             "process.env": {
                 NODE_ENV: '"development"',
-                PORT:8087
+                PORT: 8087
             },
         }),
     ],

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import Profile from './profile.js';
-import config from '../config.js';
+import config from '../constant/config.js';
 
 
 export function fetchGet(url, data = {}) {

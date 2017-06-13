@@ -1,19 +1,36 @@
 import koaRouter from 'koa-router';
 import userRouter from './users';
+import {renderReactComp, renderHbs} from '../utils/serverRender';
+import Home from '../../src/page/home';
+import Login from '../../src/page/login';
+
+
 let router = new koaRouter();
 
-router.get('/fake', async (ctx) => {
 
-    console.log("fake ctx :" ,ctx.url);
+//首页渲染
+router.get('/', async (ctx) => {
+
+    var initialState = JSON.stringify({"sate":[1,5,4]});
     ctx.type = 'html';
-    ctx.body = "11fake ff ll222l";
+    ctx.body = await renderHbs('home.hbs', {
+        content: renderReactComp(Home,initialState),
+        users: '<script>alert("hello")</script>',
+        initialState
+    })
+
 });
 
 
-router.get('/utm', async (ctx) => {
-
+//登陆页面渲染
+router.get('/login', async (ctx) => {
+    var initialState = JSON.stringify({"sate":[1,5,4]});
     ctx.type = 'html';
-    ctx.body = "utm";
+    ctx.body = await renderHbs('login.hbs', {
+        content: renderReactComp(Login,initialState),
+        initialState
+    })
+
 });
 
 router.use(userRouter.routes());

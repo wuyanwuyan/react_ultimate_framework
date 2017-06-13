@@ -1,12 +1,10 @@
 import Koa from 'koa';
 import fs from 'fs';
-import Handlebars from 'handlebars';
 import bodyParser from 'koa-bodyparser';
 import indexRoute  from './routes/index';
 import http from 'http';
 
-export default function serverEntry(expressDevMiddleware, expressHotMiddleware) {
-
+export default function serverEntry(expressDevMiddleware, expressHotMiddleware, clientCompiler) {
     const app = new Koa();
 
     // error handle
@@ -19,24 +17,8 @@ export default function serverEntry(expressDevMiddleware, expressHotMiddleware) 
     });
 
 
-    app.use(async function (ctx, next) {
-        var source = "<p>Hello, my name is {{name}}. I am from {{hometown}}. I have " +
-            "{{kids.length}} kids:</p>" +
-            "<ul>{{#kids}}<li>{{name}} is {{age}}</li>{{/kids}}</ul>";
-        var template = Handlebars.compile(source);
-
-        var data = { "name": "Alan", "hometown": "Somewhere, TX",
-            "kids": [{"name": "Jimmy", "age": "12"}, {"name": "Sally", "age": "4"}]};
-        var result = template(data);
-
-        console.log("result: ",result);
-
-        await next();
-
-    })
-
-
     if (process.env.NODE_ENV !== "production") {
+        require('./utils/serverRender').setCompiler(clientCompiler);
         app.use(expressDevMiddleware);
         app.use(expressHotMiddleware);
     }

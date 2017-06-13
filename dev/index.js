@@ -13,6 +13,10 @@ const expressHotMiddleware = require('webpack-hot-middleware');
 
 var clientCompiler = webpack(webpackDevConfig);
 
+clientCompiler.plugin("compile", stats => {
+    console.log("client compiling....  ");
+});
+
 clientCompiler.plugin('done', stats => {
     console.log("client compile done!");
 });
@@ -46,7 +50,7 @@ serverCompiler.watch({
 });
 
 serverCompiler.plugin("compile", stats => {
-    console.log("compiling....  ");
+    console.log("server compiling....  ");
 });
 
 serverCompiler.plugin('done', stats => {
@@ -65,8 +69,8 @@ serverCompiler.plugin('done', stats => {
         var serverEntry = require(bundlePath).default;
 
 
-        console.log("require entry done!!!");
-        server = serverEntry(devMidware, hotMidware);
+        console.log("require entry again!!!");
+        server = serverEntry(devMidware, hotMidware,clientCompiler);
 
         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
         sockets = {}, nextSocketId = 0;

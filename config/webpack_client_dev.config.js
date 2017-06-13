@@ -3,6 +3,7 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
+const webpackCommon = require('./webpack.common.config');
 const babelConfig = require("./babel.config").dev_client;
 const ROOT_PATH = process.cwd();
 
@@ -10,13 +11,15 @@ const extractCssPlugin = new ExtractTextPlugin({
     filename: "[name].css"
 });
 
-var htmlPlugins = [
+var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
     new HtmlWebpackPlugin({
-        inject: true,
-        template: './src/index.hbs',
-        filename: 'index.hbs'
-    })
-]
+            favicon: './src/assets/favicon.ico', //favicon路径
+            inject: true,
+            template: v.template,
+            filename: v.filename,
+            chunks: v.chunks
+        }
+    ));
 
 var plugins = [
     new webpack.DefinePlugin({
@@ -38,12 +41,8 @@ var plugins = [
 plugins = plugins.concat(htmlPlugins);
 
 
-const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 module.exports = {
-    entry: {
-        vendor: ['react', 'react-dom'],
-        index: [hotMiddlewareScript, './src/index.js']
-    },
+    entry: webpackCommon.entry_dev,
     output: {
         path: path.resolve(ROOT_PATH, './dist'),
         filename: 'js/[name].js',
@@ -66,28 +65,32 @@ module.exports = {
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
-                    use: [{
-                        loader: "css-loader",
-                        options: {
-                            sourceMap: true,
-                            importLoaders: 1,
-                            modules: true,
-                            localIdentName: '[name]_[local]-[hash:3]'
+                    use: [
+                        {
+                            loader: "isomorphic-style-loader"
+                        },
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true,
+                                importLoaders: 1,
+                                modules: true,
+                                localIdentName: '[name]_[local]-[hash:3]'
+                            }
+                        }, {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')
+                                ]
+                            }
+                        }, {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true,
-                            plugins: [
-                                require('autoprefixer')
-                            ]
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
                     ]
                 })
             }, {
@@ -98,25 +101,29 @@ module.exports = {
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
-                    use: [{
-                        loader: "css-loader",
-                        options: {
-                            sourceMap: true
+                    use: [
+                        {
+                            loader: "isomorphic-style-loader"
+                        },
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        }, {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')
+                                ]
+                            }
+                        }, {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true,
-                            plugins: [
-                                require('autoprefixer')
-                            ]
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
                     ]
                 })
             },

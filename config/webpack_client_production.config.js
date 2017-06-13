@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const webpackCommon = require('./webpack.common.config');
 const babelConfig = require("./babel.config").pro_client;
 
 const ROOT_PATH = process.cwd();
@@ -10,9 +12,19 @@ const extractCssPlugin = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
-var htmlPlugins = [
-    new HtmlWebpackPlugin({inject: true, template: './src/index.html', chunks: ["vendor","commons", "index"]})
-]
+var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
+    new HtmlWebpackPlugin({
+            favicon: './src/assets/favicon.ico', //favicon路径
+            inject: true,
+            template: v.template,
+            filename: v.filename,
+            chunks: v.chunks,
+            minify: { //压缩HTML文件
+                removeComments: true, //移除HTML中的注释
+                collapseWhitespace: false //删除空白符与换行符
+            }
+        }
+    ))
 
 var plugins = [
     new webpack.DefinePlugin({
@@ -24,7 +36,6 @@ var plugins = [
             NODE_ENV: '"production"'
         }
     }),
-    new HtmlWebpackPlugin({inject: true, template: './src/index.html',chunks:["vendor","index"]}),
     extractCssPlugin,
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js', minChunks: Infinity,}),
     new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
@@ -39,10 +50,7 @@ var plugins = [
 plugins = plugins.concat(htmlPlugins);
 
 module.exports = {
-    entry: {
-        vendor: ['react', 'react-dom'],
-        index: ['./src/index.js'],
-    },
+    entry: webpackCommon.entry,
     output: {
         path: path.resolve(ROOT_PATH, './release/client'),
         filename: 'js/[name].[chunkhash].js',

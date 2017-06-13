@@ -1,7 +1,10 @@
 {
-  "index": {
-    "js": "/js/index.js",
-    "css": "/index.css"
+  "login": {
+    "js": "/js/login.js",
+    "css": "/login.css"
+  },
+  "home": {
+    "js": "/js/home.js"
   },
   "vendor": {
     "js": "/vendor.js"
