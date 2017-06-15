@@ -1,6 +1,6 @@
 @import "reset.css";
-@import "./variables";
-@import "./utilities";
+@import "./variables.scss";
+@import "./utilities.scss";
 
 html {
   color: $font-color;

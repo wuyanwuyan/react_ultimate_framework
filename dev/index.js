@@ -36,6 +36,9 @@ let webpackDevOptions = {
 var devMidware = e2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
 var hotMidware = e2k(expressHotMiddleware(clientCompiler));
 
+// var serverEntry = require('../server_dist/server').default;
+// serverEntry(devMidware, hotMidware,clientCompiler);
+
 
 const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
 let serverCompiler = webpack(webpackServerDevConfig);
@@ -63,13 +66,15 @@ serverCompiler.plugin('done', stats => {
             }
         });
 
-
         var bundlePath = path.join(serverCompiler.options.output.path, serverCompiler.options.output.filename);
+
+        console.log("1 require entry again!!!");
 
         var serverEntry = require(bundlePath).default;
 
 
-        console.log("require entry again!!!");
+        console.log("2 require entry again!!!");
+
         server = serverEntry(devMidware, hotMidware,clientCompiler);
 
         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately

@@ -67,9 +67,6 @@ module.exports = {
                     fallback: "style-loader",
                     use: [
                         {
-                            loader: "isomorphic-style-loader"
-                        },
-                        {
                             loader: "css-loader",
                             options: {
                                 sourceMap: true,
@@ -102,9 +99,6 @@ module.exports = {
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [
-                        {
-                            loader: "isomorphic-style-loader"
-                        },
                         {
                             loader: "css-loader",
                             options: {

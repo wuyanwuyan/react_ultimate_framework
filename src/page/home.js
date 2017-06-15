@@ -1,3 +1,5 @@
+import '../css/index.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -10,7 +12,7 @@ class Home extends React.Component {
     render() {
         return (
             <div style={{fontSize:"40px"}}>
-                <a href="/login">login2</a>
+                <a href="/login">home</a>
             </div>
         )
     }

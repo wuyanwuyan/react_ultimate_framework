@@ -19,7 +19,18 @@ module.exports = {
             ["stage-0"],
             ["react"]
         ],
-        "plugins": ["transform-decorators-legacy", "transform-runtime"],
+        "plugins": [
+            [
+                "css-modules-transform", {
+                "preprocessCss": "./loaders/sass-loader.js",
+                "devMode": true,
+                "generateScopedName": "[name]_[local]-[hash:3]",
+                "extensions": [".scss",".css"]
+            }
+            ],
+            ["transform-decorators-legacy"],
+            ["transform-runtime"]
+        ],
         cacheDirectory: true
     }
 }

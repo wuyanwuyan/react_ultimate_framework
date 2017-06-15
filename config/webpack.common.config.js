@@ -10,6 +10,9 @@ const entry = {
     login: ['./src/page/login.js']
 };
 
+
+
+
 let entry_dev = {};
 Object.keys(entry).forEach(key => {
     if (key !== 'vendor') {
@@ -25,6 +28,11 @@ module.exports = {
             template: './src/home.hbs',
             filename: 'home.hbs',
             chunks: ['vendor', 'home']
+        },
+        {
+            template: './src/login.hbs',
+            filename: 'login.hbs',
+            chunks: ['vendor', 'login']
         },
         {
             template: './src/about.hbs',

@@ -41,8 +41,8 @@ var plugins = [
     new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
     new webpack.optimize.UglifyJsPlugin(
         {
-            compress: {warnings: false, drop_console: true},
-            output: {comments: false},
+            compress: {warnings: false, drop_console: true,collapse_vars: true,},
+            comments:false
         }
     )
 ];
@@ -76,7 +76,7 @@ module.exports = {
                     use: [{
                         loader: "css-loader",
                         options: {
-                            importLoaders: 1,
+                            importloader: 1,
                             modules: true,
                             localIdentName: '[name]_[local]-[hash:4]',
                             minimize: true
@@ -100,28 +100,28 @@ module.exports = {
                     /simditor/,
                 ],
                 use: extractCssPlugin.extract({
-                    fallback: "style-loader",
+                    fallback: "style-loaders",
                     use: [{
-                        loader: "css-loader",
+                        loader: "css-loaders",
                         options: {
                             minimize: true
                         }
                     }, {
-                        loader: 'postcss-loader',
+                        loader: 'postcss-loaders',
                         options: {
                             plugins: [
                                 require('autoprefixer')
                             ]
                         }
                     }, {
-                        loader: 'sass-loader'
+                        loader: 'sass-loaders'
                     }
                     ]
                 })
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
+                loader: 'url-loaders',
                 options: {
                     // limit: 7186,
                     name: 'static/images/[name].[hash].[ext]'
@@ -129,7 +129,7 @@ module.exports = {
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
+                loader: 'url-loaders',
                 options: {
                     // limit: 7186,
                     name: 'static/fonts/[name].[hash].[ext]'

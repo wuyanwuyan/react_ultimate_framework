@@ -18,59 +18,53 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
                 options: babelConfig
             },
-            {
-                test: /\.(css|scss)$/,
-                exclude: [
-                    path.resolve(__dirname, '../src/css'),
-                    /simditor/,
-                ],
-                use: [
-                    {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 1,
-                            modules: true,
-                            localIdentName: '[name]_[local]-[hash:3]'
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                require('autoprefixer')
-                            ]
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                    }
-                ]
-            }, {
-                test: /\.(css|scss)$/,
-                include: [
-                    path.resolve(__dirname, '../src/css'),
-                    /simditor/,
-                ],
-                use: [
-                    {
-                        loader: "isomorphic-style-loader"
-                    },
-                    {
-                        loader: "css-loader",
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                require('autoprefixer')
-                            ]
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                    }
-                ]
-            },
+            // {
+            //     test: /\.(css|scss)$/,
+            //     exclude: [
+            //         path.resolve(__dirname, '../src/css'),
+            //     ],
+            //     use: [
+            //         {
+            //             loader: "css-loader",
+            //             options: {
+            //                 importloader: 1,
+            //                 modules: true,
+            //                 localIdentName: '[name]_[local]-[hash:3]'
+            //             }
+            //         }, {
+            //             loader: 'postcss-loader',
+            //             options: {
+            //                 plugins: [
+            //                     require('autoprefixer')
+            //                 ]
+            //             }
+            //         }, {
+            //             loader: 'sass-loader',
+            //         }
+            //     ]
+            // }, {
+            //     test: /\.(css|scss)$/,
+            //     include: [
+            //         path.resolve(__dirname, '../src/css'),
+            //     ],
+            //     use: [
+            //         {
+            //             loader: "css-loader",
+            //         },
+            //         {
+            //             loader: 'postcss-loader',
+            //             options: {
+            //                 plugins: [
+            //                     require('autoprefixer')
+            //                 ]
+            //             }
+            //         }, {
+            //             loader: 'sass-loader',
+            //         }
+            //     ]
+            // },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
@@ -95,8 +89,7 @@ module.exports = {
         }),
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals()], // in order to ignore all modules in node_modules folder,
-    context: ROOT_PATH,
+    externals: [nodeExternals({whitelist:["react-cqtoolbox"]})], // in order to ignore all modules in node_modules folder,
     node: {
         __filename: false,
         __dirname: false

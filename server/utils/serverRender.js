@@ -16,7 +16,7 @@ let DEFAULT_STATE = {
     initialState: "null"
 }
 
-var readFileThunk = function (hbsName) {
+const readFileThunk = function (hbsName) {
     let filename;
     if (compiler) {
         filename = path.join(compiler.outputPath, hbsName)
@@ -24,7 +24,7 @@ var readFileThunk = function (hbsName) {
         filename = path.join(__dirname, `/client/${hbsName}`)
     }
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         fsystem.readFile(filename, 'utf8', function (err, data) {
             if (err) return reject(err);
             resolve(data);

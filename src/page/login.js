@@ -1,8 +1,8 @@
+import '../css/index.scss';
 import style from './login.scss';
 import React, {Component} from 'react';
-import autobind from 'autobind-decorator';
+import ReactDOM from 'react-dom';
 import {API_login} from '../utils/api.js';
-import notification from '../decorator/notification.js';
 import Profile from '../utils/profile.js';
 
 
@@ -12,11 +12,26 @@ import {FormItem} from 'react-cqtoolbox/lib/form';
 import {Section} from 'react-cqtoolbox/lib/section';
 import {Checkbox} from 'react-cqtoolbox/lib/checkbox';
 import classNames from 'classnames';
-import { withRouter } from 'react-router'
+
+
+///222
 
 class Login extends Component {
 
+
+    // render() {
+    //     return (
+    //         <div className={style.loginWrapper}>
+    //
+    //             <em data-store="see" className={style.loginWrapper}>
+    //                 loginsssss
+    //             </em>
+    //
+    //         </div>
+    //     )
+    // }
     state = {
+
         profile: '',
         password: '',
         checked: true,
@@ -62,10 +77,9 @@ class Login extends Component {
 
     render() {
         const state = this.state;
-
         return (
-            <div className={classNames(style.loginWrapper,"flex_center_vh")}>
-                <Section title="登陆">
+            <div className={classNames(style.loginWrapper, "flex_center_vh")}>
+                <Section title="登陆21">
 
                     <form style={{width: 400}}>
 
@@ -99,6 +113,12 @@ class Login extends Component {
     }
 }
 
-export default notification(autobind(Login));
+
+if (__CLIENT__) {
+    let initState = window.__INITIAL_STATE__ || {};
+    ReactDOM.render(<Login {...initState}/>, document.getElementById("react-container"));
+}
+
+export default Login;
 
 

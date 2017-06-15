@@ -4,7 +4,8 @@
     "css": "/login.css"
   },
   "home": {
-    "js": "/js/home.js"
+    "js": "/js/home.js",
+    "css": "/home.css"
   },
   "vendor": {
     "js": "/vendor.js"
