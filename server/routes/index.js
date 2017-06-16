@@ -1,8 +1,8 @@
 import koaRouter from 'koa-router';
 import userRouter from './users';
 import {renderReactComp, renderHbs} from '../utils/serverRender';
-import Home from '../../src/page/home';
-import Login from '../../src/page/login';
+import Home from '../../client/page/home';
+import Login from '../../client/page/login';
 
 
 let router = new koaRouter();

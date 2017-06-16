@@ -1,8 +1,20 @@
-var webpack = require('webpack');
-var path = require('path');
-var nodeExternals = require('webpack-node-externals');
-var babelConfig = require("./babel.config").dev_server;
+const webpack = require('webpack');
+const path = require('path');
+const fs = require('fs');
+const nodeExternals = require('webpack-node-externals');
+const babelConfig = require("./babel.config").dev_server;
 const ROOT_PATH = process.cwd();
+
+var nodeModules = {};
+var manualInclude = ['.bin', 'react-toolbox'];
+fs.readdirSync('node_modules')
+    .filter(function (x) {
+        return manualInclude.indexOf(x) === -1;
+    })
+    .forEach(function (mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
+
 
 module.exports = {
     entry: './server/index.js',
@@ -22,8 +34,12 @@ module.exports = {
             },
             // {
             //     test: /\.(css|scss)$/,
+            //     loader: 'ignore-loader'
+            // },
+            // {
+            //     test: /\.(css|scss)$/,
             //     exclude: [
-            //         path.resolve(__dirname, '../src/css'),
+            //         path.resolve(__dirname, '../client/css'),
             //     ],
             //     use: [
             //         {
@@ -47,7 +63,7 @@ module.exports = {
             // }, {
             //     test: /\.(css|scss)$/,
             //     include: [
-            //         path.resolve(__dirname, '../src/css'),
+            //         path.resolve(__dirname, '../client/css'),
             //     ],
             //     use: [
             //         {
@@ -87,9 +103,10 @@ module.exports = {
                 PORT: 8087
             },
         }),
+        // new webpack.IgnorePlugin(/\.(css|scss)$/),
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals({whitelist:["react-cqtoolbox"]})], // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[".bin","react-toolbox"]})],//nodeModules, // in order to ignore all modules in node_modules folder,
     node: {
         __filename: false,
         __dirname: false

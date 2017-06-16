@@ -6,8 +6,8 @@
 const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 const entry = {
     vendor: ['react', 'react-dom'],
-    home: ['./src/page/home.js'],
-    login: ['./src/page/login.js']
+    home: ['./client/page/home.js'],
+    login: ['./client/page/login.js']
 };
 
 
@@ -25,17 +25,17 @@ Object.keys(entry).forEach(key => {
 module.exports = {
     hbs_html_config: [
         {
-            template: './src/home.hbs',
+            template: './client/home.hbs',
             filename: 'home.hbs',
             chunks: ['vendor', 'home']
         },
         {
-            template: './src/login.hbs',
+            template: './client/login.hbs',
             filename: 'login.hbs',
             chunks: ['vendor', 'login']
         },
         {
-            template: './src/about.hbs',
+            template: './client/about.hbs',
             filename: 'about.hbs',
             chunks: ['vendor', 'index']
         }

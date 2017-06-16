@@ -1,4 +1,4 @@
-require('source-map-support').install({environment: 'node'}); // 让node支持source-map
+require('source-map-support').install({environment: 'node',entryOnly:false}); // 让node支持source-map
 const cluster = require('cluster');
 const path = require('path');
 const fs = require('fs');
@@ -36,83 +36,83 @@ let webpackDevOptions = {
 var devMidware = e2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
 var hotMidware = e2k(expressHotMiddleware(clientCompiler));
 
-// var serverEntry = require('../server_dist/server').default;
-// serverEntry(devMidware, hotMidware,clientCompiler);
+var serverEntry = require('../server_dist/server').default;
+serverEntry(devMidware, hotMidware,clientCompiler);
 
-
-const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
-let serverCompiler = webpack(webpackServerDevConfig);
-
-
-/*  使用compiler.watch 启动时也会compile ，不需要serverCompiler.run */
-serverCompiler.watch({
-    aggregateTimeout: 300,
-    poll: 1000,
-    ignored: /node_modules/
-}, (err, stats) => {
-});
-
-serverCompiler.plugin("compile", stats => {
-    console.log("server compiling....  ");
-});
-
-serverCompiler.plugin('done', stats => {
-    console.log("server compile done! ");
-    requireManual().then(() => {
-        // Make sure our newly built server bundles aren't in the module cache.
-        Object.keys(require.cache).forEach((modulePath, index) => {
-            if (modulePath.indexOf(serverCompiler.options.output.path) !== -1) {
-                delete require.cache[modulePath];
-            }
-        });
-
-        var bundlePath = path.join(serverCompiler.options.output.path, serverCompiler.options.output.filename);
-
-        console.log("1 require entry again!!!");
-
-        var serverEntry = require(bundlePath).default;
-
-
-        console.log("2 require entry again!!!");
-
-        server = serverEntry(devMidware, hotMidware,clientCompiler);
-
-        //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
-        sockets = {}, nextSocketId = 0;
-        server.on('connection', (socket) => {
-            // Add a newly connected socket
-            var socketId = nextSocketId++;
-            sockets[socketId] = socket;
-
-            // Remove the socket when it closes
-            socket.on('close', () => {
-                delete sockets[socketId];
-            });
-
-        });
-    });
-});
-
-// Maintain a hash of all connected sockets
-var server = null, sockets = {}, nextSocketId = 0;
-var requireManual = () => {
-    return new Promise((resolve)=>{
-        if (server) {
-            // Destroy all open sockets
-            for (var socketId in sockets) {
-                sockets[socketId].destroy();
-            }
-            server.close(function () {
-                console.log('Server destroyed!!!');
-                server = null;
-                resolve();
-            });
-        } else {
-            resolve();
-        }
-    })
-
-}
+//
+// const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
+// let serverCompiler = webpack(webpackServerDevConfig);
+//
+//
+// /*  使用compiler.watch 启动时也会compile ，不需要serverCompiler.run */
+// serverCompiler.watch({
+//     aggregateTimeout: 300,
+//     poll: 1000,
+//     ignored: /node_modules/
+// }, (err, stats) => {
+// });
+//
+// serverCompiler.plugin("compile", stats => {
+//     console.log("server compiling....  ");
+// });
+//
+// serverCompiler.plugin('done', stats => {
+//     console.log("server compile done! ");
+//     requireManual().then(() => {
+//         // Make sure our newly built server bundles aren't in the module cache.
+//         Object.keys(require.cache).forEach((modulePath, index) => {
+//             if (modulePath.indexOf(serverCompiler.options.output.path) !== -1) {
+//                 delete require.cache[modulePath];
+//             }
+//         });
+//
+//         var bundlePath = path.join(serverCompiler.options.output.path, serverCompiler.options.output.filename);
+//
+//         console.log("1 require entry again!!!");
+//
+//         var serverEntry = require(bundlePath).default;
+//
+//
+//         console.log("2 require entry again!!!");
+//
+//         server = serverEntry(devMidware, hotMidware,clientCompiler);
+//
+//         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
+//         sockets = {}, nextSocketId = 0;
+//         server.on('connection', (socket) => {
+//             // Add a newly connected socket
+//             var socketId = nextSocketId++;
+//             sockets[socketId] = socket;
+//
+//             // Remove the socket when it closes
+//             socket.on('close', () => {
+//                 delete sockets[socketId];
+//             });
+//
+//         });
+//     });
+// });
+//
+// // Maintain a hash of all connected sockets
+// var server = null, sockets = {}, nextSocketId = 0;
+// var requireManual = () => {
+//     return new Promise((resolve)=>{
+//         if (server) {
+//             // Destroy all open sockets
+//             for (var socketId in sockets) {
+//                 sockets[socketId].destroy();
+//             }
+//             server.close(function () {
+//                 console.log('Server destroyed!!!');
+//                 server = null;
+//                 resolve();
+//             });
+//         } else {
+//             resolve();
+//         }
+//     })
+//
+// }
 
 
 

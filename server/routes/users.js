@@ -2,7 +2,7 @@ import koaRouter from 'koa-router';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {renderToStaticMarkup} from 'react-dom/server'
-import TestServer from '../../src/page/TestServer';
+import TestServer from '../../client/page/TestServer';
 
 let userRouter = new koaRouter();
 

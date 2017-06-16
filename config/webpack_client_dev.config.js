@@ -13,7 +13,7 @@ const extractCssPlugin = new ExtractTextPlugin({
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
     new HtmlWebpackPlugin({
-            favicon: './src/assets/favicon.ico', //favicon路径
+            favicon: './client/assets/favicon.ico', //favicon路径
             inject: true,
             template: v.template,
             filename: v.filename,
@@ -60,7 +60,7 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 exclude: [
-                    path.resolve(__dirname, '../src/css'),
+                    path.resolve(__dirname, '../client/css'),
                     /simditor/,
                 ],
                 use: extractCssPlugin.extract({
@@ -93,7 +93,7 @@ module.exports = {
             }, {
                 test: /\.(css|scss)$/,
                 include: [
-                    path.resolve(__dirname, '../src/css'),
+                    path.resolve(__dirname, '../client/css'),
                     /simditor/,
                 ],
                 use: extractCssPlugin.extract({
