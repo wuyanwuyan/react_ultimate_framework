@@ -2,50 +2,18 @@ require('source-map-support').install({environment: 'node',entryOnly:false}); //
 const cluster = require('cluster');
 const path = require('path');
 const fs = require('fs');
+const chalk = require('chalk');
 
 // process.env.NODE_ENV = "production";
-
 const webpack = require('webpack');
-const webpackDevConfig = require('../config/webpack_client_dev.config.js');
+const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
+const webpackClientDevConfig = require('../config/webpack_client_dev.config.js');
 const e2k = require('express-to-koa')
 const expressDevMiddleware = require('webpack-dev-middleware');
 const expressHotMiddleware = require('webpack-hot-middleware');
 
 
-
-
-var clientCompiler = webpack(webpackDevConfig);
-
-clientCompiler.plugin("compile", stats => {
-    console.log("client compiling....  ");
-});
-
-clientCompiler.plugin('done', stats => {
-    console.log("client compile done!");
-});
-
-let webpackDevOptions = {
-    noInfo: true,// display no info to console (only warnings and errors)
-    publicPath: webpackDevConfig.output.publicPath,
-    headers: {
-        'Access-Control-Allow-Origin': '*'
-    },
-    stats: {
-        colors: true,
-        hash: false
-    }
-};
-
-var devMidware = e2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
-var hotMidware = e2k(expressHotMiddleware(clientCompiler));
-
-// var serverEntry = require('../server_dist/server').default;
-// serverEntry(devMidware, hotMidware,clientCompiler);
-
-
-const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
 let serverCompiler = webpack(webpackServerDevConfig);
-
 
 /*  使用compiler.watch 启动时也会compile ，不需要serverCompiler.run */
 serverCompiler.watch({
@@ -55,19 +23,17 @@ serverCompiler.watch({
 }, (err, stats) => {
 });
 
+
+var pipePromise = Promise.resolve();
+
 serverCompiler.plugin("compile", stats => {
-    console.log("server compiling....  ");
+    pipePromise = destroyServer();
+    console.log(chalk.yellow("server compiling....  "));
 });
 
 serverCompiler.plugin('done', stats => {
-    console.log("server compile done! ");
-    requireManual().then(() => {
-        // Make sure our newly built server bundles aren't in the module cache.
-        Object.keys(require.cache).forEach((modulePath, index) => {
-            if (modulePath.indexOf(serverCompiler.options.output.path) !== -1) {
-                delete require.cache[modulePath];
-            }
-        });
+    console.log(chalk.blue("server compile done! "));
+    pipePromise.then(() => {
 
         var bundlePath = path.join(serverCompiler.options.output.path, serverCompiler.options.output.filename);
 
@@ -98,8 +64,16 @@ serverCompiler.plugin('done', stats => {
 
 // Maintain a hash of all connected sockets
 var server = null, sockets = {}, nextSocketId = 0;
-var requireManual = () => {
+var destroyServer = () => {
     return new Promise((resolve)=>{
+
+        // Make sure our newly built server bundles aren't in the module cache.
+        Object.keys(require.cache).forEach((modulePath, index) => {
+            if (modulePath.indexOf(serverCompiler.options.output.path) !== -1) {
+                delete require.cache[modulePath];
+            }
+        });
+
         if (server) {
             // Destroy all open sockets
             for (var socketId in sockets) {
@@ -114,8 +88,39 @@ var requireManual = () => {
             resolve();
         }
     })
-
 }
+
+
+
+
+let clientCompiler = webpack(webpackClientDevConfig);
+
+clientCompiler.plugin("compile", stats => {
+    console.log(chalk.yellow("client compiling....  "));
+});
+
+clientCompiler.plugin('done', stats => {
+    console.log(chalk.green("client compile done!"));
+});
+
+let webpackDevOptions = {
+    noInfo: true,// display no info to console (only warnings and errors)
+    publicPath: webpackClientDevConfig.output.publicPath,
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    },
+    stats: {
+        colors: true,
+        hash: false
+    }
+};
+
+var devMidware = e2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
+var hotMidware = e2k(expressHotMiddleware(clientCompiler));
+
+// var serverEntry = require('../server_dist/server').default;
+// serverEntry(devMidware, hotMidware,clientCompiler);
+
 
 
 

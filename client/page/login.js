@@ -27,7 +27,7 @@ class Login extends Component {
         const state = this.state;
         return (
             <div className={classNames(style.loginWrapper, "flex_center_vh")}>
-                <Button icon='bookmark' label='登陆' raised primary />
+                <Button icon='bookmark' label='登陆1----2398' raised primary />
             </div>
         );
     }

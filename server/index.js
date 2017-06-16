@@ -47,7 +47,7 @@ export default function serverEntry(expressDevMiddleware, expressHotMiddleware, 
             console.log(err);
             return;
         }
-        console.log('✅ Listening at http://localhost:%s', port);
+        console.log('✅ Listening at http://localhost:%s \n------------------------------------------------------------', port);
     });
 
     return server;
