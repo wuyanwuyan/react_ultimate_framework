@@ -45,7 +45,9 @@ class Login extends Component {
 
     render() {
         return (
-            <div className={classNames(style.loginWrapper, "flex_center_vh")}>
+            <div className={classNames(style.loginWrapper, "flex_center_vh")} >
+                <img src={require("../../client/assets/img/th.jpeg")} alt="none" />
+                <img src={require("../../client/assets/img/small.png")} alt="none" />
                 <form onSubmit={this.handleSubmit} action="submit">
                     <section className={classNames(style.section,"padding-md")}>
                         <Input type='tel' label='Phone' name='phone' icon='phone' value={this.state.phone} required onChange={this.handlePhoneChange} />
@@ -65,6 +67,11 @@ if (__CLIENT__) {
     let initState = window.__INITIAL_STATE__ || {};
     ReactDOM.render(<Login {...initState}/>, document.getElementById("react-container"));
 }
+
+// if (__DEV__ && module.hot) {
+//     module.hot.accept();
+// }
+
 
 export default Login;
 

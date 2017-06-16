@@ -132,7 +132,7 @@ module.exports = {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 7186,
+                    limit: Infinity,
                     name: 'static/fonts/[name].[ext]'
                 }
             }

@@ -123,7 +123,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    // limit: 7186,
+                    limit: 7186,
                     name: 'static/images/[name].[hash].[ext]'
                 }
             },
@@ -131,7 +131,7 @@ module.exports = {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    // limit: 7186,
+                    limit: Infinity,
                     name: 'static/fonts/[name].[hash].[ext]'
                 }
             }

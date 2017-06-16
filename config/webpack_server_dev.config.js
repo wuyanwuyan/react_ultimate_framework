@@ -24,10 +24,20 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
+                options: {
+                    emitFile:false,
+                    limit: 7186,
+                    name: 'static/images/[name].[ext]'
+                }
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
+                options: {
+                    emitFile:false,
+                    limit: Infinity,
+                    name: 'static/fonts/[name].[ext]'
+                }
             }
         ]
     },
