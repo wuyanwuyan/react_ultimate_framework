@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import {Button, IconButton} from 'react-toolbox/lib/button';
 import classNames from 'classnames';
 
+
 ///222
 
 class Login extends Component {
@@ -26,7 +27,7 @@ class Login extends Component {
         const state = this.state;
         return (
             <div className={classNames(style.loginWrapper, "flex_center_vh")}>
-                <Button icon='bookmark' label='Bookmark' accent />
+                <Button icon='bookmark' label='登陆' raised primary />
             </div>
         );
     }

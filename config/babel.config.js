@@ -25,7 +25,7 @@ module.exports = {
                 "preprocessCss": "./loaders/sass-loader.js",
                 "devMode": true,
                 "generateScopedName": "[name]_[local]-[hash:3]",
-                "extensions": [".scss",".css"]
+                "extensions": [".scss",".css"],
             }
             ],
             ["transform-decorators-legacy"],

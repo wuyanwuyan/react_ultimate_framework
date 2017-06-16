@@ -17,6 +17,9 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
+                include: [
+                    path.resolve(ROOT_PATH,'node_modules/react-toolbox')
+                ],
                 exclude: /node_modules/,
                 options: babelConfig
             }
@@ -36,7 +39,7 @@ module.exports = {
         })
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals()], // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[/^react-toolbox/]})],//nodeModules, // in order to ignore all modules in node_modules folder,
     context: ROOT_PATH,
     node: {
         __filename: false,

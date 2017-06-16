@@ -32,55 +32,6 @@ module.exports = {
                 loader: 'babel-loader',
                 options: babelConfig
             },
-            // {
-            //     test: /\.(css|scss)$/,
-            //     loader: 'ignore-loader'
-            // },
-            // {
-            //     test: /\.(css|scss)$/,
-            //     exclude: [
-            //         path.resolve(__dirname, '../client/css'),
-            //     ],
-            //     use: [
-            //         {
-            //             loader: "css-loader",
-            //             options: {
-            //                 importloader: 1,
-            //                 modules: true,
-            //                 localIdentName: '[name]_[local]-[hash:3]'
-            //             }
-            //         }, {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 plugins: [
-            //                     require('autoprefixer')
-            //                 ]
-            //             }
-            //         }, {
-            //             loader: 'sass-loader',
-            //         }
-            //     ]
-            // }, {
-            //     test: /\.(css|scss)$/,
-            //     include: [
-            //         path.resolve(__dirname, '../client/css'),
-            //     ],
-            //     use: [
-            //         {
-            //             loader: "css-loader",
-            //         },
-            //         {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 plugins: [
-            //                     require('autoprefixer')
-            //                 ]
-            //             }
-            //         }, {
-            //             loader: 'sass-loader',
-            //         }
-            //     ]
-            // },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
@@ -102,11 +53,10 @@ module.exports = {
                 NODE_ENV: '"development"',
                 PORT: 8087
             },
-        }),
-        // new webpack.IgnorePlugin(/\.(css|scss)$/),
+        })
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals({whitelist:[".bin","react-toolbox"]})],//nodeModules, // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[/^react-toolbox/]})],//nodeModules, // in order to ignore all modules in node_modules folder,
     node: {
         __filename: false,
         __dirname: false
