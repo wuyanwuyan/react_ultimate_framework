@@ -24,11 +24,11 @@ router.get('/', async (ctx) => {
 
 //登陆页面渲染
 router.get('/login', async (ctx) => {
-    var initialState = JSON.stringify({"sate":[1,5,4]});
+    // var initialState = JSON.stringify({"sate":[1,5,4]});
     ctx.type = 'html';
     ctx.body = await renderHbs('login.hbs', {
-        content: renderReactComp(Login,initialState),
-        initialState
+        content: renderReactComp(Login),
+        // initialState
     })
 
 });

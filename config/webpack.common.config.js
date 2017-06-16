@@ -22,22 +22,21 @@ Object.keys(entry).forEach(key => {
     }
 })
 
+/**
+ * webpack entry有几个，这里就有几个handlebars的配置
+ * @type {{hbs_html_config: [*], entry_dev: {}, entry: {vendor: [*], home: [*], login: [*]}}}
+ */
 module.exports = {
     hbs_html_config: [
         {
-            template: './client/home.hbs',
+            template: './client/default.hbs',
             filename: 'home.hbs',
             chunks: ['vendor', 'home']
         },
         {
-            template: './client/login.hbs',
+            template: './client/default.hbs',
             filename: 'login.hbs',
             chunks: ['vendor', 'login']
-        },
-        {
-            template: './client/about.hbs',
-            filename: 'about.hbs',
-            chunks: ['vendor', 'index']
         }
     ],
     entry_dev,

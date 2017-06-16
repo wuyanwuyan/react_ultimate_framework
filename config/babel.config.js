@@ -10,7 +10,6 @@ module.exports = {
         presets: ["es2015", "stage-0", "react"],
         "plugins": ["transform-decorators-legacy", "transform-runtime"]
     },
-
     dev_server: {
         presets: [
             ["env", {
@@ -32,5 +31,25 @@ module.exports = {
             ["transform-runtime"]
         ],
         cacheDirectory: true
+    },
+    pro_server: {
+        presets: [
+            ["env", {
+                "targets": {"node": "current"}
+            }],
+            ["stage-0"],
+            ["react"]
+        ],
+        "plugins": [
+            [
+                "css-modules-transform", {
+                "preprocessCss": "./loaders/sass-loader.js",
+                "generateScopedName": "[name]_[local]-[hash:base64:4]",
+                "extensions": [".scss",".css"],
+            }
+            ],
+            ["transform-decorators-legacy"],
+            ["transform-runtime"]
+        ]
     }
 }

@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
-var babelConfig = require("./babel.config").dev_server;
+var babelConfig = require("./babel.config").pro_server;
 const ROOT_PATH = process.cwd();
 
 module.exports = {
@@ -17,11 +17,15 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
-                include: [
-                    path.resolve(ROOT_PATH,'node_modules/react-toolbox')
-                ],
-                exclude: /node_modules/,
                 options: babelConfig
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
             }
         ]
     },

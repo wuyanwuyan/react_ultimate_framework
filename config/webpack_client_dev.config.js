@@ -8,7 +8,8 @@ const babelConfig = require("./babel.config").dev_client;
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
-    filename: "[name].css"
+    filename: "[name].css",
+    disable:true
 });
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
@@ -60,8 +61,7 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 exclude: [
-                    path.resolve(__dirname, '../client/css'),
-                    /simditor/,
+                    path.resolve(ROOT_PATH, 'client/css'),
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
@@ -79,7 +79,7 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 plugins: [
-                                    require('autoprefixer')
+                                    require('postcss-cssnext')
                                 ]
                             }
                         }, {
@@ -93,8 +93,7 @@ module.exports = {
             }, {
                 test: /\.(css|scss)$/,
                 include: [
-                    path.resolve(__dirname, '../client/css'),
-                    /simditor/,
+                    path.resolve(ROOT_PATH, 'client/css'),
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
@@ -109,7 +108,7 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 plugins: [
-                                    require('autoprefixer')
+                                    require('postcss-cssnext')
                                 ]
                             }
                         }, {

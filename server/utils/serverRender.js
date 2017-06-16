@@ -12,6 +12,9 @@ let compiler = null;
 let fsystem = fs;
 
 let DEFAULT_STATE = {
+    description: "****后台系统",
+    keywords: "***后台管理系统，管理",
+    title: "***管理系统",
     content: "",
     initialState: "null"
 }

@@ -78,14 +78,14 @@ module.exports = {
                         options: {
                             importloader: 1,
                             modules: true,
-                            localIdentName: '[name]_[local]-[hash:4]',
+                            localIdentName: '[name]_[local]-[hash:base64:4]',
                             minimize: true
                         }
                     }, {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
-                                require('autoprefixer')
+                                require('postcss-cssnext')
                             ]
                         }
                     }, {
@@ -100,28 +100,28 @@ module.exports = {
                     /simditor/,
                 ],
                 use: extractCssPlugin.extract({
-                    fallback: "style-loaders",
+                    fallback: "style-loader",
                     use: [{
-                        loader: "css-loaders",
+                        loader: "css-loader",
                         options: {
                             minimize: true
                         }
                     }, {
-                        loader: 'postcss-loaders',
+                        loader: 'postcss-loader',
                         options: {
                             plugins: [
-                                require('autoprefixer')
+                                require('postcss-cssnext')
                             ]
                         }
                     }, {
-                        loader: 'sass-loaders'
+                        loader: 'sass-loader'
                     }
                     ]
                 })
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loaders',
+                loader: 'url-loader',
                 options: {
                     // limit: 7186,
                     name: 'static/images/[name].[hash].[ext]'
@@ -129,7 +129,7 @@ module.exports = {
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loaders',
+                loader: 'url-loader',
                 options: {
                     // limit: 7186,
                     name: 'static/fonts/[name].[hash].[ext]'

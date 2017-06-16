@@ -1,11 +1,9 @@
 {
   "login": {
-    "js": "/js/login.js",
-    "css": "/login.css"
+    "js": "/js/login.js"
   },
   "home": {
-    "js": "/js/home.js",
-    "css": "/home.css"
+    "js": "/js/home.js"
   },
   "vendor": {
     "js": "/vendor.js"

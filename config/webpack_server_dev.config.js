@@ -5,17 +5,6 @@ const nodeExternals = require('webpack-node-externals');
 const babelConfig = require("./babel.config").dev_server;
 const ROOT_PATH = process.cwd();
 
-var nodeModules = {};
-var manualInclude = ['.bin', 'react-toolbox'];
-fs.readdirSync('node_modules')
-    .filter(function (x) {
-        return manualInclude.indexOf(x) === -1;
-    })
-    .forEach(function (mod) {
-        nodeModules[mod] = 'commonjs ' + mod;
-    });
-
-
 module.exports = {
     entry: './server/index.js',
     output: {
@@ -56,7 +45,7 @@ module.exports = {
         })
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals({whitelist:[/^react-toolbox/]})],//nodeModules, // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[/^react-toolbox/]})], // in order to ignore all modules in node_modules folder,
     node: {
         __filename: false,
         __dirname: false
