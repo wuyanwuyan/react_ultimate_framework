@@ -6,6 +6,6 @@
     "js": "/js/home.js"
   },
   "vendor": {
-    "js": "/vendor.js"
+    "js": "/js/vendor.js"
   }
 }

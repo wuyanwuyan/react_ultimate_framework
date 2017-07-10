@@ -29,10 +29,7 @@ export default function serverEntry(expressDevMiddleware, expressHotMiddleware, 
 
     app.use(bodyParser());
 
-
-
     app.use(indexRoute.routes());
-
 
     app.use(async (ctx) => {
         ctx.redirect("/");
@@ -51,7 +48,6 @@ export default function serverEntry(expressDevMiddleware, expressHotMiddleware, 
     });
 
     return server;
-
 }
 
 if (process.env.NODE_ENV === "production") {

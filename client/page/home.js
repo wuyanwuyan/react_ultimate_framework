@@ -12,7 +12,7 @@ class Home extends React.Component {
     render() {
         return (
             <div style={{fontSize:"40px"}}>
-                <a href="/login">to login page</a>
+                <a href="/login">to login2</a>
             </div>
         )
     }

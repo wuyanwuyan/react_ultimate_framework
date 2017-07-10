@@ -9,7 +9,7 @@ const babelConfig = require("./babel.config").pro_client;
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css"
+    filename: "css/[name].[contenthash].css"
 });
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
@@ -21,7 +21,7 @@ var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
             chunks: v.chunks,
             minify: { //压缩HTML文件
                 removeComments: true, //移除HTML中的注释
-                collapseWhitespace: false //删除空白符与换行符
+                collapseWhitespace: true //删除空白符与换行符
             }
         }
     ))
@@ -37,7 +37,7 @@ var plugins = [
         }
     }),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js', minChunks: Infinity,}),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.[chunkhash].js', minChunks: Infinity,}),
     new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
     new webpack.optimize.UglifyJsPlugin(
         {
@@ -68,15 +68,14 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 exclude: [
-                    path.resolve(__dirname, '../client/css'),
-                    /simditor/,
+                    path.resolve(__dirname, '../client/css')
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [{
                         loader: "css-loader",
                         options: {
-                            importloader: 1,
+                            importloaders: 2,
                             modules: true,
                             localIdentName: '[name]_[local]-[hash:base64:4]',
                             minimize: true
@@ -96,8 +95,7 @@ module.exports = {
             }, {
                 test: /\.(css|scss)$/,
                 include: [
-                    path.resolve(__dirname, '../client/css'),
-                    /simditor/,
+                    path.resolve(__dirname, '../client/css')
                 ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",

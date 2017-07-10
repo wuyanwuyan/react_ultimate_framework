@@ -8,7 +8,7 @@ const babelConfig = require("./babel.config").dev_client;
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
-    filename: "[name].css",
+    filename: "css/[name].css",
     disable:true
 });
 
@@ -34,7 +34,7 @@ var plugins = [
     }),
     new AssetsPlugin({filename: 'stats.generated.json', path: ROOT_PATH, prettyPrint: true}),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js', minChunks: Infinity,}),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.js', minChunks: Infinity,}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 ];
@@ -70,7 +70,7 @@ module.exports = {
                             loader: "css-loader",
                             options: {
                                 sourceMap: true,
-                                importLoaders: 1,
+                                importLoaders: 2,
                                 modules: true,
                                 localIdentName: '[name]_[local]-[hash:3]'
                             }

@@ -10,13 +10,25 @@ let router = new koaRouter();
 
 //首页渲染
 router.get('/', async (ctx) => {
-    ctx.body = await renderHbs('home.hbs', {
-    })
+    ctx.body = await renderHbs('home.hbs', {})
 });
 
 
 //登陆页面渲染
 router.get('/login', async (ctx) => {
+
+    ctx.body = await renderHbs('login.hbs', {
+        content: renderReactComp(Login),
+    })
+
+});
+
+
+router.get('/login/:word/page/:country', async (ctx) => {
+
+    console.log('query： ', ctx.query);
+
+    console.log('params: ', ctx.params);
 
     ctx.body = await renderHbs('login.hbs', {
         content: renderReactComp(Login),
