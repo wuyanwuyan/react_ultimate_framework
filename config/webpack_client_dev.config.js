@@ -36,7 +36,7 @@ var plugins = [
     extractCssPlugin,
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.js', minChunks: Infinity,}),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
 ];
 
 plugins = plugins.concat(htmlPlugins);
