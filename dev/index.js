@@ -1,7 +1,8 @@
 require('source-map-support').install({environment: 'node', entryOnly: false}); // 让node支持source-map
+const cluster = require('cluster');   // colorful console
 const path = require('path');
 const fs = require('fs');
-const chalk = require('chalk'); // colorful console
+const chalk = require('chalk');
 
 // process.env.NODE_ENV = "production";
 const webpack = require('webpack');
