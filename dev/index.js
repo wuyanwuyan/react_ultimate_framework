@@ -4,11 +4,10 @@ const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
 
-// process.env.NODE_ENV = "production";
 const webpack = require('webpack');
 const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
 const webpackClientDevConfig = require('../config/webpack_client_dev.config.js');
-const e2k = require('express-to-koa')
+const c2k = require('koa2-connect'); // express middleware to koa2
 const expressDevMiddleware = require('webpack-dev-middleware');
 const expressHotMiddleware = require('webpack-hot-middleware');
 
@@ -40,8 +39,8 @@ let webpackDevOptions = {
     },
 };
 
-var devMidware = e2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
-var hotMidware = e2k(expressHotMiddleware(clientCompiler));
+var devMidware = c2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
+var hotMidware = c2k(expressHotMiddleware(clientCompiler));
 
 // var serverEntry = require('../server_dist/server').default;
 // serverEntry(devMidware, hotMidware,clientCompiler);
