@@ -2,6 +2,8 @@ import '../css/index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppBar } from 'react-toolbox/lib/app_bar';
+import Logo from './component/Logo.js';
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,8 +13,10 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div style={{fontSize:"40px"}}>
-                <a href="/login">to login2</a>
+            <div>
+                <AppBar>
+                    <Logo /> App Example
+                </AppBar>
             </div>
         )
     }
