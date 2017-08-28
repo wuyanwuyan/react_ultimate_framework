@@ -28,6 +28,7 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        window.location = '/';
     }
 
     render() {
