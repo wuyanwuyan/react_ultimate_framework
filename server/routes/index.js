@@ -24,4 +24,8 @@ router.get('/login', async (ctx) => {
 });
 
 
+router.get('/manager', async (ctx) => {
+    ctx.body = await renderHbs('manager.hbs')
+});
+
 export default router;

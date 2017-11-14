@@ -1,4 +1,7 @@
 {
+  "manager": {
+    "js": "/js/manager.js"
+  },
   "login": {
     "js": "/js/login.js"
   },

@@ -7,7 +7,8 @@ const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // web
 const entry = {
     vendor: ['react', 'react-dom'],
     home: ['./client/page/home.js'],
-    login: ['./client/page/login.js']
+    login: ['./client/page/login.js'],
+    manager: ['./client/page/manager/index.js']
 };
 
 
@@ -35,6 +36,11 @@ module.exports = {
             template: './client/default.hbs',
             filename: 'login.hbs',
             chunks: ['vendor', 'login']
+        },
+        {
+            template: './client/default.hbs',
+            filename: 'manager.hbs',
+            chunks: ['vendor', 'manager']
         }
     ],
     entry_dev,
