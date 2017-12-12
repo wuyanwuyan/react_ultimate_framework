@@ -1,0 +1,298 @@
+@import "./variables.css";
+
+/*Margin*/
+
+.margin {
+  margin: var(--boxsize)
+}
+
+.margin-md {
+  margin: var(--boxsize-md)
+}
+
+.margin-xs {
+  margin: var(--boxsize-xs)
+}
+
+.margin-left {
+  margin-left: var(--boxsize)
+}
+
+.margin-left-lg {
+  margin-left: var(--boxsize-lg)
+}
+
+.margin-left-sm {
+  margin-left: var(--boxsize-sm)
+}
+
+.margin-left-md {
+  margin-left: var(--boxsize-md)
+}
+
+.margin-left-bg {
+  margin-left: var(--boxsize-bg)
+}
+
+.margin-left-xs {
+  margin-left: var(--boxsize-xs)
+}
+
+.margin-right {
+  margin-right: var(--boxsize)
+}
+
+.margin-right-lg {
+  margin-right: var(--boxsize-lg)
+}
+
+.margin-right-sm {
+  margin-right: var(--boxsize-sm)
+}
+
+.margin-right-md {
+  margin-right: var(--boxsize-md)
+}
+
+.margin-right-bg {
+  margin-right: var(--boxsize-bg)
+}
+
+.margin-right-xs {
+  margin-right: var(--boxsize-xs)
+}
+
+.margin-top {
+  margin-top: var(--boxsize)
+}
+
+.margin-top-lg {
+  margin-top: var(--boxsize-lg)
+}
+
+.margin-top-sm {
+  margin-top: var(--boxsize-sm)
+}
+
+.margin-top-md {
+  margin-top: var(--boxsize-md)
+}
+
+.margin-top-bg {
+  margin-right: var(--boxsize-bg)
+}
+
+.margin-top-xs {
+  margin-top: var(--boxsize-xs)
+}
+
+.margin-bottom {
+  margin-bottom: var(--boxsize)
+}
+
+.margin-bottom-lg {
+  margin-bottom: var(--boxsize-lg)
+}
+
+.margin-bottom-sm {
+  margin-bottom: var(--boxsize-sm)
+}
+
+.margin-bottom-md {
+  margin-bottom: var(--boxsize-md)
+}
+
+.margin-bottom-xs {
+  margin-bottom: var(--boxsize-xs)
+}
+
+.margin-vertical {
+  margin-bottom: var(--boxsize);
+  margin-top: var(--boxsize)
+}
+
+.margin-vertical-lg {
+  margin-bottom: var(--boxsize-lg);
+  margin-top: var(--boxsize-lg)
+}
+
+.margin-vertical-sm {
+  margin-bottom: var(--boxsize-sm);
+  margin-top: var(--boxsize-sm)
+}
+
+.margin-vertical-md {
+  margin-bottom: var(--boxsize-md);
+  margin-top: var(--boxsize-md)
+}
+
+.margin-vertical-xs {
+  margin-bottom: var(--boxsize-xs);
+  margin-top: var(--boxsize-xs)
+}
+
+/* Padding */
+.padding {
+  padding: var(--boxsize)
+}
+
+.padding-lg {
+  padding: var(--boxsize-lg)
+}
+
+.padding-sm {
+  padding: var(--boxsize-sm)
+}
+
+.padding-md {
+  padding: var(--boxsize-md)
+}
+
+.padding-left {
+  padding-left: var(--boxsize)
+}
+
+.padding-left-lg {
+  padding-left: var(--boxsize-lg)
+}
+
+.padding-left-bg {
+  padding-left: var(--boxsize-bg)
+}
+
+.padding-left-sm {
+  padding-left: var(--boxsize-sm)
+}
+
+.padding-left-md {
+  padding-left: var(--boxsize-md)
+}
+
+.padding-right {
+  padding-right: var(--boxsize)
+}
+
+.padding-right-lg {
+  padding-right: var(--boxsize-lg)
+}
+
+.padding-right-sm {
+  padding-right: var(--boxsize-sm)
+}
+
+.padding-right-md {
+  padding-right: var(--boxsize-md)
+}
+
+.padding-top {
+  padding-top: var(--boxsize)
+}
+
+.padding-top-lg {
+  padding-top: var(--boxsize-lg)
+}
+
+.padding-top-sm {
+  padding-top: var(--boxsize-sm)
+}
+
+.padding-top-md {
+  padding-top: var(--boxsize-md)
+}
+
+.padding-bottom {
+  padding-bottom: var(--boxsize)
+}
+
+.padding-bottom-xs {
+  padding-bottom: var(--boxsize-xs)
+}
+
+.padding-bottom-lg {
+  padding-bottom: var(--boxsize-lg)
+}
+
+.padding-bottom-sm {
+  padding-bottom: var(--boxsize-sm)
+}
+
+.padding-bottom-md {
+  padding-bottom: var(--boxsize-md)
+}
+
+.padding-vertical {
+  padding-bottom: var(--boxsize);
+  padding-top: var(--boxsize)
+}
+
+.padding-vertical-lg {
+  padding-bottom: var(--boxsize-lg);
+  padding-top: var(--boxsize-lg)
+}
+
+.padding-vertical-sm {
+  padding-bottom: var(--boxsize-sm);
+  padding-top: var(--boxsize-sm)
+}
+
+.padding-vertical-md {
+  padding-bottom: var(--boxsize-md);
+  padding-top: var(--boxsize-md)
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex_center_v {
+  display: flex;
+  align-items: center;
+}
+
+.flex_center_h {
+  display: flex;
+  justify-content: center;
+}
+
+.flex_center_vh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin_left_auto {
+  margin-left: auto;
+}
+
+.border-bottom-line {
+  border-bottom: 1px gray solid;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+

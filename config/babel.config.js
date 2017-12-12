@@ -21,10 +21,10 @@ module.exports = {
         "plugins": [
             [
                 "css-modules-transform", {
-                "preprocessCss": "./loaders/sass-loader.js",
+                // "preprocessCss": "./loaders/sass-loader.js",
                 "devMode": true,
                 "generateScopedName": "[name]_[local]-[hash:3]",
-                "extensions": [".scss",".css"],
+                "extensions": [".pcss",".css"],
             }
             ],
             ["transform-decorators-legacy"],
@@ -43,9 +43,9 @@ module.exports = {
         "plugins": [
             [
                 "css-modules-transform", {
-                "preprocessCss": "./loaders/sass-loader.js",
+                // "preprocessCss": "./loaders/sass-loader.js",
                 "generateScopedName": "[name]_[local]-[hash:base64:4]",
-                "extensions": [".scss",".css"],
+                "extensions": [".pcss",".css"],
             }
             ],
             ["transform-decorators-legacy"],

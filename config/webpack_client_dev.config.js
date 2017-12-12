@@ -79,13 +79,9 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 plugins: [
+                                    require('postcss-import'),
                                     require('postcss-cssnext')
                                 ]
-                            }
-                        }, {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
                             }
                         }
                     ]
@@ -108,13 +104,9 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 plugins: [
+                                    require('postcss-import'),
                                     require('postcss-cssnext')
                                 ]
-                            }
-                        }, {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
                             }
                         }
                     ]

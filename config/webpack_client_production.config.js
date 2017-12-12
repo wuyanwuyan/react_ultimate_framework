@@ -37,12 +37,16 @@ var plugins = [
         }
     }),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.[chunkhash].js', minChunks: Infinity,}),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        filename: 'js/vendor.[chunkhash].js',
+        minChunks: Infinity,
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
     new webpack.optimize.UglifyJsPlugin(
         {
-            compress: {warnings: false, drop_console: true,collapse_vars: true,},
-            comments:false
+            compress: {warnings: false, drop_console: true, collapse_vars: true,},
+            comments: false
         }
     )
 ];
@@ -84,13 +88,11 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
+                                require('postcss-import'),
                                 require('postcss-cssnext')
                             ]
                         }
-                    }, {
-                        loader: 'sass-loader'
-                    }
-                    ]
+                    }]
                 })
             }, {
                 test: /\.(css|scss)$/,
@@ -108,13 +110,11 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
+                                require('postcss-import'),
                                 require('postcss-cssnext')
                             ]
                         }
-                    }, {
-                        loader: 'sass-loader'
-                    }
-                    ]
+                    }]
                 })
             },
             {

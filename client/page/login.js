@@ -1,5 +1,5 @@
-import '../css/index.scss';
-import style from './login.scss';
+import '../css/index.css';
+import style from './login.css';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 

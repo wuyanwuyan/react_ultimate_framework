@@ -1,9 +1,9 @@
 @import "reset.css";
-@import "./variables.scss";
-@import "./utilities.scss";
+@import "./variables.css";
+@import "./utilities.css";
 
 html {
-  color: $font-color;
+  color: var(--font-color);
 }
 
 body {
@@ -29,7 +29,7 @@ a {
 .section-title {
   padding: 15px;
   line-height: 26px;
-  font-size: px2rem(14px);
+  //font-size: px2rem(14px);
 }
 
 .article-plain-content {

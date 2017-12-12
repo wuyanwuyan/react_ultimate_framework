@@ -50,6 +50,4 @@ export async function renderHbs(hbsName, data) {
     var template = Handlebars.compile(source);
     var result = template(data);
     return result;
-
-
 }
