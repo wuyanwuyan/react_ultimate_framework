@@ -17,7 +17,6 @@ router.get('/', async (ctx) => {
 
 //登陆页面渲染
 router.get('/login', async (ctx) => {
-
     ctx.body = await renderHbs('login.hbs', {
         content: renderReactComp(Login),
     })

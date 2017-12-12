@@ -34,7 +34,7 @@ class Login extends Component {
     render() {
         const {phone, password, phoneErrMes, passwordErrMes} = this.state;
         return (
-            <div className={classNames(style.loginWrapper, "flex_center_vh")}>
+            <div className={classNames('flex_center_vh', style.loginWrapper)}>
                 <form onSubmit={this.handleSubmit} action="submit">
                     <section className={classNames(style.section, "padding-md")}>
                         <Input type='tel' label='Phone' error={phoneErrMes} icon='phone' value={phone}
@@ -61,7 +61,6 @@ if (__CLIENT__) {
 // if (__DEV__ && module.hot) {
 //     module.hot.accept();
 // }
-
 
 export default Login;
 

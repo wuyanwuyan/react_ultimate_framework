@@ -3,7 +3,7 @@
  * 包括 handlebars生成配置 ， 多页面entey入口配置
  * @type {{hbs_html_config: [*]}}
  */
-const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
+const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 const entry = {
     vendor: ['react', 'react-dom'],
     home: ['./client/page/home.js'],
