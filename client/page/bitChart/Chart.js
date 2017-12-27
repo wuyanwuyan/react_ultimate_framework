@@ -5,6 +5,13 @@ import $ from 'jquery';
 
 HighchartsMore(Highcharts);
 
+let styles = {
+    height: '100vh',
+    overflow: 'hidden',
+    width: '100vw',
+    position: 'fixed'
+}
+
 export default class Chart extends React.Component {
     constructor(props) {
         super(props);
@@ -136,7 +143,7 @@ export default class Chart extends React.Component {
 
     render() {
         return (
-            <div id="container" ref={r => this.chart = r} style={{width:'100vw',height:'100vh'}}>
+            <div id="container" ref={r => this.chart = r} style={styles}>
 
             </div>
         )

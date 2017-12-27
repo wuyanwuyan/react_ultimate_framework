@@ -9,14 +9,10 @@ class BitChart extends React.Component {
 
     render() {
         return (
-            <div>
-                <Chart />
-            </div>
+            <Chart />
         )
     }
 }
-
-
 
 
 if (__CLIENT__) {
