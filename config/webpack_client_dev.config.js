@@ -78,7 +78,7 @@ module.exports = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: [
+                                plugins: ()=> [
                                     require('postcss-import'),
                                     require('postcss-cssnext')
                                 ]

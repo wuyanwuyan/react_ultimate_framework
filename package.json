@@ -22,7 +22,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "handlebars": "^4.0.10",
+    "highcharts": "^6.0.4",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",

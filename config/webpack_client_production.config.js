@@ -46,6 +46,8 @@ var plugins = [
     new webpack.optimize.UglifyJsPlugin(
         {
             compress: {warnings: false, drop_console: true, collapse_vars: true,},
+            output: {comments: false},
+            beautify: false,
             comments: false
         }
     )
@@ -70,7 +72,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|scss)$/,
+                test: /\.(css|pcss)$/,
                 exclude: [
                     path.resolve(__dirname, '../client/css')
                 ],
@@ -95,7 +97,7 @@ module.exports = {
                     }]
                 })
             }, {
-                test: /\.(css|scss)$/,
+                test: /\.(css|pcss)$/,
                 include: [
                     path.resolve(__dirname, '../client/css')
                 ],
@@ -109,7 +111,7 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [
+                            plugins: () => [
                                 require('postcss-import'),
                                 require('postcss-cssnext')
                             ]

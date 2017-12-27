@@ -8,6 +8,9 @@
   "home": {
     "js": "/js/home.js"
   },
+  "bitChart": {
+    "js": "/js/bitChart.js"
+  },
   "vendor": {
     "js": "/js/vendor.js"
   }

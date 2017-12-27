@@ -8,7 +8,8 @@ const entry = {
     vendor: ['react', 'react-dom'],
     home: ['./client/page/home.js'],
     login: ['./client/page/login.js'],
-    manager: ['./client/page/manager/index.js']
+    manager: ['./client/page/manager/index.js'],
+    bitChart: ['./client/page/bitChart/index.js']
 };
 
 
@@ -41,6 +42,11 @@ module.exports = {
             template: './client/default.hbs',
             filename: 'manager.hbs',
             chunks: ['vendor', 'manager']
+        },
+        {
+            template: './client/default.hbs',
+            filename: 'bitChart.hbs',
+            chunks: ['vendor', 'bitChart']
         }
     ],
     entry_dev,

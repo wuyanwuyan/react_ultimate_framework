@@ -29,7 +29,10 @@ const readFileThunk = function (hbsName) {
 
     return new Promise((resolve, reject) => {
         fsystem.readFile(filename, 'utf8', function (err, data) {
-            if (err) return reject(err);
+            if (err) {
+                console.log(err);
+                return reject(err);
+            }
             resolve(data);
         });
     });

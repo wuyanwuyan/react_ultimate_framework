@@ -27,4 +27,9 @@ router.get('/manager', async (ctx) => {
     ctx.body = await renderHbs('manager.hbs')
 });
 
+
+router.get('/bitChart', async (ctx) => {
+    ctx.body = await renderHbs('bitChart.hbs');
+});
+
 export default router;
