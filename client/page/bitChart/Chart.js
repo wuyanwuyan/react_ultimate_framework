@@ -113,6 +113,7 @@ export default class Chart extends React.Component {
                 }],
 
                 tooltip: {
+                    followTouchMove:false,
                     split: true
                 },
 
