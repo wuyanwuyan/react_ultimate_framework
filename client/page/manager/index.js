@@ -21,7 +21,7 @@ store.runSaga(helloSaga);
 
 
 if (__CLIENT__) {
-    ReactDOM.render(
+    ReactDOM.hydrate(
         <Provider store={store}>
             <IndexView/>
         </Provider>,

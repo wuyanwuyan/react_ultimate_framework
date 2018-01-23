@@ -55,7 +55,7 @@ class Login extends Component {
 
 if (__CLIENT__) {
     let initState = window.__INITIAL_STATE__ || {};
-    ReactDOM.render(<Login {...initState}/>, document.getElementById("react-container"));
+    ReactDOM.hydrate(<Login {...initState}/>, document.getElementById("react-container"));
 }
 
 // if (__DEV__ && module.hot) {

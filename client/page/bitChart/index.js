@@ -17,7 +17,7 @@ class BitChart extends React.Component {
 
 if (__CLIENT__) {
     let initState = window.__INITIAL_STATE__ || {};
-    ReactDOM.render(<BitChart {...initState}/>, document.getElementById("react-container"));
+    ReactDOM.hydrate(<BitChart {...initState}/>, document.getElementById("react-container"));
 }
 
 export default BitChart;

@@ -24,6 +24,7 @@ clientCompiler.plugin('done', stats => {
 
 let webpackDevOptions = {
     noInfo: true,// display no info to console (only warnings and errors)
+    logTime:true,
     publicPath: webpackClientDevConfig.output.publicPath,
     headers: {
         'Access-Control-Allow-Origin': '*'

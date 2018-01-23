@@ -34,7 +34,7 @@ var plugins = [
     }),
     new AssetsPlugin({filename: 'stats.generated.json', path: ROOT_PATH, prettyPrint: true}),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.js', minChunks: Infinity,}),
+    new webpack.optimize.CommonsChunkPlugin({name: ['vendor','manifest'], filename: 'js/[name].js', minChunks: Infinity,}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 ];

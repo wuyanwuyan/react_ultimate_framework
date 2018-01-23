@@ -17,7 +17,7 @@ let entry_dev = {};
 Object.keys(entry).forEach(key => {
     if (key !== 'vendor') {
         entry_dev[key] = [hotMiddlewareScript].concat(entry[key]);
-    }else{
+    } else {
         entry_dev[key] = entry[key];
     }
 })
@@ -31,22 +31,22 @@ module.exports = {
         {
             template: './client/default.hbs',
             filename: 'home.hbs',
-            chunks: ['vendor', 'home']
+            chunks: ['manifest', 'vendor', 'home']
         },
         {
             template: './client/default.hbs',
             filename: 'login.hbs',
-            chunks: ['vendor', 'login']
+            chunks: ['manifest', 'vendor', 'login']
         },
         {
             template: './client/default.hbs',
             filename: 'manager.hbs',
-            chunks: ['vendor', 'manager']
+            chunks: ['manifest', 'vendor', 'manager']
         },
         {
             template: './client/default.hbs',
             filename: 'bitChart.hbs',
-            chunks: ['vendor', 'bitChart']
+            chunks: ['manifest', 'vendor', 'bitChart']
         }
     ],
     entry_dev,

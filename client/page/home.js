@@ -24,7 +24,7 @@ class Home extends React.Component {
 
 if(__CLIENT__){
     let initState = window.__INITIAL_STATE__ || {};
-    ReactDOM.render(<Home {...initState}/>, document.getElementById("react-container"));
+    ReactDOM.hydrate(<Home {...initState}/>, document.getElementById("react-container"));
 }
 
 export default Home;
