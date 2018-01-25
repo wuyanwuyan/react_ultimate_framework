@@ -10,8 +10,8 @@ module.exports = {
                 "style": "css"
             }]
         ],
-        cacheDirectory: true,
-        babelrc:false
+        // cacheDirectory: true,
+        babelrc: false
     },
 
     pro_client: {
@@ -24,7 +24,7 @@ module.exports = {
                 "style": "css"
             }]
         ],
-        babelrc:false
+        babelrc: false
     },
     dev_server: {
         presets: [
@@ -41,8 +41,8 @@ module.exports = {
                 "libraryName": "antd"
             }]
         ],
-        cacheDirectory: true,
-        babelrc:false
+        // cacheDirectory: true,
+        babelrc: false
     },
     pro_server: {
         presets: [
@@ -59,6 +59,6 @@ module.exports = {
                 "libraryName": "antd"
             }]
         ],
-        babelrc:false
+        babelrc: false
     }
 }

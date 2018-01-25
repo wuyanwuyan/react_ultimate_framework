@@ -12,7 +12,6 @@ const entry = {
     bitChart: ['./client/page/bitChart/index.js']
 };
 
-
 let entry_dev = {};
 Object.keys(entry).forEach(key => {
     if (key !== 'vendor') {

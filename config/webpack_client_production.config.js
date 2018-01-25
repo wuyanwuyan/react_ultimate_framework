@@ -72,7 +72,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|pcss|less)$/,
+                test: /\.(css|pcss)$/,
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [{

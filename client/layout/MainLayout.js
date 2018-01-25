@@ -30,10 +30,10 @@ export default class MainLayout extends React.Component {
                                 <img src={require('../assets/img/logo_white.png')} alt='' style={{marginRight: 3}}/>
                                 <label className="logo-title">CQCOIN</label>
                             </a>
-                            <ul className="flex_center_v header-menu-ul" style={{marginLeft: 90}}>
+                            <div className="flex_center_v header-menu-ul" style={{marginLeft: 90}}>
                                 <li className="flex_center_v menu-item active"><a>行情</a></li>
                                 <li className="flex_center_v menu-item"><a>APP下载</a></li>
-                            </ul>
+                            </div>
 
                             <div className="flex_center_v margin_left_auto">
                                 <a href="/register" style={{marginRight: 26, color: '#666666'}}>注册</a>

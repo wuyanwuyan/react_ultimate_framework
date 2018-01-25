@@ -19,8 +19,8 @@ class Home extends React.Component {
 
     render() {
         return (
-            <MainLayout>
-                <LocaleProvider locale={zhCN}>
+            <LocaleProvider locale={zhCN}>
+                <MainLayout>
                     <section className="section-wrapper">
                         <div>
                             <label>所有货币</label>
@@ -28,8 +28,8 @@ class Home extends React.Component {
                                           enterButton/>
                         </div>
                     </section>
-                </LocaleProvider>
-            </MainLayout>
+                </MainLayout>
+            </LocaleProvider>
         );
     }
 }

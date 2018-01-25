@@ -41,7 +41,6 @@ var plugins = [
 
 plugins = plugins.concat(htmlPlugins);
 
-
 module.exports = {
     entry: webpackCommon.entry_dev,
     output: {
@@ -59,7 +58,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|pcss|less)$/,
+                test: /\.(css|pcss)$/,
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [
