@@ -1,0 +1,23 @@
+{
+  "home": {
+    "js": "/js/home.js",
+    "css": "/css/home.css"
+  },
+  "manager": {
+    "js": "/js/manager.js",
+    "css": "/css/manager.css"
+  },
+  "login": {
+    "js": "/js/login.js",
+    "css": "/css/login.css"
+  },
+  "bitChart": {
+    "js": "/js/bitChart.js"
+  },
+  "vendor": {
+    "js": "/js/vendor.js"
+  },
+  "manifest": {
+    "js": "/js/manifest.js"
+  }
+}

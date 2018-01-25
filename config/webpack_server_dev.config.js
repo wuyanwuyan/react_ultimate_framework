@@ -38,6 +38,10 @@ module.exports = {
                     limit: Infinity,
                     name: 'static/fonts/[name].[ext]'
                 }
+            },
+            {
+                test: /\.(css|pcss|less)$/,
+                loader: 'ignored-loader',
             }
         ]
     },
@@ -55,7 +59,7 @@ module.exports = {
         })
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals({whitelist:[/^react-toolbox/]})], // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[/^antd/]})], // in order to ignore all modules in node_modules folder,
     node: {
         __filename: false,
         __dirname: false

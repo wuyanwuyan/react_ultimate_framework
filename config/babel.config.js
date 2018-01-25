@@ -2,13 +2,29 @@ module.exports = {
     dev_client: {
         // presets: ["es2015", "stage-0", "react", "react-hmre"],
         presets: ["es2015", "stage-0", "react"],
-        "plugins": ["transform-decorators-legacy", "transform-runtime"],
-        cacheDirectory: true
+        "plugins": [
+            ["transform-decorators-legacy"],
+            ["transform-runtime"],
+            ["import", {
+                "libraryName": "antd",
+                "style": "css"
+            }]
+        ],
+        cacheDirectory: true,
+        babelrc:false
     },
 
     pro_client: {
         presets: ["es2015", "stage-0", "react"],
-        "plugins": ["transform-decorators-legacy", "transform-runtime"]
+        "plugins": [
+            ["transform-decorators-legacy"],
+            ["transform-runtime"],
+            ["import", {
+                "libraryName": "antd",
+                "style": "css"
+            }]
+        ],
+        babelrc:false
     },
     dev_server: {
         presets: [
@@ -19,18 +35,14 @@ module.exports = {
             ["react"]
         ],
         "plugins": [
-            [
-                "css-modules-transform", {
-                // "preprocessCss": "./loaders/sass-loader.js",
-                "devMode": true,
-                "generateScopedName": "[name]_[local]-[hash:3]",
-                "extensions": [".pcss",".css"],
-            }
-            ],
             ["transform-decorators-legacy"],
-            ["transform-runtime"]
+            ["transform-runtime"],
+            ["import", {
+                "libraryName": "antd"
+            }]
         ],
-        cacheDirectory: true
+        cacheDirectory: true,
+        babelrc:false
     },
     pro_server: {
         presets: [
@@ -41,15 +53,12 @@ module.exports = {
             ["react"]
         ],
         "plugins": [
-            [
-                "css-modules-transform", {
-                // "preprocessCss": "./loaders/sass-loader.js",
-                "generateScopedName": "[name]_[local]-[hash:base64:4]",
-                "extensions": [".pcss",".css"],
-            }
-            ],
             ["transform-decorators-legacy"],
-            ["transform-runtime"]
-        ]
+            ["transform-runtime"],
+            ["import", {
+                "libraryName": "antd"
+            }]
+        ],
+        babelrc:false
     }
 }

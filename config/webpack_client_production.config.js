@@ -72,35 +72,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|pcss)$/,
-                exclude: [
-                    path.resolve(__dirname, '../client/css')
-                ],
-                use: extractCssPlugin.extract({
-                    fallback: "style-loader",
-                    use: [{
-                        loader: "css-loader",
-                        options: {
-                            importloaders: 2,
-                            modules: true,
-                            localIdentName: '[name]_[local]-[hash:base64:4]',
-                            minimize: true
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                require('postcss-import'),
-                                require('postcss-cssnext')
-                            ]
-                        }
-                    }]
-                })
-            }, {
-                test: /\.(css|pcss)$/,
-                include: [
-                    path.resolve(__dirname, '../client/css')
-                ],
+                test: /\.(css|pcss|less)$/,
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [{
@@ -113,7 +85,8 @@ module.exports = {
                         options: {
                             plugins: () => [
                                 require('postcss-import'),
-                                require('postcss-cssnext')
+                                require('postcss-cssnext'),
+                                require('precss')
                             ]
                         }
                     }]

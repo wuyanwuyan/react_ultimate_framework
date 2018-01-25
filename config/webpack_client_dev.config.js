@@ -9,7 +9,7 @@ const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
     filename: "css/[name].css",
-    disable:true
+    // disable:true
 });
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
@@ -59,10 +59,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|scss)$/,
-                exclude: [
-                    path.resolve(ROOT_PATH, 'client/css'),
-                ],
+                test: /\.(css|pcss|less)$/,
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [
@@ -70,9 +67,7 @@ module.exports = {
                             loader: "css-loader",
                             options: {
                                 sourceMap: true,
-                                importLoaders: 2,
-                                modules: true,
-                                localIdentName: '[name]_[local]-[hash:3]'
+                                importLoaders: 1,
                             }
                         }, {
                             loader: 'postcss-loader',
@@ -80,32 +75,8 @@ module.exports = {
                                 sourceMap: true,
                                 plugins: ()=> [
                                     require('postcss-import'),
-                                    require('postcss-cssnext')
-                                ]
-                            }
-                        }
-                    ]
-                })
-            }, {
-                test: /\.(css|scss)$/,
-                include: [
-                    path.resolve(ROOT_PATH, 'client/css'),
-                ],
-                use: extractCssPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: true
-                            }
-                        }, {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: [
-                                    require('postcss-import'),
-                                    require('postcss-cssnext')
+                                    require('postcss-cssnext'),
+                                    require('precss')
                                 ]
                             }
                         }

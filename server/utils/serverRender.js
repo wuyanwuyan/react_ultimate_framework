@@ -12,9 +12,9 @@ let compiler = null;
 let fsystem = fs;
 
 let DEFAULT_STATE = {
-    description: "***后台系统",
-    keywords: "***后台管理系统，管理",
-    title: "***管理系统",
+    description: "区块链大数据资讯平台",
+    keywords: "CQcoin,比特币,BTC,区块链",
+    title: "CQcoin-区块链大数据资讯平台",
     content: "",
     initialState: "null"
 }
