@@ -1,7 +1,7 @@
 import koaRouter from 'koa-router';
 import {renderReactComp, renderHbs} from '../utils/serverRender';
-import Home from '../../client/page/home';
 import Login from '../../client/page/login';
+import DownloadApp from '../../client/page/DownloadApp';
 
 
 let router = new koaRouter();
@@ -10,7 +10,14 @@ let router = new koaRouter();
 //首页渲染
 router.get('/', async (ctx) => {
     ctx.body = await renderHbs('home.hbs', {
-        content: renderReactComp(Home),
+    })
+});
+
+
+//下载app
+router.get('/download', async (ctx) => {
+    ctx.body = await renderHbs('download.hbs', {
+        content:renderReactComp(DownloadApp,{url:ctx.request.path})
     })
 });
 

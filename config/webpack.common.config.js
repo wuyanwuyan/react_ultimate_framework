@@ -6,7 +6,8 @@
 const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=true';  // webpack-hot-middleware热更新需要添加到入口文件
 const entry = {
     vendor: ['react', 'react-dom'],
-    home: ['./client/page/home.js'],
+    home: ['./client/page/home/index.js'],
+    download: ['./client/page/DownloadApp.js'],
     login: ['./client/page/login.js'],
     manager: ['./client/page/manager/index.js'],
     bitChart: ['./client/page/bitChart/index.js']
@@ -46,6 +47,11 @@ module.exports = {
             template: './client/default.hbs',
             filename: 'bitChart.hbs',
             chunks: ['manifest', 'vendor', 'bitChart']
+        },
+        {
+            template: './client/default.hbs',
+            filename: 'download.hbs',
+            chunks: ['manifest', 'vendor', 'download']
         }
     ],
     entry_dev,

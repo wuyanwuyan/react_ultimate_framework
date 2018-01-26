@@ -1,5 +1,7 @@
 import React from "react";
 import "./mainLayout.css";
+import classnames from 'classnames';
+
 
 export default class MainLayout extends React.Component {
     constructor(props) {
@@ -8,8 +10,9 @@ export default class MainLayout extends React.Component {
     }
 
     render() {
+        let url = this.props.url || window.location.pathname;
         return (
-            <div>
+            [
                 <header key="header">
                     <div className="header-top">
                         <div className="flex_center_v layout-width">
@@ -31,8 +34,8 @@ export default class MainLayout extends React.Component {
                                 <label className="logo-title">CQCOIN</label>
                             </a>
                             <div className="flex_center_v header-menu-ul" style={{marginLeft: 90}}>
-                                <li className="flex_center_v menu-item active"><a>行情</a></li>
-                                <li className="flex_center_v menu-item"><a>APP下载</a></li>
+                                <li className={`flex_center_v menu-item ${url === '/' ? 'active': ""}`}><a href="/">行情</a></li>
+                                <li className={`flex_center_v menu-item ${url === '/download' ? 'active': ""}`}><a href="/download">APP下载</a></li>
                             </div>
 
                             <div className="flex_center_v margin_left_auto">
@@ -41,10 +44,10 @@ export default class MainLayout extends React.Component {
                             </div>
                         </div>
                     </div>
-                </header>
-                <section className="layout-width" key="body">
+                </header>,
+                <main className="layout-width" key="body">
                     {this.props.children}
-                </section>
+                </main>,
                 <footer key="footer">
                     <div className="flex_center_v layout-width">
                     <span className="flex_center_v">
@@ -65,7 +68,7 @@ export default class MainLayout extends React.Component {
                     </span>
                     </div>
                 </footer>
-            </div>
+            ]
         )
     }
 }

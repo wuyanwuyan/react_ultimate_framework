@@ -249,6 +249,12 @@
   height: 0;
 }
 
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .flex {
   display: flex;
 }

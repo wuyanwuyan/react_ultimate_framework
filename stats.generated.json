@@ -7,6 +7,10 @@
     "js": "/js/manager.js",
     "css": "/css/manager.css"
   },
+  "download": {
+    "js": "/js/download.js",
+    "css": "/css/download.css"
+  },
   "login": {
     "js": "/js/login.js",
     "css": "/css/login.css"

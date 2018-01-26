@@ -1,0 +1,44 @@
+
+main.layout-width {
+  width: 100%;
+  margin: 0 auto;
+  background: blue url(../assets/img/download_bg.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.download-section{
+  h2{
+    font-size: 3.6rem;
+    color: #ffffff;
+  }
+
+  h3{
+    font-size: 3.6rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 36px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin-top: 45px;
+    text-align: right;
+  }
+
+  .qrcode{
+    width: 280px;
+    height: 280px;
+    margin-top: 45px;
+  }
+
+  .btn{
+    width: 280px;
+    height: 72px;
+    background-color: rgba(0, 0, 0, 0.14);
+    border-radius: 36px;
+    border: solid 1px #ffffff;
+
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 45px;
+
+  }
+}
