@@ -77,7 +77,7 @@ export default class TrendTable extends React.Component {
                     <Pagination defaultCurrent={1} total={80} />
                 </div>
                 <div>
-                    <Table columns={columns} dataSource={data}  pagination={false}/>
+                    <Table columns={columns} dataSource={data} scroll={{x:700}}  pagination={false}/>
                 </div>
                 <div className="flex_center_v boxTools ">
                     <Button className='margin_left_auto margin-right-sm'>自选</Button>
