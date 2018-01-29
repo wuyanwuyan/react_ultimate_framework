@@ -37,12 +37,12 @@ var plugins = [
         }
     }),
     extractCssPlugin,
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
         name: ['vendor', 'manifest'],
         filename: 'js/[name].[chunkhash].js',
         minChunks: Infinity,
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
     new webpack.optimize.UglifyJsPlugin(
         {
             compress: {warnings: false, drop_console: true, collapse_vars: true,},

@@ -1,7 +1,6 @@
 import React from "react";
 import "./mainLayout.css";
-import classnames from 'classnames';
-
+import {NavLink} from "react-router-dom";
 
 export default class MainLayout extends React.Component {
     constructor(props) {
@@ -10,7 +9,6 @@ export default class MainLayout extends React.Component {
     }
 
     render() {
-        let url = this.props.url || window.location.pathname;
         return (
             [
                 <header key="header">
@@ -34,8 +32,9 @@ export default class MainLayout extends React.Component {
                                 <label className="logo-title">CQCOIN</label>
                             </a>
                             <div className="flex_center_v header-menu-ul" style={{marginLeft: 90}}>
-                                <li className={`flex_center_v menu-item ${url === '/' ? 'active': ""}`}><a href="/">行情</a></li>
-                                <li className={`flex_center_v menu-item ${url === '/download' ? 'active': ""}`}><a href="/download">APP下载</a></li>
+                                <NavLink className='flex_center_v menu-item' exact to="/" target="_self">行情</NavLink>
+                                <NavLink className='flex_center_v menu-item' to="/download"
+                                         target="_self">APP下载</NavLink>
                             </div>
 
                             <div className="flex_center_v margin_left_auto">
@@ -72,3 +71,5 @@ export default class MainLayout extends React.Component {
         )
     }
 }
+
+

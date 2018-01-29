@@ -16,7 +16,8 @@ let DEFAULT_STATE = {
     keywords: "CQcoin,比特币,BTC,区块链",
     title: "CQcoin-区块链大数据资讯平台",
     content: "",
-    initialState: "null"
+    initialState: "null",
+    rootClass:"",
 }
 
 const readFileThunk = function (hbsName) {

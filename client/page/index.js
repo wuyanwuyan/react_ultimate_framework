@@ -1,4 +1,4 @@
-import "../../css/index.css";
+import "../css/index.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -7,14 +7,20 @@ import {LocaleProvider} from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
+import {BrowserRouter, StaticRouter,Route} from "react-router-dom";
 
-import MainLayout from "../../layout/MainLayout";
-import TrendTable from "../../component/TrendTable";
-import News from "../../component/News";
 
-import "../../css/reboot.css";
-import {BrowserRouter} from "react-router-dom";
+import MainLayout from "../layout/MainLayout";
+
+import HomePage from './HomePage';
+import DownloadApp from './DownloadApp';
+
+import "../css/reboot.css";
+
 moment.locale('zh-cn');
+
+
+const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
 
 class Home extends React.Component {
@@ -24,20 +30,14 @@ class Home extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <Router {...this.props}>
                 <LocaleProvider locale={zhCN}>
                     <MainLayout>
-                        <div className="flex">
-                            <div className="flex1" style={{marginRight: 20}}>
-                                <TrendTable />
-                            </div>
-                            <div className="left-wrapper">
-                                <News />
-                            </div>
-                        </div>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route path="/download" component={DownloadApp}/>
                     </MainLayout>
                 </LocaleProvider>
-            </BrowserRouter>
+            </Router>
         );
     }
 }

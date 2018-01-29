@@ -37,23 +37,17 @@ header {
   }
 
   .menu-item {
-
+    color: #666666;
     height: 100%;
     padding-left: 18px;
     padding-right: 18px;
     vertical-align: middle;
     white-space:nowrap;
 
-    a{
-      color: #666666;
-    }
 
     &.active {
       border-bottom: solid 2px var(--active-color);
-
-      a{
-        color: var(--active-color);
-      }
+      color: var(--active-color);
     }
 
   }

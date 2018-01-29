@@ -47,13 +47,7 @@ export default class TrendTable extends React.Component {
             name: 'Jim Green',
             age: 40,
             address: 'London Park',
-        }
-
-
-
-        ];
-
-
+        }];
 
 
         return (

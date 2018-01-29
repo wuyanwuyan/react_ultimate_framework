@@ -3,21 +3,6 @@
     "js": "/js/home.js",
     "css": "/css/home.css"
   },
-  "manager": {
-    "js": "/js/manager.js",
-    "css": "/css/manager.css"
-  },
-  "download": {
-    "js": "/js/download.js",
-    "css": "/css/download.css"
-  },
-  "login": {
-    "js": "/js/login.js",
-    "css": "/css/login.css"
-  },
-  "bitChart": {
-    "js": "/js/bitChart.js"
-  },
   "vendor": {
     "js": "/js/vendor.js"
   },
