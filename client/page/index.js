@@ -14,6 +14,7 @@ import MainLayout from "../layout/MainLayout";
 
 import HomePage from './HomePage';
 import DownloadApp from './DownloadApp';
+import CoinInfo from './coinInfo';
 
 import "../css/reboot.css";
 
@@ -34,7 +35,8 @@ class Home extends React.Component {
                 <LocaleProvider locale={zhCN}>
                     <MainLayout>
                         <Route exact path="/" component={HomePage}/>
-                        <Route path="/download" component={DownloadApp}/>
+                        <Route exact path="/coin/:coin" component={CoinInfo}/>
+                        <Route exact path="/download" component={DownloadApp}/>
                     </MainLayout>
                 </LocaleProvider>
             </Router>

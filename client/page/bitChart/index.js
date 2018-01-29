@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Chart from './Chart';
+// import Chart from './Chart';
 
 class BitChart extends React.Component {
     constructor(props) {
@@ -8,9 +8,7 @@ class BitChart extends React.Component {
     }
 
     render() {
-        return (
-            <Chart />
-        )
+        return null;
     }
 }
 

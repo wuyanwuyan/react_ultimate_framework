@@ -1,0 +1,18 @@
+#coinTable{
+    padding: 20px;
+
+    table{
+        width:100%;
+        table-layout:fixed;
+    }
+    table, td, th
+    {
+        border:1px solid #d9d9d9;
+    }
+
+    td{
+        text-align: center;
+        font-size: 1.4rem;
+        padding: 16px 0;
+    }
+}

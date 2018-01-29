@@ -15,6 +15,10 @@ router.get('/', async (ctx) => {
 });
 
 
+router.get('/coin/:coin', async (ctx) => {
+    ctx.body = await renderHbs('home.hbs')
+});
+
 //下载app
 router.get('/download', async (ctx) => {
     ctx.body = await renderHbs('home.hbs', {

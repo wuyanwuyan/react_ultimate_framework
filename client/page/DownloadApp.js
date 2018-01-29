@@ -6,6 +6,10 @@ class DownloadApp extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        console.log('DownloadApp componentDidMount');
+    }
+
     render() {
         return (
             <section className="flex_center_vh download-section">

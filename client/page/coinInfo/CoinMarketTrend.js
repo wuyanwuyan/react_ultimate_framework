@@ -1,15 +1,15 @@
-import './trendTable.css';
 import React from "react";
-import {Input,Select,Button,Pagination,Table} from "antd";
+import {Select,Table} from 'antd';
+import "./CoinMarketTrend.css";
 
-export default class TrendTable extends React.Component {
+export default class CoinBaseInfo extends React.Component {
     constructor(props) {
         super(props);
 
     }
 
-
     render() {
+
         const columns = [
             { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
             { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
@@ -49,32 +49,15 @@ export default class TrendTable extends React.Component {
 
 
         return (
-            <section className="section-wrapper trend-table padding-bottom-lg">
-                <div className="flex_center_v boxTips">
-                    <h3>所有货币</h3>
-                    <div className="margin_left_auto search-input">
-                        <Input.Search placeholder="输入币名或者交易所搜索"
-                                      onSearch={value => console.log(value)}
-                        />
-                    </div>
-                </div>
-                <div className="flex_center_v boxTools">
-                    <Button type="primary" className='margin-right-sm'>全部</Button>
-                    <Button className='margin-right-sm'>自选</Button>
+            <section id="coinMarketTrend" className="section-wrapper">
+                <div className="flex_center_v trend-header">
+                    <h4>BTC市场行情</h4>
+                    <label className="margin_left_auto">换算价格</label>
                     <Select defaultValue="人民币（CNY）" style={{ width: 128 }} onChange={f=>f}>
                         <Select.Option value="CNY">人民币（CNY）</Select.Option>
                     </Select>
-
-                    <Button className='margin_left_auto margin-right-sm'>自选</Button>
-                    <Pagination defaultCurrent={1} total={80} />
                 </div>
-                <div>
-                    <Table columns={columns} dataSource={data} scroll={{x:700}}  pagination={false}/>
-                </div>
-                <div className="flex_center_v boxTools ">
-                    <Button className='margin_left_auto margin-right-sm'>自选</Button>
-                    <Pagination defaultCurrent={1} total={80} />
-                </div>
+                <Table columns={columns} dataSource={data} scroll={{x:700}}  pagination={false}/>
             </section>
         )
     }

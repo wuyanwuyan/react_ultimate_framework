@@ -26,7 +26,7 @@
     "handlebars": "^4.0.10",
     "highcharts": "^6.0.4",
     "ignored-loader": "^0.0.1",
-    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.3.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
@@ -38,7 +38,6 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-toolbox": "^2.0.0-beta.12",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
   },
