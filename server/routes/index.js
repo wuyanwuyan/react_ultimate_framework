@@ -1,8 +1,21 @@
 import koaRouter from "koa-router";
 import {renderHbs, renderReactComp} from "../utils/serverRender";
 import Home from "../../client/page";
+import scriptInline from '../../client/utils/responsiveCss';
+import {isMobile} from '../../client/utils/common';
 
 let router = new koaRouter();
+
+router.use(async (ctx,next)=>{
+    if(isMobile(ctx.request.headers['user-agent'] || "")){
+
+        return ctx.body = await renderHbs('home.hbs', {
+            scriptInline:scriptInline,
+            htmlId:'mobile'
+        });
+    }
+    await next();
+})
 
 //首页渲染
 router.get('/', async (ctx) => {
