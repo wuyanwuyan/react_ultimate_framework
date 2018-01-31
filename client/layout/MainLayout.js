@@ -9,40 +9,50 @@ export default class MainLayout extends React.Component {
     }
 
     render() {
+        const navLinks = (
+            <div className="flex_center_v header-menu-links">
+                <NavLink className='flex_center_v header-menu-item' exact to="/" target="_self">行情</NavLink>
+                {
+                    __MOBILE__ &&
+                    <NavLink className='flex_center_v header-menu-item' exact to="/news" target="_self">资讯</NavLink>
+                }
+                <NavLink className='flex_center_v header-menu-item' to="/download"
+                         target="_self">APP下载</NavLink>
+            </div>
+        );
+
         return (
             [
-                <header key="header">
-                    <div className="header-top">
-                        <div className="flex_center_v layout-width">
+                <header key="header" className="header">
+                    {
+                        !__MOBILE__ && <div className="header-top">
+                            <div className="flex_center_v layout-width">
                             <span className="flex_center_v"><img src={require('../assets/img/small-phone.png')}
                                                                  alt='small-phone'
                                                                  style={{marginRight: 3}}/>手机客户端</span>
-                            <span className="flex_center_v margin_left_auto">
+                                <span className="flex_center_v margin_left_auto">
                             官方微信群：CQ_blockchain
                             <img src={require('../assets/img/small-earth.png')} alt='small-earth'
                                  style={{marginLeft: 40, marginRight: 3}}/>
                             官方微信群：简体中文
                         </span>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div className="header-menu">
                         <div className="flex_center_v layout-width">
                             <a href="/" className="flex_center_v">
                                 <img src={require('../assets/img/logo_white.png')} alt='' style={{marginRight: 3}}/>
-                                <label className="logo-title">CQCOIN</label>
+                                <label className="header-logo-title">CQCOIN</label>
                             </a>
-                            <div className="flex_center_v header-menu-ul" style={{marginLeft: 90}}>
-                                <NavLink className='flex_center_v menu-item' exact to="/" target="_self">行情</NavLink>
-                                <NavLink className='flex_center_v menu-item' to="/download"
-                                         target="_self">APP下载</NavLink>
-                            </div>
-
+                            {!__MOBILE__ && navLinks}
                             <div className="flex_center_v margin_left_auto">
                                 <a href="/register" style={{marginRight: 26, color: '#666666'}}>注册</a>
                                 <a href="/login" style={{width: 80, height: 36}} className="button-border">登录</a>
                             </div>
                         </div>
                     </div>
+                    {__MOBILE__ && navLinks}
                 </header>,
                 <main className="layout-width" key="body">
                     {this.props.children}

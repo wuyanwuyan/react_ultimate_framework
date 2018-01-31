@@ -1,5 +1,5 @@
 .news-section {
-  padding: 17px 10px;
+  padding: 0.17rem 0.1rem;
 }
 
 .news-source-web {
@@ -12,7 +12,7 @@
   }
 
   li:not(:last-child) {
-    margin-right: 18px;
+    margin-right: 0.18rem;
   }
 
   .active {
@@ -29,11 +29,11 @@
 
 .news-item {
   border: solid 1px #e8e8e8;
-  padding: 15px;
+  padding: 0.15rem;
 
   background-color: #ffffff;
   border: solid 1px #e8e8e8;
-  margin-top: 10px;
+  margin-top: 0.1rem;
 }
 
 .news-title {
@@ -51,13 +51,13 @@
 .news-source {
   background-color: #e0f0ff;
   border-radius: 3px;
-  padding: 6px 12px;
+  padding: 0.06rem 0.12rem;
   font-size: 0.13rem;
 }
 
 .news-time {
   font-size: 0.13rem;
   color: #999999;
-  margin-left: 8px;
+  margin-left: 0.08rem;
 }
 

@@ -12,14 +12,14 @@ class DownloadApp extends React.Component {
 
     render() {
         return (
-            <section className="flex_center_vh download-section">
+            <section className="flex_center_vh">
                 <section>
-                    <h2>未来金融最灵敏的风向标</h2>
-                    <h3>--CQCOIN</h3>
+                    <h2 className="download-h2">未来金融最灵敏的风向标</h2>
+                    <h3 className="download-h2">--CQCOIN</h3>
 
                     <section>
-                        <img src={require('../assets/img/download_qrcode.jpg')} alt="qrcode" className="qrcode"/>
-                        <div className="flex_center_vh btn">
+                        <img src={require('../assets/img/download_qrcode.jpg')} className="download-qrcode" alt="qrcode"/>
+                        <div className="flex_center_vh download-btn">
                             <img src={require('../assets/img/ios-logo.png')} alt="ios"/>
                             iOS下载
                         </div>

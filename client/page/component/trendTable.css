@@ -10,14 +10,16 @@
     width: 260px;
   }
 
-
   .boxTips{
     padding: 7px 10px;
     border-bottom: solid 1px #d9d9d9;
   }
 
-
   .boxTools{
     padding: 10px;
+  }
+
+  .icon{
+   width: 0.16rem;
   }
 }

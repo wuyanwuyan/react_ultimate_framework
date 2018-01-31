@@ -1,6 +1,6 @@
 #coinMarketTrend{
-    padding-bottom: 10px;
-    margin-top:20px;
+    padding-bottom: 0.10rem;
+    margin-top:0.2rem;
 
     .trend-header{
         padding: 10px;

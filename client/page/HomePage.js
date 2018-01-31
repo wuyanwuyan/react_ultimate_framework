@@ -11,12 +11,12 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className="flex">
-                <div className="flex1" style={{marginRight: 20}}>
+                <div className="flex1">
                     <TrendTable />
                 </div>
-                <div className="left-wrapper">
-                    <News />
-                </div>
+                {
+                    !__MOBILE__ && <div className="left-wrapper"><News /></div>
+                }
             </div>
 
         );

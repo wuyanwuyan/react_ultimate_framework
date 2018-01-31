@@ -34,7 +34,7 @@ router.get('/coin/:coin', async (ctx) => {
 //下载app
 router.get('/download', async (ctx) => {
     ctx.body = await renderHbs('home.hbs', {
-        rootClass:'download',
+        rootClass:'downloadPage',
         content: renderReactComp(Home, {
             location: ctx.url,
             context: {}
