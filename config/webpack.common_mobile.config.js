@@ -3,10 +3,10 @@
  * 包括 handlebars生成配置 ， 多页面entey入口配置
  * @type {{hbs_html_config: [*]}}
  */
-const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=true&name=desktop';  // webpack-hot-middleware热更新需要添加到入口文件
+const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=true&name=mobile';  // webpack-hot-middleware热更新需要添加到入口文件
 const entry = {
     vendor: ['react', 'react-dom'],
-    home: ['./client/page/index.js'],
+    index: ['./client/page/index.js'],
     // download: ['./client/page/DownloadApp.js'],
     // login: ['./client/page/login.js'],
     // manager: ['./client/page/manager/index.js'],
@@ -30,8 +30,8 @@ module.exports = {
     hbs_html_config: [
         {
             template: './client/default.hbs',
-            filename: 'home.hbs',
-            chunks: ['manifest', 'vendor', 'home']
+            filename: 'home_mobile.hbs',
+            chunks: ['manifest', 'vendor', 'index']
         },
         // {
         //     template: './client/default.hbs',

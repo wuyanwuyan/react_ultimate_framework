@@ -1,12 +1,11 @@
 html {
-  font-size: 62.5%;
+  font-size: 625%;
 }
 
 body {
   font-family: "Microsoft Yahei", "Helvetica Neue", "宋体", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.6rem;
+  font-size: 0.16rem;
   background-color: #f2f2f2;
-
 }
 
 html,body,#react-container{

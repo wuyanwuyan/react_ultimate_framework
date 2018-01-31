@@ -3,7 +3,7 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const webpackCommon = require('./webpack.common.config');
+const webpackCommon = require('./webpack.common_mobile.config');
 const babelConfig = require("./babel.config").pro_client;
 
 const ROOT_PATH = process.cwd();
@@ -32,6 +32,7 @@ var plugins = [
         __SERVER__: false,
         __PRODUCTION__: true,
         __DEV__: false,
+        __MOBILE__:false,
         'process.env': {
             NODE_ENV: '"production"'
         }
@@ -58,9 +59,9 @@ plugins = plugins.concat(htmlPlugins);
 module.exports = {
     entry: webpackCommon.entry,
     output: {
-        path: path.resolve(ROOT_PATH, './release/client'),
+        path: path.resolve(ROOT_PATH, './release/client_mobile'),
         filename: 'js/[name].[chunkhash].js',
-        publicPath: "./"
+        publicPath: "/"
     },
 
     module: {

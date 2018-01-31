@@ -52,6 +52,7 @@ module.exports = {
             __SERVER__: true,
             __PRODUCTION__: false,
             __DEV__: true,
+            __MOBILE__:false,
             "process.env": {
                 NODE_ENV: '"development"',
                 PORT: 8087

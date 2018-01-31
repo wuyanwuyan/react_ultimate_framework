@@ -1,12 +1,16 @@
 {
+  "index": {
+    "js": "/js_mobile/index.js",
+    "css": "/css_mobile/index.css"
+  },
+  "vendor": {
+    "js": "/js_mobile/vendor.js"
+  },
+  "manifest": {
+    "js": "/js_mobile/manifest.js"
+  },
   "home": {
     "js": "/js/home.js",
     "css": "/css/home.css"
-  },
-  "vendor": {
-    "js": "/js/vendor.js"
-  },
-  "manifest": {
-    "js": "/js/manifest.js"
   }
 }

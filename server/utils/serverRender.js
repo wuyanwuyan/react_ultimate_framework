@@ -3,27 +3,18 @@
  */
 
 import fs from 'fs';
-var path = require('path');
+import path from 'path';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Handlebars from 'handlebars';
 
-let compiler = null;
+let devMidware = null;
 let fsystem = fs;
-
-let DEFAULT_STATE = {
-    description: "区块链大数据资讯平台",
-    keywords: "CQcoin,比特币,BTC,区块链",
-    title: "CQcoin-区块链大数据资讯平台",
-    content: "",
-    initialState: "null",
-    rootClass:"",
-}
 
 const readFileThunk = function (hbsName) {
     let filename;
-    if (compiler) {
-        filename = path.join(compiler.outputPath, hbsName)
+    if (devMidware) {
+        filename = devMidware.getFilenameFromUrl(`/${hbsName}`);
     } else {
         filename = path.join(__dirname, `/client/${hbsName}`)
     }
@@ -39,13 +30,22 @@ const readFileThunk = function (hbsName) {
     });
 }
 
-export function setCompiler(c) {
-    compiler = c;
-    fsystem = compiler.outputFileSystem;
+export function setCompiler(midware) {
+    devMidware = midware;
+    fsystem = devMidware.fileSystem;
 }
 
 export function renderReactComp(Comp, props = {}) {
     return renderToString(<Comp {...props}/>)
+}
+
+let DEFAULT_STATE = {
+    description: "区块链大数据资讯平台",
+    keywords: "CQcoin,比特币,BTC,区块链",
+    title: "CQcoin-区块链大数据资讯平台",
+    content: "",
+    initialState: "null",
+    rootClass:"",
 }
 
 export async function renderHbs(hbsName, data) {

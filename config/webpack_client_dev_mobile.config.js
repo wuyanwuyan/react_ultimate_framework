@@ -3,12 +3,12 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-const webpackCommon = require('./webpack.common.config');
+const webpackCommon = require('./webpack.common_mobile.config');
 const babelConfig = require("./babel.config").dev_client;
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
-    filename: "css/[name].css",
+    filename: "css_mobile/[name].css",
     // disable:true
 });
 
@@ -28,18 +28,14 @@ var plugins = [
         __SERVER__: false,
         __PRODUCTION__: false,
         __DEV__: true,
-        __MOBILE__: false,
+        __MOBILE__:true,
         "process.env": {
             NODE_ENV: '"development"'
         },
     }),
     new AssetsPlugin({filename: 'stats.generated.json', path: ROOT_PATH, prettyPrint: true}),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({
-        name: ['vendor', 'manifest'],
-        filename: 'js/[name].js',
-        minChunks: Infinity,
-    }),
+    new webpack.optimize.CommonsChunkPlugin({name: ['vendor','manifest'], filename: 'js_mobile/[name].js', minChunks: Infinity,}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 ];
@@ -47,11 +43,11 @@ var plugins = [
 plugins = plugins.concat(htmlPlugins);
 
 module.exports = {
-    name: 'desktop',
+    name:'mobile',
     entry: webpackCommon.entry_dev,
     output: {
         path: path.resolve(ROOT_PATH, './dist'),
-        filename: 'js/[name].js',
+        filename: 'js_mobile/[name].js',
         publicPath: "/"
     },
 
@@ -78,7 +74,7 @@ module.exports = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [
+                                plugins: ()=> [
                                     require('postcss-import'),
                                     require('postcss-cssnext'),
                                     require('precss')

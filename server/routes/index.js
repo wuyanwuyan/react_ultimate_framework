@@ -8,8 +8,7 @@ let router = new koaRouter();
 
 router.use(async (ctx,next)=>{
     if(isMobile(ctx.request.headers['user-agent'] || "")){
-
-        return ctx.body = await renderHbs('home.hbs', {
+        return ctx.body = await renderHbs('home_mobile.hbs', {
             scriptInline:scriptInline,
             htmlId:'mobile'
         });

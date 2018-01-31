@@ -61,7 +61,7 @@ export default class MainLayout extends React.Component {
                             <span style={{marginLeft: 22}}>微信群：CQ_blockchain    </span>
                             <span style={{marginLeft: 22}}>邮箱：support@chuangqi.tech</span>
                         </div>
-                        <div style={{marginTop: 22, fontSize: '1.2rem'}}>
+                        <div style={{marginTop: 22, fontSize: '0.12rem'}}>
                             Copyright@2013-2016 闯奇信息科技（上海）有限公司  版权所有
                         </div>
                     </span>

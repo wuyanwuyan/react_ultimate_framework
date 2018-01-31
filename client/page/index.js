@@ -49,4 +49,7 @@ if (__CLIENT__) {
     ReactDOM.render(<Home {...initState}/>, document.getElementById("react-container"));
 }
 
+
+console.log(__DEV__,__CLIENT__,__MOBILE__);
+
 export default Home;

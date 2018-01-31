@@ -13,7 +13,7 @@ header {
 
   .header-top {
     background: black;
-    font-size: 1.2rem;
+    font-size: 0.12rem;
     padding-top: 16px;
     padding-bottom: 16px;
   }
@@ -28,7 +28,7 @@ header {
   }
 
   .logo-title {
-    font-size: 2.4rem;
+    font-size: 0.24rem;
     color: #065aa6;
   }
 
@@ -68,11 +68,11 @@ footer{
   }
 
   .logo-title{
-    font-size: 3.7rem;
+    font-size: 0.37rem;
   }
 
   .contact{
-    font-size: 1.4rem;
+    font-size: 0.14rem;
     font-weight: normal;
   }
 }

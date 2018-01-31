@@ -7,12 +7,13 @@ const chalk = require('chalk');
 const webpack = require('webpack');
 const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
 const webpackClientDevConfig = require('../config/webpack_client_dev.config.js');
+const webpackClientMobileDevConfig = require('../config/webpack_client_dev_mobile.config.js');
 const c2k = require('koa2-connect'); // express middleware to koa2
 const expressDevMiddleware = require('webpack-dev-middleware');
 const expressHotMiddleware = require('webpack-hot-middleware');
 
 
-let clientCompiler = webpack(webpackClientDevConfig);
+let clientCompiler = webpack([webpackClientDevConfig,webpackClientMobileDevConfig]);
 
 clientCompiler.plugin("compile", stats => {
     console.log(chalk.yellow("client compiling....  "));
@@ -24,7 +25,7 @@ clientCompiler.plugin('done', stats => {
 
 let webpackDevOptions = {
     noInfo: true,// display no info to console (only warnings and errors)
-    logTime:true,
+    logTime: true,
     publicPath: webpackClientDevConfig.output.publicPath,
     headers: {
         'Access-Control-Allow-Origin': '*'
@@ -40,8 +41,9 @@ let webpackDevOptions = {
     },
 };
 
-var devMidware = c2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
-var hotMidware = c2k(expressHotMiddleware(clientCompiler));
+const devMidware = expressDevMiddleware(clientCompiler, webpackDevOptions);
+
+const hotMidware = expressHotMiddleware(clientCompiler);
 
 // var serverEntry = require('../server_dist/server').default;
 // serverEntry(devMidware, hotMidware,clientCompiler);
@@ -64,6 +66,8 @@ serverCompiler.plugin("compile", stats => {
     console.log(chalk.yellow("server compiling....  "));
 });
 
+
+
 serverCompiler.plugin('done', stats => {
     console.log(chalk.blue("server compile done! "));
     pipePromise.then(() => {
@@ -77,7 +81,7 @@ serverCompiler.plugin('done', stats => {
 
         console.log("require entry done!");
 
-        server = serverEntry(devMidware, hotMidware, clientCompiler);
+        server = serverEntry(c2k(devMidware), c2k(hotMidware),devMidware);
 
         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
         sockets = {}, nextSocketId = 0;
@@ -93,6 +97,10 @@ serverCompiler.plugin('done', stats => {
 
         });
     });
+});
+
+serverCompiler.plugin('failed', error => {
+    console.error(error);
 });
 
 // Maintain a hash of all connected sockets

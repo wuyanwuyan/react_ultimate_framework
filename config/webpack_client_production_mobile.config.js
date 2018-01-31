@@ -2,14 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
-const webpackCommon = require('./webpack.common.config');
-const babelConfig = require("./babel.config").dev_client;
+
+const webpackCommon = require('./webpack.common_mobile.config');
+const babelConfig = require("./babel.config").pro_client;
+
 const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
-    filename: "css/[name].css",
-    // disable:true
+    filename: "css_mobile/[name].[contenthash].css"
 });
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
@@ -18,40 +18,49 @@ var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
             inject: true,
             template: v.template,
             filename: v.filename,
-            chunks: v.chunks
+            chunks: v.chunks,
+            minify: { //压缩HTML文件
+                removeComments: true, //移除HTML中的注释
+                collapseWhitespace: true //删除空白符与换行符
+            }
         }
-    ));
+    ))
 
 var plugins = [
     new webpack.DefinePlugin({
         __CLIENT__: true,
         __SERVER__: false,
-        __PRODUCTION__: false,
-        __DEV__: true,
-        __MOBILE__: false,
-        "process.env": {
-            NODE_ENV: '"development"'
-        },
+        __PRODUCTION__: true,
+        __DEV__: false,
+        __MOBILE__:true,
+        'process.env': {
+            NODE_ENV: '"production"'
+        }
     }),
-    new AssetsPlugin({filename: 'stats.generated.json', path: ROOT_PATH, prettyPrint: true}),
     extractCssPlugin,
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
         name: ['vendor', 'manifest'],
-        filename: 'js/[name].js',
+        filename: 'js_mobile/[name].[chunkhash].js',
         minChunks: Infinity,
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(
+        {
+            compress: {warnings: false, drop_console: true, collapse_vars: true,},
+            output: {comments: false},
+            beautify: false,
+            comments: false
+        }
+    )
 ];
 
 plugins = plugins.concat(htmlPlugins);
 
 module.exports = {
-    name: 'desktop',
-    entry: webpackCommon.entry_dev,
+    entry: webpackCommon.entry,
     output: {
-        path: path.resolve(ROOT_PATH, './dist'),
-        filename: 'js/[name].js',
+        path: path.resolve(ROOT_PATH, './release/client'),
+        filename: 'js_mobile/[name].[chunkhash].js',
         publicPath: "/"
     },
 
@@ -67,25 +76,21 @@ module.exports = {
                 test: /\.(css|pcss)$/,
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
-                    use: [
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: true,
-                                importLoaders: 1,
-                            }
-                        }, {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: () => [
-                                    require('postcss-import'),
-                                    require('postcss-cssnext'),
-                                    require('precss')
-                                ]
-                            }
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            minimize: true
                         }
-                    ]
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: () => [
+                                require('postcss-import'),
+                                require('postcss-cssnext'),
+                                require('precss')
+                            ]
+                        }
+                    }]
                 })
             },
             {
@@ -93,7 +98,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 7186,
-                    name: 'static/images/[name].[ext]'
+                    name: 'static/images/[name].[hash].[ext]'
                 }
             },
             {
@@ -101,12 +106,11 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: Infinity,
-                    name: 'static/fonts/[name].[ext]'
+                    name: 'static/fonts/[name].[hash].[ext]'
                 }
             }
         ]
     },
 
-    plugins: plugins,
-    devtool: 'source-map'
+    plugins: plugins
 }

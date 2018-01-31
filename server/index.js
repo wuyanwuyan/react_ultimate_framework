@@ -1,14 +1,16 @@
-import Koa from 'koa';
-import fs from 'fs';
-import bodyParser from 'koa-bodyparser';
-import indexRoute  from './routes/index';
-import http from 'http';
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import indexRoute from "./routes/index";
+import http from "http";
 
-export default function serverEntry(expressDevMiddleware, expressHotMiddleware, clientCompiler) {
+export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     const app = new Koa();
 
     // error handle
     app.use(async function (ctx, next) {
+
+        console.log(Date.now(),': ',ctx.url);
+
         try {
             await next();
         } catch (e) {
@@ -16,11 +18,10 @@ export default function serverEntry(expressDevMiddleware, expressHotMiddleware, 
         }
     });
 
-
     if (process.env.NODE_ENV !== "production") {
-        require('./utils/serverRender').setCompiler(clientCompiler);
-        app.use(expressDevMiddleware);
-        app.use(expressHotMiddleware);
+        app.use(devMiddleware);
+        hotMiddleware && app.use(hotMiddleware);
+        devMidware && require('./utils/serverRender').setCompiler(devMidware);
     }
 
     if (process.env.NODE_ENV === "production") {

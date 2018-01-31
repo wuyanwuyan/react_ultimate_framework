@@ -3,7 +3,7 @@
 }
 
 .news-source-web {
-  font-size: 1.6rem;
+  font-size: 0.16rem;
   color: #333333;
   margin-bottom: 0;
 
@@ -16,14 +16,14 @@
   }
 
   .active {
-    font-size: 1.6rem;
+    font-size: 0.16rem;
     color: #065aa6;
   }
 
 }
 
 .news-more{
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   color: #333333;
 }
 
@@ -37,13 +37,13 @@
 }
 
 .news-title {
-  font-size: 1.4rem;
+  font-size: 0.14rem;
   color: #333333;
   display: block;
 }
 
 .news-desc {
-  font-size: 1.4rem;
+  font-size: 0.14rem;
   color: #666666;
   display: block;
 }
@@ -52,11 +52,11 @@
   background-color: #e0f0ff;
   border-radius: 3px;
   padding: 6px 12px;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
 }
 
 .news-time {
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   color: #999999;
   margin-left: 8px;
 }
