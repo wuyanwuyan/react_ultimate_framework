@@ -7,14 +7,17 @@ import {LocaleProvider} from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
-import {BrowserRouter, StaticRouter,Route} from "react-router-dom";
+import {BrowserRouter, Route, StaticRouter, Switch} from "react-router-dom";
 
 
 import MainLayout from "../layout/MainLayout";
 
-import HomePage from './HomePage';
-import DownloadApp from './DownloadApp';
-import CoinInfo from './coinInfo';
+import HomePage from "./HomePage";
+import DownloadApp from "./DownloadApp";
+import CoinInfo from "./coinInfo";
+import News from "./component/News";
+import PageNotFound from "./PageNotFound";
+import RegisterPage from "./RegisterPage";
 
 import "../css/reboot.css";
 
@@ -34,9 +37,14 @@ class Home extends React.Component {
             <Router {...this.props}>
                 <LocaleProvider locale={zhCN}>
                     <MainLayout>
-                        <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/coin/:coin" component={CoinInfo}/>
-                        <Route exact path="/download" component={DownloadApp}/>
+                        <Switch>
+                            <Route exact path="/" component={HomePage}/>
+                            <Route exact path="/news" component={News}/>
+                            <Route exact path="/coin/:coin" component={CoinInfo}/>
+                            <Route exact path="/download" component={DownloadApp}/>
+                            <Route exact path="/register" component={RegisterPage}/>
+                            <Route component={PageNotFound}/>
+                        </Switch>
                     </MainLayout>
                 </LocaleProvider>
             </Router>
@@ -50,6 +58,6 @@ if (__CLIENT__) {
 }
 
 
-console.log(__DEV__,__CLIENT__,__MOBILE__);
+console.log(__DEV__, __CLIENT__, __MOBILE__);
 
 export default Home;

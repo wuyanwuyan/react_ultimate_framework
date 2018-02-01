@@ -5,29 +5,35 @@ import {Button, Icon, Input, Pagination, Select, Table} from "antd";
 export default class TrendTable extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            searchActive: false
+        }
 
     }
 
+    toggleSearch = () => {
+        this.setState({
+            searchActive: !this.state.searchActive
+        })
+    }
 
     render() {
+        const {searchActive} = this.state;
+
+        const tableProp = __MOBILE__ ? {
+            style: {width: '100vw'},
+            scroll:{x:window.innerWidth+260}
+        } : {};
+
         const columns = [
-            {title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left'},
-            {title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left'},
-            {title: 'Column 1', dataIndex: 'address', key: '1'},
-            {title: 'Column 2', dataIndex: 'address', key: '2'},
-            {title: 'Column 3', dataIndex: 'address', key: '3'},
-            {title: 'Column 4', dataIndex: 'address', key: '4'},
-            {title: 'Column 5', dataIndex: 'address', key: '5'},
-            {title: 'Column 6', dataIndex: 'address', key: '6'},
-            {title: 'Column 7', dataIndex: 'address', key: '7'},
-            {title: 'Column 8', dataIndex: 'address', key: '8'},
-            {
-                title: 'Action',
-                key: 'operation',
-                fixed: 'right',
-                width: 100,
-                render: () => <a href="#">action</a>,
-            },
+            {title: '排名', width: 60, dataIndex: 'age', key: 'name', fixed: 'left'},
+            {title: '名称', width: 100, dataIndex: 'address', key: 'age', fixed: 'left'},
+            {title: '价格', dataIndex: 'address', key: '1'},
+            {title: '成交额24h', dataIndex: 'address', key: '2', sorter: true},
+            {title: '流通供给量 ', dataIndex: 'age', key: '3'},
+            {title: '流通市值', dataIndex: 'address', key: '4'},
+            {title: '波动24h', dataIndex: 'address', key: '5'},
+            {title: '自选状态', dataIndex: 'address', key: '6'}
         ];
 
         const data = [{
@@ -62,17 +68,24 @@ export default class TrendTable extends React.Component {
                     </div>
                 }
                 <div className="flex_center_v boxTools">
-                    <Button type="primary" className='margin-right-sm'>全部</Button>
-                    <Button className='margin-right-sm'>自选</Button>
-                    <Select defaultValue="人民币（CNY）" style={{width: 128}} onChange={f => f}>
+                    {!searchActive && <Button type="primary" className='margin-right-sm'>全部</Button> }
+                    {!searchActive && <Button className='margin-right-sm'>自选</Button>}
+                    {!searchActive && <Select defaultValue="人民币（CNY）" style={{width: 128}} onChange={f => f}>
                         <Select.Option value="CNY">人民币（CNY）</Select.Option>
-                    </Select>
-                    {__MOBILE__ && <Icon type="search" className="margin_left_auto icon"/>}
+                    </Select>}
+                    {
+                        !__MOBILE__ ? null : (
+                            !searchActive ?
+                                <Icon type="search" className="margin_left_auto icon" onClick={this.toggleSearch}/> :
+                                <Input.Search placeholder="输入币名或者交易所搜索"
+                                              onSearch={value => console.log(value)}/>
+                        )
+                    }
                     {!__MOBILE__ && <Button className='margin_left_auto margin-right-sm'>自选</Button>}
                     {!__MOBILE__ && <Pagination defaultCurrent={1} total={80}/>}
                 </div>
                 <div>
-                    {/*<Table columns={columns} dataSource={data} scroll={{x: 700}} pagination={false}/>*/}
+                    <Table columns={columns} dataSource={data} pagination={false} size='small' {...tableProp}/>
                 </div>
 
                 {

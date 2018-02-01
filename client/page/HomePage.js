@@ -18,7 +18,6 @@ class HomePage extends React.Component {
                     !__MOBILE__ && <div className="left-wrapper"><News /></div>
                 }
             </div>
-
         );
     }
 }

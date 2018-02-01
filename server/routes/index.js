@@ -1,16 +1,16 @@
 import koaRouter from "koa-router";
 import {renderHbs, renderReactComp} from "../utils/serverRender";
 import Home from "../../client/page";
-import scriptInline from '../../client/utils/responsiveCss';
-import {isMobile} from '../../client/utils/common';
+import scriptInline from "../../client/utils/responsiveCss";
+import {isMobile} from "../../client/utils/common";
 
 let router = new koaRouter();
 
-router.use(async (ctx,next)=>{
-    if(isMobile(ctx.request.headers['user-agent'] || "")){
+router.get('*', async (ctx, next) => {
+    if (isMobile(ctx.request.headers['user-agent']) && ctx.accepts('html')) {
         return ctx.body = await renderHbs('home_mobile.hbs', {
-            scriptInline:scriptInline,
-            htmlId:'mobile'
+            scriptInline: scriptInline,
+            htmlId: 'mobile'
         });
     }
     await next();
@@ -34,7 +34,7 @@ router.get('/coin/:coin', async (ctx) => {
 //下载app
 router.get('/download', async (ctx) => {
     ctx.body = await renderHbs('home.hbs', {
-        rootClass:'downloadPage',
+        rootClass: 'downloadPage',
         content: renderReactComp(Home, {
             location: ctx.url,
             context: {}

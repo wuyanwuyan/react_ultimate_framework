@@ -1,7 +1,7 @@
 {
-  "home": {
-    "js": "/js/home.js",
-    "css": "/css/home.css"
+  "index": {
+    "js": "/js_mobile/index.js",
+    "css": "/css_mobile/index.css"
   },
   "vendor": {
     "js": "/js/vendor.js"
@@ -9,8 +9,8 @@
   "manifest": {
     "js": "/js/manifest.js"
   },
-  "index": {
-    "js": "/js_mobile/index.js",
-    "css": "/css_mobile/index.css"
+  "home": {
+    "js": "/js/home.js",
+    "css": "/css/home.css"
   }
 }

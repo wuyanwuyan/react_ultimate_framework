@@ -1,7 +1,9 @@
 import React from "react";
 import "./mainLayout.css";
 import {NavLink} from "react-router-dom";
+import LoginModal from "../page/component/LoginModal";
 
+@LoginModal
 export default class MainLayout extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ export default class MainLayout extends React.Component {
                 <NavLink className='flex_center_v header-menu-item' exact to="/" target="_self">行情</NavLink>
                 {
                     __MOBILE__ &&
-                    <NavLink className='flex_center_v header-menu-item' exact to="/news" target="_self">资讯</NavLink>
+                    <NavLink className='flex_center_v header-menu-item' to="/news" target="_self">资讯</NavLink>
                 }
                 <NavLink className='flex_center_v header-menu-item' to="/download"
                          target="_self">APP下载</NavLink>
@@ -48,7 +50,10 @@ export default class MainLayout extends React.Component {
                             {!__MOBILE__ && navLinks}
                             <div className="flex_center_v margin_left_auto">
                                 <a href="/register" style={{marginRight: 26, color: '#666666'}}>注册</a>
-                                <a href="/login" style={{width: 80, height: 36}} className="button-border">登录</a>
+                                <a style={{width: 80, height: 36}} className="button-border"
+                                   onClick={() => {
+                                       this.props.showLoginModal()
+                                   }}>登录</a>
                             </div>
                         </div>
                     </div>

@@ -6,11 +6,7 @@ import http from "http";
 export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     const app = new Koa();
 
-    // error handle
-    app.use(async function (ctx, next) {
-
-        console.log(Date.now(),': ',ctx.url);
-
+    app.use(async function (ctx, next) { // error handle
         try {
             await next();
         } catch (e) {
