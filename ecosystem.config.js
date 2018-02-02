@@ -37,7 +37,7 @@ module.exports = {
             repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
             path: '/data/cqcoin-web',
             "post-setup": "ls -la",
-            'post-deploy': 'yarn install --production=false && yarn run build && pm2 startOrRestart ecosystem.config.js --env production',
+            'post-deploy': 'yarn install --production=false && yarn run build && sudo pm2 startOrRestart ecosystem.config.js --env production',
             env: {
                 "NODE_ENV": "production"
             }
