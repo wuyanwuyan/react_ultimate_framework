@@ -13,6 +13,9 @@ module.exports = {
             out_file: "./logs/app-out.log",  //日志
             env: {
                 COMMON_VARIABLE: 'true'
+            },
+            env_production: {
+                NODE_ENV: 'production'
             }
         }
     ],
