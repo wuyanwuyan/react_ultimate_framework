@@ -53,7 +53,7 @@ module.exports = {
             __MOBILE__:false,
             "process.env": {
                 NODE_ENV: '"production"',
-                PORT: 8088
+                PORT: 8010
             },
         })
     ],
