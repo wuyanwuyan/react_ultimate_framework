@@ -6,7 +6,7 @@ module.exports = {
     apps: [
         // First application
         {
-            name: 'react_ultimate_framework',
+            name: 'cqcoin_web',
             script: 'release/server.js',
             instances: 2,
             error_file: "./logs/app-err.log",//错误输出日志
@@ -26,16 +26,16 @@ module.exports = {
      */
     deploy: {
         production: {
-            user: 'claude',
+            user: 'xiangsheng',
             host: [
                 {
-                    "host": "localhost",
-                    "port": "22"
+                    "host": "121.41.91.93",
+                    "port": "6677"
                 }
             ],
-            ref: 'origin/master',
-            repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/Users/claude/Desktop/react_ultimate_framework',
+            ref: 'origin/ant-ui',
+            repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
+            path: '/data/cqcoin-web',
             "post-setup": "ls -la",
             'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production',
             env: {
@@ -43,16 +43,16 @@ module.exports = {
             }
         },
         dev: {
-            user: 'claude',
+            user: 'xiangsheng',
             host: [
                 {
-                    "host": "localhost",
-                    "port": "22"
+                    "host": "121.41.91.93",
+                    "port": "6677"
                 }
             ],
-            ref: 'origin/master',
-            repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
-            path: '/var/www/dev/react_ultimate_framework',
+            ref: 'origin/ant-ui',
+            repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
+            path: '/data/cqcoin-web',
             'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
