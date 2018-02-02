@@ -14,7 +14,7 @@ import MainLayout from "../layout/MainLayout";
 
 import HomePage from "./HomePage";
 import DownloadApp from "./DownloadApp";
-import CoinInfo from "./coinInfo/index";
+import CoinInfo from "./coinInfo";
 import News from "./component/News";
 import PageNotFound from "./PageNotFound";
 import RegisterPage from "./RegisterPage";
