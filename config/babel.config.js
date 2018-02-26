@@ -3,12 +3,13 @@ module.exports = {
         // presets: ["es2015", "stage-0", "react", "react-hmre"],
         presets: ["es2015", "stage-0", "react"],
         "plugins": ["transform-decorators-legacy", "transform-runtime"],
-        cacheDirectory: true
+        babelrc: false,
+        // cacheDirectory: true,
     },
-
     pro_client: {
         presets: ["es2015", "stage-0", "react"],
-        "plugins": ["transform-decorators-legacy", "transform-runtime"]
+        "plugins": ["transform-decorators-legacy", "transform-runtime"],
+        babelrc: false
     },
     dev_server: {
         presets: [
@@ -30,7 +31,8 @@ module.exports = {
             ["transform-decorators-legacy"],
             ["transform-runtime"]
         ],
-        cacheDirectory: true
+        babelrc: false,
+        // cacheDirectory: true
     },
     pro_server: {
         presets: [
@@ -50,6 +52,7 @@ module.exports = {
             ],
             ["transform-decorators-legacy"],
             ["transform-runtime"]
-        ]
+        ],
+        babelrc: false
     }
 }

@@ -37,12 +37,12 @@ var plugins = [
         }
     }),
     extractCssPlugin,
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
         name: ['vendor', 'manifest'],
         filename: 'js/[name].[chunkhash].js',
         minChunks: Infinity,
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),  // 按引用频度来排序 ID，以便达到减少文件大小的效果
     new webpack.optimize.UglifyJsPlugin(
         {
             compress: {warnings: false, drop_console: true, collapse_vars: true,},
@@ -60,7 +60,7 @@ module.exports = {
     output: {
         path: path.resolve(ROOT_PATH, './release/client'),
         filename: 'js/[name].[chunkhash].js',
-        publicPath: "./"
+        publicPath: "/"
     },
 
     module: {
@@ -81,7 +81,7 @@ module.exports = {
                     use: [{
                         loader: "css-loader",
                         options: {
-                            importloaders: 2,
+                            importloaders: 1,
                             modules: true,
                             localIdentName: '[name]_[local]-[hash:base64:4]',
                             minimize: true
@@ -89,9 +89,10 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [
+                            plugins: () => [
                                 require('postcss-import'),
-                                require('postcss-cssnext')
+                                require('postcss-cssnext'),
+                                require('precss')
                             ]
                         }
                     }]
@@ -113,7 +114,8 @@ module.exports = {
                         options: {
                             plugins: () => [
                                 require('postcss-import'),
-                                require('postcss-cssnext')
+                                require('postcss-cssnext'),
+                                require('precss')
                             ]
                         }
                     }]

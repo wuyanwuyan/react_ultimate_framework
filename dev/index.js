@@ -1,5 +1,4 @@
 require('source-map-support').install({environment: 'node', entryOnly: false}); // 让node支持source-map
-const cluster = require('cluster');   // colorful console
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
@@ -40,8 +39,9 @@ let webpackDevOptions = {
     },
 };
 
-var devMidware = c2k(expressDevMiddleware(clientCompiler, webpackDevOptions));
-var hotMidware = c2k(expressHotMiddleware(clientCompiler));
+const devMidware = expressDevMiddleware(clientCompiler, webpackDevOptions);
+
+const hotMidware = expressHotMiddleware(clientCompiler);
 
 // var serverEntry = require('../server_dist/server').default;
 // serverEntry(devMidware, hotMidware,clientCompiler);
@@ -77,7 +77,7 @@ serverCompiler.plugin('done', stats => {
 
         console.log("require entry done!");
 
-        server = serverEntry(devMidware, hotMidware, clientCompiler);
+        server = serverEntry(c2k(devMidware), c2k(hotMidware),devMidware);
 
         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
         sockets = {}, nextSocketId = 0;
@@ -93,6 +93,10 @@ serverCompiler.plugin('done', stats => {
 
         });
     });
+});
+
+serverCompiler.plugin('failed', error => {
+    console.error(error);
 });
 
 // Maintain a hash of all connected sockets

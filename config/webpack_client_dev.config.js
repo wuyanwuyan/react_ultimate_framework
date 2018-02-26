@@ -9,7 +9,7 @@ const ROOT_PATH = process.cwd();
 
 const extractCssPlugin = new ExtractTextPlugin({
     filename: "css/[name].css",
-    disable:true
+    // disable:true
 });
 
 var htmlPlugins = webpackCommon.hbs_html_config.map(v =>
@@ -43,6 +43,7 @@ plugins = plugins.concat(htmlPlugins);
 
 
 module.exports = {
+    name: 'desktop',
     entry: webpackCommon.entry_dev,
     output: {
         path: path.resolve(ROOT_PATH, './dist'),
@@ -59,7 +60,7 @@ module.exports = {
                 options: babelConfig
             },
             {
-                test: /\.(css|scss)$/,
+                test: /\.(css|pcss)$/,
                 exclude: [
                     path.resolve(ROOT_PATH, 'client/css'),
                 ],
@@ -70,7 +71,7 @@ module.exports = {
                             loader: "css-loader",
                             options: {
                                 sourceMap: true,
-                                importLoaders: 2,
+                                importLoaders: 1,
                                 modules: true,
                                 localIdentName: '[name]_[local]-[hash:3]'
                             }
@@ -78,9 +79,10 @@ module.exports = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: ()=> [
+                                plugins: () => [
                                     require('postcss-import'),
-                                    require('postcss-cssnext')
+                                    require('postcss-cssnext'),
+                                    require('precss')
                                 ]
                             }
                         }
@@ -103,9 +105,10 @@ module.exports = {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: [
+                                plugins: () => [
                                     require('postcss-import'),
-                                    require('postcss-cssnext')
+                                    require('postcss-cssnext'),
+                                    require('precss')
                                 ]
                             }
                         }

@@ -37,7 +37,7 @@ module.exports = {
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/Users/claude/Desktop/react_ultimate_framework',
             "post-setup": "ls -la",
-            'post-deploy': 'yarn install && npm run build && pm2 startOrRestart ecosystem.config.js --env production',
+            'post-deploy': 'yarn install --production=false && npm run build && pm2 startOrRestart ecosystem.config.js --env production',
             env: {
                 "NODE_ENV": "production"
             }
@@ -53,7 +53,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'git@github.com:wuyanwuyan/react_ultimate_framework.git',
             path: '/var/www/dev/react_ultimate_framework',
-            'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
+            'post-deploy': 'yarn install --production=false && npm run build && pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
             }
