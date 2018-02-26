@@ -16,3 +16,7 @@
         padding: 16px 0;
     }
 }
+
+#mobile #coinTable{
+    padding: 0;
+}

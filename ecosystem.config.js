@@ -53,7 +53,7 @@ module.exports = {
             ref: 'origin/ant-ui',
             repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
             path: '/data/cqcoin-web',
-            'post-deploy': 'yarn install && npm run build && pm2 reload ecosystem.config.js --env dev',
+            'post-deploy': 'yarn install --production=false && npm run build && sudo pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
             }
