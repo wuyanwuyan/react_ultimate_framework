@@ -8,8 +8,7 @@ module.exports = {
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "globals": {
         "__DEV__": true,
-        "__CLIENT__": true,
-        "process": true
+        "__CLIENT__": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
