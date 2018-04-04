@@ -18,7 +18,13 @@
     "pm2_local": "pm2 startOrRestart ecosystem.config.js",
     "deploy-dev": "pm2 deploy ecosystem.config.js dev --force",
     "deploy-pro": "pm2 deploy ecosystem.config.js production --force",
-    "deploy-pro-babel": "NODE_ENV=production babel server  -d server_dist && NODE_ENV=production babel client  -d client_dist"
+    "deploy-pro-babel": "NODE_ENV=production babel server  -d server_dist && NODE_ENV=production babel client  -d client_dist",
+    "eslint-checkAll": "eslint ./client --ext js && eslint ./server --ext js",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "client/**/*.js": "eslint",
+    "server/**/*.js": "eslint"
   },
   "dependencies": {
     "antd": "^3.1.6",
@@ -45,6 +51,7 @@
     "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-import": "^1.6.3",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -56,10 +63,14 @@
     "babel-preset-stage-0": "^6.24.1",
     "chalk": "^2.1.0",
     "css-loader": "^0.28.5",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
     "ignore-loader": "^0.1.2",
+    "lint-staged": "^7.0.3",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.6",
