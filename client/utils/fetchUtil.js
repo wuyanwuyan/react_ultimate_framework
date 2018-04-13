@@ -16,9 +16,9 @@ export function fetchGet(url, query = {}, option = {}) {
         })
             .then((response) => {
                 // token过期 ，没权限
-                if (response.status === 401) {
-
-                }
+                // if (response.status === 401) {
+                //
+                // }
 
                 isOk = !!response.ok;
                 const contentType = response.headers.get("content-type");
@@ -65,9 +65,9 @@ export function fetchPost(url, data = {}, type = 'json') {
         })
             .then((response) => {
                 // token过期 ，没权限
-                if (response.status === 401) {
-
-                }
+                // if (response.status === 401) {
+                //
+                // }
 
                 isOk = !!response.ok;
                 const contentType = response.headers.get("content-type");
@@ -95,7 +95,7 @@ export function fetchPut(url) {
 
 }
 
-export function fetchDelete(url,query = {}, option = {}) {
+export function fetchDelete(url, query = {}, option = {}) {
 }
 
 export function serialize(obj) {

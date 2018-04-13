@@ -80,7 +80,7 @@ class Home extends React.Component {
                                                    title={value.title}>
                                                     {value.title}
                                                 </a>
-                                                
+
                                             </div>
                                         )
                                     })}
