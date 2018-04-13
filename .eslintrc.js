@@ -9,7 +9,8 @@ module.exports = {
     "globals": {
         "__DEV__": true,
         "__CLIENT__": true,
-        "process": true
+        __SERVER__: true,
+        __PRODUCTION__: true,
     },
     "parser": "babel-eslint",
     "parserOptions": {

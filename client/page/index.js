@@ -23,7 +23,6 @@ import "../css/reboot.css";
 
 moment.locale('zh-cn');
 
-
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
 
@@ -56,8 +55,5 @@ if (__CLIENT__) {
     let initState = window.__INITIAL_STATE__ || {};
     ReactDOM.render(<Home {...initState}/>, document.getElementById("react-container"));
 }
-
-
-console.log(__DEV__, __CLIENT__, __MOBILE__);
 
 export default Home;

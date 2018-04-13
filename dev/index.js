@@ -1,18 +1,16 @@
 require('source-map-support').install({environment: 'node', entryOnly: false}); // 让node支持source-map
 const path = require('path');
-const fs = require('fs');
 const chalk = require('chalk');
 
 const webpack = require('webpack');
 const webpackServerDevConfig = require('../config/webpack_server_dev.config.js');
 const webpackClientDevConfig = require('../config/webpack_client_dev.config.js');
-const webpackClientMobileDevConfig = require('../config/webpack_client_dev_mobile.config.js');
 const c2k = require('koa2-connect'); // express middleware to koa2
 const expressDevMiddleware = require('webpack-dev-middleware');
 const expressHotMiddleware = require('webpack-hot-middleware');
 
 
-let clientCompiler = webpack([webpackClientDevConfig,webpackClientMobileDevConfig]);
+let clientCompiler = webpack(webpackClientDevConfig);
 
 clientCompiler.plugin("compile", stats => {
     console.log(chalk.yellow("client compiling....  "));
@@ -20,6 +18,10 @@ clientCompiler.plugin("compile", stats => {
 
 clientCompiler.plugin('done', stats => {
     console.log(chalk.green("client compile done!"));
+});
+
+clientCompiler.plugin('failed', error => {
+    console.error(error);
 });
 
 let webpackDevOptions = {
@@ -44,10 +46,6 @@ const devMidware = expressDevMiddleware(clientCompiler, webpackDevOptions);
 
 const hotMidware = expressHotMiddleware(clientCompiler);
 
-// var serverEntry = require('../server_dist/server').default;
-// serverEntry(devMidware, hotMidware,clientCompiler);
-
-
 let serverCompiler = webpack(webpackServerDevConfig);
 
 /*  使用compiler.watch 启动时也会compile ，不需要serverCompiler.run */
@@ -61,11 +59,9 @@ serverCompiler.watch({
 var pipePromise = Promise.resolve();
 
 serverCompiler.plugin("compile", stats => {
-    pipePromise = destroyServer();
+    pipePromise = pipePromise.then(() => destroyServer());
     console.log(chalk.yellow("server compiling....  "));
 });
-
-
 
 serverCompiler.plugin('done', stats => {
     console.log(chalk.blue("server compile done! "));
@@ -77,10 +73,9 @@ serverCompiler.plugin('done', stats => {
 
         var serverEntry = require(bundlePath).default;
 
-
         console.log("require entry done!");
 
-        server = serverEntry(c2k(devMidware), c2k(hotMidware),devMidware);
+        server = serverEntry(c2k(devMidware), c2k(hotMidware), devMidware);
 
         //参考 shut down http server  https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
         sockets = {}, nextSocketId = 0;

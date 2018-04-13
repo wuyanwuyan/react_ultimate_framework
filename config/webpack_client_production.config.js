@@ -32,7 +32,6 @@ var plugins = [
         __SERVER__: false,
         __PRODUCTION__: true,
         __DEV__: false,
-        __MOBILE__:false,
         'process.env': {
             NODE_ENV: '"production"'
         }

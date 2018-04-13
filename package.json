@@ -8,17 +8,12 @@
   "license": "MIT",
   "scripts": {
     "start": "node dev/index.js",
-    "webpack-dev-server": "webpack-dev-server --inline --hot --config=./config/webpack_client_dev.config.js",
     "clean": "rm -rf ./dist && rm -rf ./server_dist && rm -rf ./release",
     "build": "npm run build_client_pro && npm run build_server_pro",
     "build_client_dev": "webpack --config=./config/webpack_client_dev.config.js && webpack --config=./config/webpack_client_dev_mobile.config.js",
     "build_server_dev": "webpack --display-error-details --config=./config/webpack_server_dev.config.js",
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js && webpack --config=./config/webpack_client_production_mobile.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
-    "pm2_local": "pm2 startOrRestart ecosystem.config.js",
-    "deploy-dev": "pm2 deploy ecosystem.config.js dev --force",
-    "deploy-pro": "pm2 deploy ecosystem.config.js production --force",
-    "deploy-pro-babel": "NODE_ENV=production babel server  -d server_dist && NODE_ENV=production babel client  -d client_dist",
     "eslint-checkAll": "eslint ./client --ext js && eslint ./server --ext js",
     "precommit": "lint-staged"
   },
@@ -30,9 +25,7 @@
     "antd": "^3.1.6",
     "classnames": "^2.2.5",
     "handlebars": "^4.0.10",
-    "highcharts": "^6.0.4",
     "ignored-loader": "^0.0.1",
-    "jquery": "^3.3.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",
@@ -81,7 +74,6 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.5.5",
     "webpack-dev-middleware": "^2.0.4",
-    "webpack-dev-server": "^2.7.1",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-node-externals": "^1.6.0"
   }

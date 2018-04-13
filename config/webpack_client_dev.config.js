@@ -28,7 +28,6 @@ var plugins = [
         __SERVER__: false,
         __PRODUCTION__: false,
         __DEV__: true,
-        __MOBILE__: false,
         "process.env": {
             NODE_ENV: '"development"'
         },
