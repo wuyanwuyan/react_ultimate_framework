@@ -40,12 +40,11 @@ export function renderReactComp(Comp, props = {}) {
 }
 
 let DEFAULT_STATE = {
-    description: "区块链大数据资讯平台",
-    keywords: "CQcoin,比特币,BTC,区块链",
-    title: "CQcoin-区块链大数据资讯平台",
+    description: "服务器渲染",
+    keywords: "react server side render,服务器渲染",
+    title: "react 服务器渲染",
     content: "",
     initialState: "null",
-    rootClass:"",
 }
 
 export async function renderHbs(hbsName, data) {

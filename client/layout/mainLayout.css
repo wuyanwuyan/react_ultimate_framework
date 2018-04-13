@@ -1,118 +1,33 @@
-.layout-width {
-  width: 1200px;
-  margin: 0 auto;
+header {
+  background-color: #444;
+
+  & > div{
+    font-size: 13px;
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
 }
 
-#mobile .layout-width {
-  width: 100%;
+main{
+  width: 90%;
+  margin: 15px auto;
 }
 
-.header {
-  color: white;
-  box-shadow: 0px 2px 10px 0px rgba(106, 106, 106, 0.28);
+.brand {
 
-  &-top {
-    background: black;
-    font-size: 0.12rem;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
-  &-menu {
-    background-color: white;
-
-    & > div {
-      height: 0.6rem;
-    }
-  }
-
-  &-logo-title {
-    font-size: 0.24rem;
-    color: #065aa6;
-  }
-
-  &-menu-links {
-    height: 100%;
-    margin-left: 90px;
-  }
-
-  &-menu-item {
-    color: #666666;
-    height: 100%;
-    padding-left: 18px;
-    padding-right: 18px;
-    vertical-align: middle;
-    white-space: nowrap;
-
-    &.active {
-      border-bottom: solid 2px #065aa6;
-      color: #065aa6;
-    }
+  img {
+    width: 12rem;
   }
 }
 
-#mobile {
-  .header  {
+.nav {
+  margin-bottom: 0;
 
-    &-menu {
-      border-bottom: solid 1px #D9D9D9;
-      padding-left: 0.1rem;
-      padding-right: 0.1rem;
-    }
-
-    &-menu-links {
-      padding-left: 0.1rem;
-      padding-right: 0.1rem;
-      background-color: white;
-      height: 0.48rem;
-      margin-left: 0;
-    }
+  a {
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem;
+    color: #ccc
   }
 }
-
-main {
-  padding-top: 0.34rem;
-  padding-bottom: 0.4rem;
-  flex: 1 0 auto;
-}
-
-#mobile main {
-  padding-top: 0.1rem;
-  padding-bottom: 0;
-  flex: 1 0 auto;
-}
-
-footer {
-  background: #1f2933;
-
-  & > div {
-    color: white;
-    height: 110px;
-  }
-
-  .logo-title {
-    font-size: 0.37rem;
-  }
-
-  .contact {
-    font-size: 0.14rem;
-    font-weight: normal;
-  }
-}
-
-#mobile footer{
-  display: none;
-}
-
-.section-wrapper {
-  background-color: #ffffff;
-  box-shadow: 0px 2px 5px 0px rgba(134, 134, 134, 0.35);
-  border-radius: 3px;
-}
-
-.left-wrapper {
-  width: 320px;
-  flex-basis: 320px;
-  margin-left: 0.2rem;
-}
-

@@ -9,8 +9,10 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     app.use(async function (ctx, next) { // error handle
         try {
             await next();
-        } catch (e) {
-            app.emit('error', e, ctx);
+        } catch (err) {
+            ctx.status = err.status || 500;
+            ctx.body = err.message;
+            ctx.app.emit('error', err, ctx);
         }
     });
 
@@ -38,10 +40,10 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
 
     server.listen(port, function (err) {
         if (err) {
-            console.log(err);
+            console.error(err);
             return;
         }
-        console.log('✅ Listening at http://localhost:%s \n------------------------------------------------------------', port);
+        console.log('✅ Server start success! Listening at http://localhost:%s \n------------------------------------------------------------', port);
     });
 
     return server;
@@ -50,3 +52,4 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
 if (process.env.NODE_ENV === "production") {
     serverEntry();
 }
+

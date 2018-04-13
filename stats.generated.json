@@ -8,9 +8,5 @@
   },
   "manifest": {
     "js": "/js/manifest.js"
-  },
-  "index": {
-    "js": "/js_mobile/index.js",
-    "css": "/css_mobile/index.css"
   }
 }
