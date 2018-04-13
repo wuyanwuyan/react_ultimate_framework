@@ -1,3 +1,4 @@
+import 'isomorphic-fetch';
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import indexRoute from "./routes/index";

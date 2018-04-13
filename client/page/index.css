@@ -16,3 +16,49 @@
   }
 }
 
+.cell {
+  font-size: 1.4rem;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+
+  &:nth-child(1){
+    border-top: none;
+
+  }
+}
+
+.user_avatar {
+  img{
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+  }
+}
+
+.reply_count {
+  width: 70px;
+  display: inline-block;
+  text-align: center;
+  color:#9e78c0;
+}
+
+reply_count{
+}
+
+.count_seperator {
+  font-size: 1.0rem;
+}
+
+.count_of_visits {
+  font-size: 1.0rem;
+  color: #b4b4b4;
+}
+
+.user_small_avatar{
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  margin-right: .5em;
+  border-radius: 3px;
+}

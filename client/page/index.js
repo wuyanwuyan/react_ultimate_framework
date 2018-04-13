@@ -7,7 +7,7 @@ import {LocaleProvider} from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
-import {BrowserRouter, Route, StaticRouter,NavLink, Switch} from "react-router-dom";
+import {BrowserRouter, Route, StaticRouter, NavLink, Switch} from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 
@@ -27,28 +27,64 @@ class Home extends React.Component {
 
         // ask share job good
         const topic = {
-            all:'全部',
-            good:'精华',
-            share:'分享',
-            ask:'问答',
-            job:'招聘',
+            '': '全部',
+            good: '精华',
+            share: '分享',
+            ask: '问答',
+            job: '招聘',
         }
+
+        const props = this.props;
 
         return (
             <Router {...this.props}>
                 <LocaleProvider locale={zhCN}>
                     <MainLayout>
-                        <div style={{marginRight:'30rem'}}>
+                        <div style={{marginRight: '30rem'}}>
                             <div className="topic-header">
                                 {
-                                    Object.keys(topic).map((value)=> <NavLink key={value} to={`/${value}`} className='topic-tab' activeClassName='current-tab' exact replace={true}>{topic[value]}</NavLink>)
+                                    Object.keys(topic).map((value) =>
+                                        <NavLink key={value}
+                                                 to={`/${value}`}
+                                                 className='topic-tab'
+                                                 activeClassName='current-tab'
+                                                 exact
+                                                 target="_self">
+                                            {topic[value]}
+                                        </NavLink>)
                                 }
                             </div>
                             <div>
                                 <div className='topic_list'>
-                                    <div className='cell'>
 
-                                    </div>
+                                    {props.topic_list.data.map(value => {
+                                        return (
+                                            <div key={value.id} className='cell flex_center_v'>
+
+                                                <a className="user_avatar">
+                                                    <img src={value.author.avatar_url} title="value.author.loginname"/>
+                                                </a>
+
+                                                <span className="reply_count">
+                                                    <span className="count_of_replies" title="回复数">
+                                                        {value.reply_count}
+                                                    </span>
+                                                <span className="count_seperator">/</span>
+                                                    <span className="count_of_visits" title="点击数">
+                                                        {value.visit_count}
+                                                    </span>
+                                                </span>
+
+
+                                                <a className="topic_title" href={`/topic/${value.id}`}
+                                                   title={value.title}>
+                                                    {value.title}
+                                                </a>
+                                                
+                                            </div>
+                                        )
+                                    })}
+
                                 </div>
                             </div>
                         </div>
