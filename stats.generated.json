@@ -1,4 +1,8 @@
 {
+  "homeSPA": {
+    "js": "/js/homeSPA.js",
+    "css": "/css/homeSPA.css"
+  },
   "home": {
     "js": "/js/home.js",
     "css": "/css/home.css"

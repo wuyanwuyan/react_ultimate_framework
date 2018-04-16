@@ -24,5 +24,10 @@ router.get(['/', '/:topic'], async (ctx) => {
     })
 });
 
+router.get(['/indexSPA', ''], async (ctx) => {
+
+    ctx.body = await renderHbs('homeSPA.hbs')
+});
+
 
 export default router;

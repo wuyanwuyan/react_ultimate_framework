@@ -9,7 +9,7 @@ export default class TopicList extends React.Component {
     }
 
     _onChangePage = (page) => {
-        location.href = `${location.pathname}?page=${page}`;
+       this.props.onChangePage(page);
     }
 
     _renderTab = (value) => {

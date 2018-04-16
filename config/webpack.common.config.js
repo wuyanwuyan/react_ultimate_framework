@@ -7,6 +7,7 @@ const hotMiddlewareScript = 'webpack-hot-middleware/client?timeout=2000&reload=t
 const entry = {
     vendor: ['react', 'react-dom'],
     home: ['./client/page/index.js'],
+    homeSPA: ['./client/page/indexSPA/index.js'],
     // download: ['./client/page/DownloadApp.js'],
     // login: ['./client/page/login.js'],
     // manager: ['./client/page/manager/index.js'],
@@ -32,6 +33,11 @@ module.exports = {
             template: './client/default.hbs',
             filename: 'home.hbs',
             chunks: ['manifest', 'vendor', 'home']
+        },
+        {
+            template: './client/default.hbs',
+            filename: 'homeSPA.hbs',
+            chunks: ['manifest', 'vendor', 'homeSPA']
         },
         // {
         //     template: './client/default.hbs',

@@ -19,11 +19,13 @@ moment.locale('zh-cn');
 
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
-// ask share job good
-
 class Home extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    _onChangePage = (page) => {
+        location.href = `${location.pathname}?page=${page}`;
     }
 
     render() {
@@ -47,8 +49,7 @@ class Home extends React.Component {
                                         </NavLink>)
                                 }
                             </div>
-                            <TopicList {...props}/>
-
+                            <TopicList {...props} onChangePage={this._onChangePage}/>
                         </div>
                     </MainLayout>
                 </LocaleProvider>
