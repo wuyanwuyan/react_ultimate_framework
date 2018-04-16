@@ -41,8 +41,7 @@ class Home extends React.Component {
                                                  to={`/${value}`}
                                                  className='topic-tab'
                                                  activeClassName='current-tab'
-                                                 exact
-                                                 target="_self">
+                                                 exact>
                                             {topic[value]}
                                         </NavLink>)
                                 }

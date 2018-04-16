@@ -42,7 +42,7 @@ export function renderReactComp(Comp, props = {}) {
 let DEFAULT_STATE = {
     description: "服务器渲染",
     keywords: "react server side render,服务器渲染",
-    title: "react 服务器渲染",
+    title: "react server side render",
     content: "",
     initialState: "null",
 }

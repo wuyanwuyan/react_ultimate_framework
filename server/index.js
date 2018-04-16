@@ -32,7 +32,7 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     app.use(indexRoute.routes());
 
     app.use(async (ctx) => {
-        ctx.redirect("/");
+        ctx.body = 404;
     });
 
     const port = process.env.PORT || 8087;

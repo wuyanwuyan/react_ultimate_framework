@@ -5,31 +5,22 @@ import {fetchGet} from '../../client/utils/fetchUtil';
 
 let router = new koaRouter();
 
-
-//首页渲染
-router.get('/', async (ctx) => {
-    ctx.body = await renderHbs('home.hbs', {
-        content: renderReactComp(Home, {
-            location: ctx.url,
-            context: {}
-        }),
-    })
-});
-
-router.get('/:topic', async (ctx) => {
+router.get(['/', '/:topic'], async (ctx) => {
 
     console.log(ctx.params.topic);
+    let page = ctx.query.page || 1;
 
+    const topic_list = await fetchGet('https://cnodejs.org/api/v1/topics', {tab: ctx.params.topic, page});
 
-    const topic_list = await fetchGet('https://cnodejs.org/api/v1/topics',{tab:ctx.params.topic});
-
+    let state = {
+        location: ctx.url,
+        context: {},
+        topic_list,
+        page
+    };
     ctx.body = await renderHbs('home.hbs', {
-        content: renderReactComp(Home, {
-            location: ctx.url,
-            context: {},
-            topic_list
-        }),
-        initialState: JSON.stringify({topic_list}),
+        content: renderReactComp(Home, state),
+        initialState: JSON.stringify(state),
     })
 });
 

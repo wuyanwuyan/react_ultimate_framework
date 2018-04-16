@@ -62,3 +62,22 @@ reply_count{
   margin-right: .5em;
   border-radius: 3px;
 }
+
+.topiclist-tab {
+  background-color: #e5e5e5;
+  color: #999;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.put-top{
+  background: #80bd01;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-right: 2px;
+
+}
