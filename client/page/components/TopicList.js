@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pagination} from "antd";
 import {topic} from '../../constant/config';
-
+import LoadingEffect from './LoadingEffect';
 
 export default class TopicList extends React.Component {
     constructor(props) {
@@ -21,6 +21,9 @@ export default class TopicList extends React.Component {
 
     render() {
         const props = this.props;
+        if(!props.topic_list){
+            return <LoadingEffect />;
+        }
         return (
             <div>
                 <div className='topic_list'>

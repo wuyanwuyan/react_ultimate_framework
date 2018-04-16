@@ -12,7 +12,6 @@ import {BrowserRouter, Route, StaticRouter, NavLink, Switch} from "react-router-
 import MainLayout from "../layout/MainLayout";
 import TopicList from './components/TopicList';
 import {topic} from '../constant/config';
-import "../css/reboot.css";
 import './index.css';
 
 moment.locale('zh-cn');

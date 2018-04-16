@@ -22,7 +22,6 @@ const readFileThunk = function (hbsName) {
     return new Promise((resolve, reject) => {
         fsystem.readFile(filename, 'utf8', function (err, data) {
             if (err) {
-                console.log(err);
                 return reject(err);
             }
             resolve(data);
@@ -33,10 +32,6 @@ const readFileThunk = function (hbsName) {
 export function setCompiler(midware) {
     devMidware = midware;
     fsystem = devMidware.fileSystem;
-}
-
-export function renderReactComp(Comp, props = {}) {
-    return renderToString(<Comp {...props}/>)
 }
 
 let DEFAULT_STATE = {
