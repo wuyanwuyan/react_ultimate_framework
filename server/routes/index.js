@@ -18,7 +18,11 @@ router.get(['/indexSPA', '/indexSPA/:topic'], async (ctx) => {
     const topic_list = await fetchGet('https://cnodejs.org/api/v1/topics', {tab: ctx.params.topic, page});
 
     let state = {
-        topic_list,
+        topic:{
+            topic_list,
+            tab: ctx.params.topic,
+            page,
+        }
     };
 
     const store = createStore(rootReducer, state)
