@@ -1,0 +1,16 @@
+{
+  "homeSPA": {
+    "js": "/js/homeSPA.js",
+    "css": "/css/homeSPA.css"
+  },
+  "home": {
+    "js": "/js/home.js",
+    "css": "/css/home.css"
+  },
+  "vendor": {
+    "js": "/js/vendor.js"
+  },
+  "manifest": {
+    "js": "/js/manifest.js"
+  }
+}

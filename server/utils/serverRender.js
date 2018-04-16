@@ -22,7 +22,6 @@ const readFileThunk = function (hbsName) {
     return new Promise((resolve, reject) => {
         fsystem.readFile(filename, 'utf8', function (err, data) {
             if (err) {
-                console.log(err);
                 return reject(err);
             }
             resolve(data);
@@ -35,16 +34,12 @@ export function setCompiler(midware) {
     fsystem = devMidware.fileSystem;
 }
 
-export function renderReactComp(Comp, props = {}) {
-    return renderToString(<Comp {...props}/>)
-}
-
 let DEFAULT_STATE = {
-    description: "***后台系统",
-    keywords: "***后台管理系统，管理",
-    title: "***管理系统",
+    description: "服务器渲染",
+    keywords: "react server side render,服务器渲染",
+    title: "react server side render",
     content: "",
-    initialState: "null"
+    initialState: "null",
 }
 
 export async function renderHbs(hbsName, data) {

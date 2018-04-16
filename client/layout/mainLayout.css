@@ -1,0 +1,33 @@
+header {
+  background-color: #444;
+
+  & > div{
+    font-size: 13px;
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+}
+
+main{
+  width: 90%;
+  margin: 15px auto;
+}
+
+.brand {
+
+  img {
+    width: 12rem;
+  }
+}
+
+.nav {
+  margin-bottom: 0;
+
+  a {
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem;
+    color: #ccc
+  }
+}

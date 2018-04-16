@@ -1,23 +1,24 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import indexRoute  from './routes/index';
-import http from 'http';
+import 'isomorphic-fetch';
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import indexRoute from "./routes/index";
+import http from "http";
 
 export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     const app = new Koa();
 
-    // error handle
-    app.use(async function (ctx, next) {
+    app.use(async function (ctx, next) { // error handle
         try {
             await next();
-        } catch (e) {
-            app.emit('error', e, ctx);
+        } catch (err) {
+            ctx.status = err.status || 500;
+            ctx.body = err.message;
+            ctx.app.emit('error', err, ctx);
         }
     });
 
-
     if (process.env.NODE_ENV !== "production") {
-        devMiddleware && app.use(devMiddleware);
+        app.use(devMiddleware);
         hotMiddleware && app.use(hotMiddleware);
         devMidware && require('./utils/serverRender').setCompiler(devMidware);
     }
@@ -31,7 +32,7 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     app.use(indexRoute.routes());
 
     app.use(async (ctx) => {
-        ctx.redirect("/");
+        ctx.body = 404;
     });
 
     const port = process.env.PORT || 8087;
@@ -40,10 +41,10 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
 
     server.listen(port, function (err) {
         if (err) {
-            console.log(err);
+            console.error(err);
             return;
         }
-        console.log('✅ Listening at http://localhost:%s \n------------------------------------------------------------', port);
+        console.log('✅ Server start success! Listening at http://localhost:%s \n------------------------------------------------------------', port);
     });
 
     return server;
@@ -52,3 +53,4 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
 if (process.env.NODE_ENV === "production") {
     serverEntry();
 }
+

@@ -34,13 +34,16 @@ var plugins = [
     }),
     new AssetsPlugin({filename: 'stats.generated.json', path: ROOT_PATH, prettyPrint: true}),
     extractCssPlugin,
-    new webpack.optimize.CommonsChunkPlugin({name: ['vendor','manifest'], filename: 'js/[name].js', minChunks: Infinity,}),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: ['vendor', 'manifest'],
+        filename: 'js/[name].js',
+        minChunks: Infinity,
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 ];
 
 plugins = plugins.concat(htmlPlugins);
-
 
 module.exports = {
     name: 'desktop',
@@ -61,9 +64,6 @@ module.exports = {
             },
             {
                 test: /\.(css|pcss)$/,
-                exclude: [
-                    path.resolve(ROOT_PATH, 'client/css'),
-                ],
                 use: extractCssPlugin.extract({
                     fallback: "style-loader",
                     use: [
@@ -72,34 +72,6 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 importLoaders: 1,
-                                modules: true,
-                                localIdentName: '[name]_[local]-[hash:3]'
-                            }
-                        }, {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: () => [
-                                    require('postcss-import'),
-                                    require('postcss-cssnext'),
-                                    require('precss')
-                                ]
-                            }
-                        }
-                    ]
-                })
-            }, {
-                test: /\.(css|scss)$/,
-                include: [
-                    path.resolve(ROOT_PATH, 'client/css'),
-                ],
-                use: extractCssPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: true
                             }
                         }, {
                             loader: 'postcss-loader',

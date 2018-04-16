@@ -36,6 +36,10 @@ module.exports = {
                     limit: Infinity,
                     name: 'static/fonts/[name].[hash].[ext]'
                 }
+            },
+            {
+                test: /\.(css|pcss|less)$/,
+                loader: 'ignored-loader',
             }
         ]
     },
@@ -48,12 +52,12 @@ module.exports = {
             __DEV__: false,
             "process.env": {
                 NODE_ENV: '"production"',
-                PORT: 8088
+                PORT: 8010
             },
         })
     ],
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
-    externals: [nodeExternals({whitelist:[/^react-toolbox/]})],//nodeModules, // in order to ignore all modules in node_modules folder,
+    externals: [nodeExternals({whitelist:[/^antd/]})],//nodeModules, // in order to ignore all modules in node_modules folder,
     context: ROOT_PATH,
     node: {
         __filename: false,

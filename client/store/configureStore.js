@@ -14,7 +14,6 @@ export default function configureStore(rootReducer, initialState = {}) {
         (window && window.devToolsExtension) ? window.devToolsExtension() : f => f,
     );
 
-
     let store = createStore(rootReducer, initialState, storeEnhancers);
     store.runSaga = sagaMiddleware.run;
     return store;
