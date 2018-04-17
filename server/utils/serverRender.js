@@ -1,7 +1,3 @@
-/**
- * 服务器渲染的两个方法，一个渲染react组件成string，一个渲染handlebars
- */
-
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
