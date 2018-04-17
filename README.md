@@ -78,6 +78,7 @@ app.use(webpackHotMiddleware(compiler));
 **具体实现：**
 
 webpack的compiler对象提供了watch模式，同时暴露出了打包过程中的事件钩子([详见文档](https://doc.webpack-china.org/api/compiler/))。
+
 于是，我们监听后端webpack对compiler对象的重新打包事件和打包完成事件，分别销毁服务器和重启服务器，自己实现了后端的修改热刷新。
 这里使用到到两个hook事件：
 ``` javascript
