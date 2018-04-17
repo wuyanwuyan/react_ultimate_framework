@@ -55,13 +55,13 @@ app.use(webpackHotMiddleware(compiler));
 
 当涉及到服务器端渲染。会遇到一系列问题
 
-1. 服务器同样需要客户端的组件，调用reactserver的renderString才能将组件渲染成html。服务器端无法理解前端代码中require端css文件，图片。
+1. 服务器同样需要客户端的组件，调用reactServer的`renderString`才能将组件渲染成html。服务器端无法理解前端代码中require端css文件，图片。
 
 解决方法：
 
 使用webpack对服务器端代码进行打包，对于css文件webpack配置为`ignore-loader`,忽略css。
-对于图片文件，同样使用`url-loader`,配置成和客户端一样(经常会配置成小于多少k端图片转换成base64
-)
+
+对于图片文件，同样使用`url-loader`,配置成和客户端一样(经常会配置成小于多少k端图片转换成base64)
 
 
 2. 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中webpack实时打包，热刷新机制，
@@ -75,7 +75,7 @@ app.use(webpackHotMiddleware(compiler));
 **服务端**
 当后端代码改变，我们同样需要重启后端，因为我们使用了webpack对后端代码进行打包，需要自己实现重启后端对工作。
 
-具体实现：
+**具体实现：**
 
 webpack的compiler对象提供了watch模式，同时暴露出了打包过程中的事件钩子([详见文档](https://doc.webpack-china.org/api/compiler/))。
 于是，我们监听后端webpack对compiler对象的重新打包事件和打包完成事件，分别销毁服务器和重启服务器，自己实现了后端的修改热刷新。
@@ -90,10 +90,14 @@ serverCompiler.plugin("done", stats => {
 });
 ```
 
-关键到一点，我们在这个项目中启动了两次webpack打包，一次对客户端，一次对后端。客户端至关重要对两个对象，webpackDevMiddle和webpackHotMiddle对象无论如何都不能销毁。
+关键的一点，我们在这个项目中启动了两次webpack打包，一次对客户端，一次对后端。客户端至关重要的两个对象，`webpackDevMiddle`和`webpackHotMiddle`对象无论如何都不能销毁。
 
-我们将后端webpack打包时，指定了`libriaryTarget`为`commonjs`,这样写个hook脚本，手动启动或者销毁服务器对象，在hook脚本中始终保存着webpackDevMiddle和webpackHotMiddle对象。
+我们将后端webpack打包时，指定了`libriaryTarget`为`commonjs`,这里写个hook脚本，手动启动或者销毁服务器对象，在hook脚本中始终保存着`webpackDevMiddle`和`webpackHotMiddle`对象。
 
-是想一下，不保留这两个middleware，那么服务器的重启都会导致客户端的重新打包，这是非常慢的过程。
+试想一下，不保留这两个middleware，那么服务器的重启都会导致客户端的重新打包，这是非常慢的过程。
+
+工程中，这个只使用在开发环境的hook脚本在`dev`文件夹，也是`npm start`的入口。
+
+通过对客户端和后端同时打包，保留了开发环境赖以生存的实时刷新机制。
 
 
