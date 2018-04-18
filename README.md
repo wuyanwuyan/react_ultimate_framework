@@ -2,16 +2,16 @@
 ##### 自己配置的前端基于react技术栈，后端使用koa2的web项目工程
 
 ## 前言
-用react开发了不少项目，大多数是客户端渲染。
-当涉及到资讯类，官网类的网站时，为了优化seo，必须使用react服务器渲染。
-于是查阅不少资料，总结一套自己觉得还不错的框架。
+用react开发了不少项目，大多数是客户端渲染。  
+当涉及到资讯类，官网类的网站时，为了优化seo，必须使用react服务器渲染。  
+于是查阅不少资料，总结一套自己觉得还不错的框架。  
 说是框架，其实就是一堆配置的集合。
 
 
 ## 特点
-1. 前后端分离,nodejs做中间层
+1. 前后端分离，nodejs做中间层
 2. 支持webpack多页面多入口配置
-3. 支持react 服务器渲染，包含集成redux的SPA页面服务器渲染
+3. 支持react 服务器渲染，包含集成了redux的SPA页面服务器渲染
 4. hot reload。修改客户端代码，浏览器自动刷新；修改服务器代码，自动reload。如果页面用到服务器渲染，修改前后端共用模块，将同时热更新
 5. 使用postCss，可扩展使用sass
 4. 集成了ant-design UI，可以选择不用
@@ -28,7 +28,7 @@
 │   ├── decorator
 │   ├── default.hbs     项目中使用handlebars，来渲染模版，实际上只用了非常少的功能
 │   ├── layout
-│   ├── page
+│   ├── page            客户端多页面入口
 │   └── utils
 ├── config      webpack配置文件夹
 │   ├── babel.config.js     webpack的babel-loader配置提取到这个文件
@@ -38,11 +38,11 @@
 │   ├── webpack_server_dev.config.js        开发环境，node后端webpack配置
 │   └── webpack_server_production.config.js     生产环境，node后端webpack配置
 ├── dev
-│   ├── index.js        开发环境
-│   └── restartServer.js
+│   ├── index.js        开发环境关键的启动脚本，npm start的入口
+│   └── restartServer.js   实现对node server重启的功能，参考how to shutdown nodejs server
 ├── server
-│   ├── index.js
-│   ├── routes
+│   ├── index.js        服务器入口文件
+│   ├── routes          路由
 │   └── utils
 ├── ecosystem.config.js     发布部署的pm2配置，暂未使用
 ├── package.json
