@@ -9,13 +9,13 @@
 
 
 ## 特点
-1. 前后端分离，nodejs做中间层
-2. 支持webpack多页面多入口配置
-3. 支持react 服务器渲染，包含集成了redux的SPA页面服务器渲染
-4. hot reload。修改客户端代码，浏览器自动刷新；修改服务器代码，自动reload。如果页面用到服务器渲染，修改前后端共用模块，将同时热更新
-5. 使用postCss，可扩展使用sass
-4. 集成了ant-design UI，可以选择不用
-6. 所有的依赖均已经升级到最新版本(😅尴尬，这里webpack是3的版本，最新已经到4)
+- 前后端分离，nodejs做中间层(这里的后端一般指提供api接口的后端，比如java后端)
+- 支持webpack多页面多入口配置
+- 支持react 服务器渲染，包含集成了redux的SPA页面服务器渲染
+- hot reload。修改客户端代码，浏览器自动刷新；修改服务器代码，自动reload。如果页面用到服务器渲染，修改前后端公共代码，将同时热更新
+- 使用postCss，可扩展使用sass
+- 集成了ant-design UI，可以选择不用
+- 所有的依赖均已经升级到最新版本(😅尴尬，这里webpack是3的版本，最新已经到4)
 
 ## 目录结构
 ```
@@ -54,8 +54,14 @@
 ## 客户端配置
 客户端配置很常见，主要是webpack配置，一个用于开发环境`webpack_client_dev.config.js`，一个用于生产环境`webpack_client_production.config.js`，支持webpack多页面配置，
 把入口entry和生成html文件的html-webpack-plugin配置提取到`webpack.common.config.js`。
-
-这里也把babel的配置都集中到`babel.config.js`，因为服务器端也需要用到，下面会讲到。
+``` javascript
+const entry = {
+    vendor: ['react', 'react-dom'],
+    home: ['./client/page/index.js'],
+    homeSPA: ['./client/page/indexSPA/index.js'],
+};
+```
+这里也把babel-loader的option配置都集中到`babel.config.js`，因为服务器端也需要用到，下面会讲到。
 
 ## 服务器端配置（关键）
 web服务器采用了koa2框架。
@@ -85,29 +91,32 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 ```
 
-当涉及到服务器端渲染。会遇到一系列问题
+### 服务器端渲染遇到的一些问题
 
-1. 服务器同样需要客户端的组件，调用reactServer的`renderString`才能将组件渲染成html。服务器端无法理解前端代码中require端css文件，图片。
+- 服务器同样需要引用客户端的组件，调用reactServer的`renderString`才能将组件渲染成html。node端无法理解前端代码中require的css文件和图片。  
 
-解决方法：
+**解决方法：**  
+使用webpack对服务器端代码进行打包。  
+对于css文件webpack配置为`ignore-loader`,忽略css。  
+对于图片文件，同样使用`url-loader`,配置成和客户端一样(经常会配置成小于多少k图片转换成base64)。  
 
-使用webpack对服务器端代码进行打包，对于css文件webpack配置为`ignore-loader`,忽略css。
+需要注意的一些地方：  
+1. 我们只对自己写的代码打包，node_modules里的安装模块不打包。但是如果引用的是前端组件库的代码，必须同样打包。 这里使用`webpack-node-externals`,防止webpack打包node_modules的代码。
+``` javascript
+target: 'node', // in order to ignore built-in modules like path, fs, etc.
+externals: [nodeExternals({whitelist:[/^antd/]})], // in order to ignore all modules in node_modules folder,
+```
 
-对于图片文件，同样使用`url-loader`,配置成和客户端一样(经常会配置成小于多少k端图片转换成base64)
-
-
-2. 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中webpack实时打包，热刷新机制，
-应该怎么样才能继续保留。 如果修改了一个客户端和服务器端都使用到的组件，客户端和服务器端都需要热加载。
-
-解决方法：
+- 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中怎么样才能继续保留webpack实时打包，热刷新机制？   
+**解决方法：**
 
 **客户端**
 开发过程中实时打包，我们依旧使用`webpack-dev-midddleware`和`webpack-hot-midddleware`。
 
-**服务端**
-当后端代码改变，我们同样需要重启后端，因为我们使用了webpack对后端代码进行打包，需要自己实现重启后端对工作。
+**服务端（重点）**
+当后端代码改变，我们同样需要重启后端，因为我们使用了webpack对后端代码进行打包，需要自己实现重启后端的工作。
 
-**具体实现：**
+**具体实现：**  
 
 webpack的compiler对象提供了watch模式，同时暴露出了打包过程中的事件钩子([详见文档](https://doc.webpack-china.org/api/compiler/))。
 
