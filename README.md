@@ -18,6 +18,38 @@
 6. 所有的依赖均已经升级到最新版本(😅尴尬，这里webpack是3的版本，最新已经到4)
 
 ## 目录结构
+```
+├── client      客户端react代码
+│   ├── assets  图片或字体资源文件夹
+│   ├── component
+│   ├── config
+│   ├── constant
+│   ├── css
+│   ├── decorator
+│   ├── default.hbs     项目中使用handlebars，来渲染模版，实际上只用了非常少的功能
+│   ├── layout
+│   ├── page
+│   └── utils
+├── config      webpack配置文件夹
+│   ├── babel.config.js     webpack的babel-loader配置提取到这个文件
+│   ├── webpack.common.config.js    webpack的入口和生成html文件的配置提取到这个文件
+│   ├── webpack_client_dev.config.js    开发环境，客户端webpack配置
+│   ├── webpack_client_production.config.js 生产环境，客户端webpack配置
+│   ├── webpack_server_dev.config.js        开发环境，node后端webpack配置
+│   └── webpack_server_production.config.js     生产环境，node后端webpack配置
+├── dev
+│   ├── index.js        开发环境
+│   └── restartServer.js
+├── server
+│   ├── index.js
+│   ├── routes
+│   └── utils
+├── ecosystem.config.js     发布部署的pm2配置，暂未使用
+├── package.json
+├── stats.generated.json    assets-webpack-plugin插件生成的webpack资源列表文件
+└── yarn.lock               推荐使用yarn
+```
+
 
 ## 客户端配置
 客户端配置很常见，主要是webpack配置，一个用于开发环境`webpack_client_dev.config.js`，一个用于生产环境`webpack_client_production.config.js`，支持webpack多页面配置，

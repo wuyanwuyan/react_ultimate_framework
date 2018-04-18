@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(ROOT_PATH, './server_dist'),
         filename: 'server.js',
         publicPath: "/",
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2'   //导出成commonjs2规范的包
     },
 
     module: {
