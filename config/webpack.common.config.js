@@ -8,10 +8,6 @@ const entry = {
     vendor: ['react', 'react-dom'],
     home: ['./client/page/index.js'],
     homeSPA: ['./client/page/indexSPA/index.js'],
-    // download: ['./client/page/DownloadApp.js'],
-    // login: ['./client/page/login.js'],
-    // manager: ['./client/page/manager/index.js'],
-    // bitChart: ['./client/page/bitChart/index.js']
 };
 
 let entry_dev = {};
