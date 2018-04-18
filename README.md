@@ -150,7 +150,7 @@ serverCompiler.plugin('done', stats => {
 
 工程中，这个只使用在开发环境的hook脚本在`dev`文件夹，也是`npm start`的入口。
 
-![](https://github.com/wuyanwuyan/react_ultimate_framework/blob/master/doc/flowImg.png)
+![](https://github.com/wuyanwuyan/react_ultimate_framework/raw/master/doc/flowImg.png)
 
 ## 服务器渲染的示例
 
