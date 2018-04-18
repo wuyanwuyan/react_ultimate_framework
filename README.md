@@ -1,6 +1,3 @@
-# react_ultimate_framework
-##### 自己配置的前端基于react技术栈，后端使用koa2的web项目工程
-
 ## 前言
 用react开发了不少项目，大多数是客户端渲染。  
 当涉及到资讯类，官网类的网站时，为了优化seo，必须使用react服务器渲染。  
@@ -16,6 +13,12 @@
 - 使用postCss，可扩展使用sass
 - 集成了ant-design UI，可以选择不用
 - 所有的依赖均已经升级到最新版本(😅尴尬，这里webpack是3的版本，最新已经到4)
+
+## 运行
+``` shell
+yarn install
+yarn start
+```
 
 ## 目录结构
 ```
@@ -93,7 +96,7 @@ app.use(webpackHotMiddleware(compiler));
 
 ### 服务器端渲染遇到的一些问题
 
-- 服务器同样需要引用客户端的组件，调用reactServer的`renderString`才能将组件渲染成html。node端无法理解前端代码中require的css文件和图片。  
+##### 服务器同样需要引用客户端的组件，调用`react-dom/server`的`renderToString`才能将组件渲染成html。node端无法理解前端代码中require的css文件和图片。  
 
 **解决方法：**  
 使用webpack对服务器端代码进行打包。  
@@ -107,39 +110,45 @@ target: 'node', // in order to ignore built-in modules like path, fs, etc.
 externals: [nodeExternals({whitelist:[/^antd/]})], // in order to ignore all modules in node_modules folder,
 ```
 
-- 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中怎么样才能继续保留webpack实时打包，热刷新机制？   
+##### 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中怎么样才能继续保留webpack实时打包，热刷新机制？
 **解决方法：**
 
 **客户端**
-开发过程中实时打包，我们依旧使用`webpack-dev-midddleware`和`webpack-hot-midddleware`。
+
+开发过程中实时打包，我们依旧使用`webpack-dev-midddleware`和`webpack-hot-midddleware`，但要注意保证这两个对象不会因为服务器重启而被销毁。
 
 **服务端（重点）**
+
 当后端代码改变，我们同样需要重启后端，因为我们使用了webpack对后端代码进行打包，需要自己实现重启后端的工作。
 
-**具体实现：**  
+**实现node服务器重启：**
 
-webpack的compiler对象提供了watch模式，同时暴露出了打包过程中的事件钩子([详见文档](https://doc.webpack-china.org/api/compiler/))。
+（核心）webpack的compiler对象提供了watch模式，同时暴露出了打包过程中的事件钩子([详见文档](https://doc.webpack-china.org/api/compiler/))。
 
 于是，我们监听后端webpack对compiler对象的重新打包事件和打包完成事件，分别销毁服务器和重启服务器，自己实现了后端的修改热刷新。
 这里使用到到两个hook事件：
 ``` javascript
-// 开始重新打包时，销毁现有到服务器对象
+// webpack监听到代码改变，开始重新打包时，销毁现有的server对象
 serverCompiler.plugin("compile", stats => {
+    destroyServer(serverCompiler);
+    console.log(chalk.yellow("server compiling....  "));
 });
 
 // 打包完成，重新启动服务器
-serverCompiler.plugin("done", stats => {
+serverCompiler.plugin('done', stats => {
+    console.log(chalk.blue("server compile done! "));
+    restartServer(serverCompiler, devMidware, hotMidware)
 });
 ```
+如何关闭http server，这里参考了stackoverflow上的一个答案 [shut down http server](https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately)
 
-关键的一点，我们在这个项目中启动了两次webpack打包，一次对客户端，一次对后端。客户端至关重要的两个对象，`webpackDevMiddle`和`webpackHotMiddle`对象无论如何都不能销毁。
+关键的一点，我们在这个项目中启动了两次webpack打包，一个对客户端的`clientCompiler`，一个对后端的`serverCompiler`。客户端至关重要的两个对象，`webpackDevMiddle`和`webpackHotMiddle`对象无论如何都不能销毁。
 
 我们将后端webpack打包时，指定了`libriaryTarget`为`commonjs`,这里写个hook脚本，手动启动或者销毁服务器对象，在hook脚本中始终保存着`webpackDevMiddle`和`webpackHotMiddle`对象。
 
-试想一下，不保留这两个middleware，那么服务器的重启都会导致客户端的重新打包，这是非常慢的过程。
+试想一下，不保留这两个middleware，那么修改node端代码的每一次重启都会导致客户端的重新打包，这是非常慢的过程。
 
 工程中，这个只使用在开发环境的hook脚本在`dev`文件夹，也是`npm start`的入口。
 
-通过对客户端和后端同时打包，保留了开发环境赖以生存的实时刷新机制。
-
+## 服务器渲染的示例
 
