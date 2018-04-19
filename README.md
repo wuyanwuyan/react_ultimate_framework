@@ -153,4 +153,32 @@ serverCompiler.plugin('done', stats => {
 ![](https://github.com/wuyanwuyan/react_ultimate_framework/raw/master/doc/flowImg.png)
 
 ## 服务器渲染的示例
+服务器渲染的流程：
+1. node端获取数据,作为服务器渲染 组件的props。
+2. React服务端渲染HTML,放在和客户端渲染一样的标签位置
+``` javascript
+import {renderToString} from 'react-dom/server';
+renderToString(<RootComponent {...props}/>)
+```
+``` handlebars
+<body>
+<div id="react-container">{{{renderContent}}}</div>
+</body>
+```
+3. 脱水。服务端交给浏览器的不光要有HTML，还需要有“脱水数据”，也就是在服务端渲染过程中给React组件的输入数据。
+“脱水数据”传递至浏览器的方式：
+``` handlebars
+<body>
+<div id="react-container">{{{content}}}</div>
+<script id="INITIAL_STATE">window.__INITIAL_STATE__ = {{{initialState}}}</script>
+</body>
+```
+4. 注水。当浏览器渲染时可以直接根据“脱水数据”来渲染React组件，这个过程叫做“注水”。使用“脱水数据”就是为了保证两端数据一致，同时避免不必要的服务器请求。
+``` javascript
+if (__CLIENT__) {
+    let initState = window.__INITIAL_STATE__ || {};
+    ReactDOM.hydrate(<Home {...initState}/>, document.getElementById("react-container"));
+}
+```
 
+工程例子里面使用到了一个cnode的api，[get /topics 主题首页](https://cnodejs.org/api)，实现服务器端渲染cnode端首页，以及包含使用了redux端单页面应用，如何实现react服务器渲染。
