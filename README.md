@@ -96,7 +96,7 @@ app.use(webpackHotMiddleware(compiler));
 
 ### 服务器端渲染遇到的一些问题
 
-##### 服务器同样需要引用客户端的组件，调用`react-dom/server`的`renderToString`才能将组件渲染成html。node端无法理解前端代码中require的css文件和图片。  
+#### 服务器同样需要引用客户端的组件，调用`react-dom/server`的`renderToString`才能将组件渲染成html。node端无法理解前端代码中require的css文件和图片。  
 
 **解决方法：**  
 使用webpack对服务器端代码进行打包。  
@@ -110,7 +110,7 @@ target: 'node', // in order to ignore built-in modules like path, fs, etc.
 externals: [nodeExternals({whitelist:[/^antd/]})], // in order to ignore all modules in node_modules folder,
 ```
 
-##### 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中怎么样才能继续保留webpack实时打包，热刷新机制？
+#### 对服务端代码进行了webpack打包，使其可以正常require css文件和图片，但开发过程中怎么样才能继续保留webpack实时打包，热刷新机制？
 **解决方法：**
 
 **客户端**
