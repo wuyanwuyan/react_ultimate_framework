@@ -19,6 +19,8 @@
 yarn install
 yarn start
 ```
+打开 http://localhost:8087
+或者 http://localhost:8087/indexSPA （单页面redux服务器渲染）
 
 ## 目录结构
 ```
