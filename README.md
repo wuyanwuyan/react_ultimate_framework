@@ -2,7 +2,7 @@
 用react开发了不少项目，大多数是客户端渲染。  
 当涉及到资讯类，官网类的网站时，为了优化seo，必须使用react服务器渲染。  
 于是查阅不少资料，总结一套自己觉得还不错的框架。  
-说是框架，其实就是一堆配置的集合。
+说是框架，更像是一堆配置的集合。
 
 
 ## 特点
@@ -10,7 +10,7 @@
 - 支持webpack多页面多入口配置
 - 支持react 服务器渲染，包含集成了redux的SPA页面服务器渲染
 - hot reload。修改客户端代码，浏览器自动刷新；修改服务器代码，自动reload。如果页面用到服务器渲染，修改前后端公共代码，将同时热更新
-- 使用postCss，可扩展使用sass
+- 使用postCss，同时可支持服务器渲染+css modules
 - 集成了ant-design UI，可以选择不用
 - 所有的依赖均已经升级到最新版本(😅尴尬，这里webpack是3的版本，最新已经到4)
 
@@ -19,7 +19,7 @@
 yarn install
 yarn start
 ```
-打开 http://localhost:8087
+打开 http://localhost:8087   
 或者 http://localhost:8087/indexSPA （单页面redux服务器渲染）
 
 ## 目录结构
