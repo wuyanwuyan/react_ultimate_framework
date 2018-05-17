@@ -14,6 +14,7 @@
     "build_server_dev": "webpack --display-error-details --config=./config/webpack_server_dev.config.js",
     "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
+    "deploy-pro": "pm2 deploy ecosystem.config.js production --force",
     "eslint-checkAll": "eslint ./client --ext js && eslint ./server --ext js",
     "precommit": "lint-staged"
   },

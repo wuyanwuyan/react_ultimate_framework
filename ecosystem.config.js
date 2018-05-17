@@ -33,9 +33,9 @@ module.exports = {
                     "port": "6677"
                 }
             ],
-            ref: 'origin/ant-ui',
+            ref: 'origin/bitnews360',
             repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
-            path: '/data/cqcoin-web',
+            path: '/data/cq-biying-web',
             "post-setup": "ls -la",
             'post-deploy': 'yarn install --production=false && yarn run build && sudo pm2 startOrRestart ecosystem.config.js --env production',
             env: {
@@ -50,9 +50,9 @@ module.exports = {
                     "port": "6677"
                 }
             ],
-            ref: 'origin/ant-ui',
+            ref: 'origin/bitnews360',
             repo: 'https://github.com/wuyanwuyan/react_ultimate_framework.git',
-            path: '/data/cqcoin-web',
+            path: '/data/cq-biying-web',
             'post-deploy': 'yarn install --production=false && npm run build && sudo pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
