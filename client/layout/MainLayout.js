@@ -1,9 +1,6 @@
 import React from "react";
 import "./mainLayout.css";
 import {NavLink} from "react-router-dom";
-import {Input} from "antd";
-
-const Search = Input.Search;
 
 
 export default class MainLayout extends React.Component {
@@ -13,46 +10,37 @@ export default class MainLayout extends React.Component {
 
     render() {
         return (
-            <div>
-                <header>
-                    <div className='flex_center_v'>
-                        <a className="margin-right-md brand" href="/">
-                            <img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" />
-                        </a>
-                        <Search
-                            onSearch={value => console.log(value)}
-                            style={{ width: 200}}
-                        />
+            [
+                <div key='header' style={{backgroundColor: 'white'}}>
+                    <header className='flex'>
 
-                        <ul className="margin_left_auto flex_center_v nav">
-                            <li><a href="/">首页</a></li>
+                        <img className='alignSelfCenter' src="http://www.bitnews360.com/img/logo.png"/>
 
+                        <ul className='ul-links flex_center_v alignSelfEnd'>
                             <li>
-                                <a href="/my/messages">
-                                    未读消息
-                                </a>
+                                <NavLink exact className='nav-link' activeClassName='nav-link-active'
+                                         to='/'>7x24快讯</NavLink>
                             </li>
-
-                            <li><a href="/getstart">新手入门</a></li>
-                            <li><a href="/api">API</a></li>
-
-                            <li><a href="/about" target="">关于</a></li>
-
-
-                            <li><a href="/setting">设置</a></li>
                             <li>
-                                <a href="/signout" data-method="post" rel="nofollow">退出</a>
+                                <NavLink className='nav-link' activeClassName='nav-link-active'
+                                         to='/realtime'>实时行情</NavLink>
                             </li>
-
+                            <li>
+                                <NavLink className='nav-link' activeClassName='nav-link-active'
+                                         to='/about'>关于我们</NavLink>
+                            </li>
                         </ul>
-                    </div>
-
-
-                </header>
-                <main>
+                    </header>
+                </div>,
+                <main key='main'>
                     {this.props.children}
-                </main>
-            </div>
+                </main>,
+                <footer key='footer'>
+                    <p>京ICP备18019521号-1</p>
+                </footer>
+
+            ]
+
         )
     }
 }

@@ -3,6 +3,7 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import indexRoute from "./routes/index";
 import http from "http";
+import proxy from "koa-proxies";
 
 export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     const app = new Koa();
@@ -30,6 +31,15 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
     app.use(bodyParser());
 
     app.use(indexRoute.routes());
+
+    app.use(proxy('/fakeApi', {
+        target: 'http://www.bitnews360.com',
+        changeOrigin: true,
+        rewrite: function(path){
+            return path.replace(/^\/fakeApi/, 'http://www.bitnews360.com');
+        },
+        logs: true
+    }));
 
     app.use(async (ctx) => {
         ctx.body = 404;

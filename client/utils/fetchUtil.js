@@ -1,15 +1,23 @@
+import config from '../constant/config';
+import FormData from 'form-data';
+
 export function fetchGet(url, query = {}, option = {}) {
     let isOk;
     let serializeQuery = serialize(query);
-    let finalUrl = `${url}` + (serializeQuery ? `?${serializeQuery}` : '');
+    let queryStr = serializeQuery ? `?${serializeQuery}` : '';
+    let finalUrl = `${config.backend.url}${url}`;
 
-    __DEV__ && console.log('%c start fetchGet:  ' + finalUrl, 'color: green');
+    if (/^http/.test(url)) {
+        finalUrl = url;
+    }
+
+    finalUrl += queryStr;
 
     let headers = {
         // 'Content-Type': 'application/json;charset=utf-8'
     };
 
-
+    __DEV__ && console.log('%c start fetchGet:  ' + finalUrl, 'color: green');
     return new Promise((resolve, reject) => {
         fetch(finalUrl, {
             headers,
@@ -30,6 +38,9 @@ export function fetchGet(url, query = {}, option = {}) {
                 }
             })
             .then((responseData) => {
+
+                __DEV__ && console.log('%c end fetchGet:  ' + finalUrl, 'color: green');
+
                 if (isOk) {
                     resolve(responseData);
                 } else {
@@ -37,6 +48,7 @@ export function fetchGet(url, query = {}, option = {}) {
                 }
             })
             .catch((error) => {
+                __DEV__ && console.error(error);
                 reject(error);
             });
     });
@@ -48,20 +60,28 @@ export function fetchPost(url, data = {}, type = 'json') {
 
     let headers = {};
 
+    const formData = new FormData();
+    for (const key in data) {
+        formData.append(key, data[key]);
+    }
 
     if (type === 'json') {
         // headers.Accept = 'application/json';
         headers['Content-Type'] = 'application/json';
     }
 
-    let finalUrl = `${url}`;
+    let finalUrl = `${config.backend.url}${url}`;
+
+    if (/^http/.test(url)) {
+        finalUrl = url;
+    }
 
     __DEV__ && console.log('%c start fetchPost:  ' + finalUrl, ' data: ', data, 'color: green');
     return new Promise((resolve, reject) => {
         fetch(finalUrl, {
             method: 'POST',
             headers,
-            body: JSON.stringify(data),
+            body: type === 'form' ? formData : typeof data === 'object' ? JSON.stringify(data) : data,
         })
             .then((response) => {
                 // token过期 ，没权限
@@ -79,6 +99,9 @@ export function fetchPost(url, data = {}, type = 'json') {
                 }
             })
             .then((responseData) => {
+
+                __DEV__ && console.log('%c end fetchPost:  ' + finalUrl, ' data: ', data, 'color: green');
+
                 if (isOk) {
                     resolve(responseData);
                 } else {
@@ -86,6 +109,7 @@ export function fetchPost(url, data = {}, type = 'json') {
                 }
             })
             .catch((error) => {
+                __DEV__ && console.error(error);
                 reject(error);
             });
     });

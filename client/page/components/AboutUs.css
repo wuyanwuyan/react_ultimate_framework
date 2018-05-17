@@ -1,0 +1,26 @@
+.about-us{
+    width: 100%;
+
+    .logoimg2{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    &-banner{
+        width: 100%;
+    }
+
+    &-info{
+        padding: 10px 100px;
+
+
+        label{
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1.8rem;
+            color: #666;
+        }
+    }
+}

@@ -2,17 +2,18 @@ import "../css/index.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import {LocaleProvider, Pagination} from "antd";
-// 由于 antd 组件的默认文案是英文，所以需要修改为中文
-import zhCN from "antd/lib/locale-provider/zh_CN";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import {BrowserRouter, Route, StaticRouter, NavLink, Switch} from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
-import TopicList from './components/TopicList';
 import {topic} from '../constant/config';
+import "../css/reboot.css";
 import './index.css';
+
+import IndexView from './components/IndexView';
+import RealTimeView from './components/RealTimeView';
+import AboutUs from './components/AboutUs';
 
 moment.locale('zh-cn');
 
@@ -23,35 +24,18 @@ class Home extends React.Component {
         super(props);
     }
 
-    _onChangePage = (page) => {
-        location.href = `${location.pathname}?page=${page}`;
-    }
-
     render() {
         const props = this.props;
 
         return (
             <Router {...props}>
-                <LocaleProvider locale={zhCN}>
-                    <MainLayout>
-                        <div style={{marginRight: '30rem'}}>
-                            <div className="topic-header">
-                                {
-                                    Object.keys(topic).map((value) =>
-                                        <NavLink key={value}
-                                                 to={`/${value}`}
-                                                 className='topic-tab'
-                                                 activeClassName='current-tab'
-                                                 exact
-                                                 target="_self">
-                                            {topic[value]}
-                                        </NavLink>)
-                                }
-                            </div>
-                            <TopicList {...props} onChangePage={this._onChangePage}/>
-                        </div>
-                    </MainLayout>
-                </LocaleProvider>
+                <MainLayout>
+                    <div className='main-wp'>
+                        <Route exact path="/" component={IndexView}/>
+                        <Route exact path="/realtime" component={RealTimeView}/>
+                        <Route exact path="/about" component={AboutUs}/>
+                    </div>
+                </MainLayout>
             </Router>
         );
     }
@@ -59,7 +43,7 @@ class Home extends React.Component {
 
 if (__CLIENT__) {
     let initState = window.__INITIAL_STATE__ || {};
-    ReactDOM.hydrate(<Home {...initState}/>, document.getElementById("react-container"));
+    ReactDOM.render(<Home {...initState}/>, document.getElementById("react-container"));
 }
 
 export default Home;

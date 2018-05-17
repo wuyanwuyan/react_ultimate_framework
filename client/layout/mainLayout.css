@@ -1,33 +1,46 @@
+:root {
+  --max-width: 1200px
+
+}
+
 header {
-  background-color: #444;
-
-  & > div{
-    font-size: 13px;
-    padding: 1rem;
-    width: 90%;
-    margin: 0 auto;
-  }
+  background-color: white;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 7.4rem;
 
 }
 
-main{
-  width: 90%;
-  margin: 15px auto;
-}
+.ul-links {
+  padding-bottom: 10px;
 
-.brand {
-
-  img {
-    width: 12rem;
+  li {
+    margin: 0 40px;
   }
 }
 
-.nav {
-  margin-bottom: 0;
+.nav-link {
+  font-size: 1.6rem;
+  color: black;
+  text-decoration: none;
+  padding-bottom: 6px;
 
-  a {
-    font-size: 1.3rem;
-    padding: 1rem 1.5rem;
-    color: #ccc
+  &:hover, &-active {
+    color: #6ea1fe;
+    border-bottom: solid 3px #6ea1fe;
   }
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+footer{
+  color: white;
+  height: 60px;
+  line-height: 60px;
+  background: #666;
+  font-size: 1.8rem;
+  text-align: center;
 }

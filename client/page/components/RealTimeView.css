@@ -1,0 +1,56 @@
+.slider-item {
+  &-a {
+    width: 100%;
+    height: 22.6rem;
+    display: inline-block;
+  }
+
+  img {
+    height: 100%;
+  }
+
+}
+
+.slick-dots {
+  bottom: 8px;
+}
+
+
+.tablist{
+  width: 100%;
+
+  .td-coin-name:before{
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 100px;
+    background: #ccc;
+    float: left;
+    margin-top: 16px;
+    margin-right: 6px;
+  }
+
+  thead{
+    th{
+      text-align: left;
+      font-size: 1.6rem;
+      border-bottom: solid 1px #dcdcdc;
+      height: 46px;
+      line-height: 46px;
+    }
+  }
+
+
+  tbody{
+    td{
+      font-size: 1.4rem;
+      text-align: left;
+      border-bottom: solid 1px #dcdcdc;
+      height: 46px;
+      line-height: 46px;
+    }
+  }
+
+}
+

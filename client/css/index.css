@@ -1,2 +1,28 @@
-@import "./reset.css";
+@import "./normalize.css";
 @import "./utilities.css";
+
+.section {
+  box-shadow: 0px 0px 16px 3px #dedede;
+  border-radius: 10px;
+  padding: 1.8rem;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.left {
+  flex-basis: 67%;
+  width: 67%;
+  min-width: 67%;
+}
+
+.trend {
+  border-radius: 3px;
+  height: 25px;
+  line-height: 25px;
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  outline: none;
+  border:0;
+  font-size: 1.2rem;
+}

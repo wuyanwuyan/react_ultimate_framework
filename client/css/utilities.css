@@ -79,7 +79,7 @@
 }
 
 .margin-top-bg {
-  margin-right: var(--boxsize-bg)
+  margin-top: var(--boxsize-bg)
 }
 
 .margin-top-xs {
@@ -284,6 +284,14 @@
   flex-direction: column;
 }
 
+.alignSelfCenter {
+  align-self: center;
+}
+
+.alignSelfEnd {
+  align-self: flex-end;
+}
+
 .margin_left_auto {
   margin-left: auto;
 }
@@ -302,3 +310,6 @@
 }
 
 
+.margin0{
+  margin: 0;
+}

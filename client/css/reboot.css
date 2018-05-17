@@ -3,10 +3,20 @@ html {
 }
 
 body{
-  background-color: #e1e1e1;
+  background-color: #f2f2f2;
 }
 
 a:active,a:hover,a:focus,a:focus-within{
   text-decoration: none;
   outline:0;
+}
+
+ul,ol{
+  li{
+    list-style-type:none;
+  }
+}
+
+*,*:before,*:after{
+  box-sizing: border-box;
 }

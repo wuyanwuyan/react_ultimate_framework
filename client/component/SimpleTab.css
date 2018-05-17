@@ -1,0 +1,27 @@
+.simple-tab {
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  background: #d8d8d8;
+  color: #333;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+
+  & span{
+    text-align: center;
+    flex: 1;
+    color: black;
+    cursor: pointer;
+
+    &.active{
+      color: white;
+      background: #00b787;
+    }
+
+
+  }
+
+
+}

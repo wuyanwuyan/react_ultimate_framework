@@ -1,0 +1,151 @@
+.index-image {
+  width: 100%;
+}
+
+.timel {
+  width: 6.2rem;
+  text-align: center;
+  font-size: 1.2rem;
+
+  h6 {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    background: #6ea1fe;
+    font-size: 0.8em;
+    color: white;
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  h5 {
+    width: 100%;
+    border-radius: 0 0 6px 6px;
+    border: solid 1px #bdbdbd;
+    border-top: none;
+    height: 28px;
+    line-height: 28px;
+    font-size: 1.2em;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+}
+
+.timez {
+
+  width: 6.2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  border-right: #ddd 1px solid;
+
+  h6 {
+    font-size: 1.2em;
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+  }
+  h5 {
+    font-size: 1.0em;
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    color: #999;
+    font-weight: normal;
+  }
+}
+
+.time-label {
+  font-size: 2.0rem;
+  color: #6ea1fe;
+  border-bottom: solid 3px #6ea1fe;
+  text-align: center;
+  padding: 4px 0 10px;
+  margin: 0 18px;
+}
+
+.news {
+  font-size: 1.8rem;
+  margin-top: 4rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #6d6d6d;
+
+  }
+
+  &::first-child::before {
+    background: #6ea1fe;
+  }
+
+  &-timeline {
+    width: 2px;
+    background: #6d6d6d;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    height: calc(100% - 8px);
+
+  }
+
+  &-time {
+    font-size: 1em;
+    margin-left: 20px;
+    margin-right: 30px;
+
+  }
+
+  &-title {
+    font-size: 1em;
+    margin: 0;
+  }
+
+  &-content {
+    font-size: 0.8em;
+    font-weight: normal;
+    line-height: 1.4;
+  }
+
+  &-rate {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.7em;
+  }
+
+}
+
+.lookMore {
+  background: #6ea1fe;
+  color: white;
+  width: 100%;
+  height: 45px;
+  font-size: 1.6rem;
+  border-radius: 6px;
+  outline: none;
+  margin-top: 20px;
+
+  &:hover {
+    background: #538bf0;
+    cursor: pointer;
+  }
+}
+
+.star-grey {
+  background-image: url("../../assets/star-grey.png");
+  display: block;
+  height: 16px;
+  width: 90px;
+  background-repeat: repeat-x;
+
+}
+
+.star-yellow{
+  background-image:url("../../assets/star-yellow.png");
+  display: block;
+  height: 16px;
+  background-repeat: repeat-x;
+}
