@@ -10,9 +10,9 @@
     "start": "node dev/index.js",
     "clean": "rm -rf ./dist && rm -rf ./server_dist && rm -rf ./release",
     "build": "npm run build_client_pro && npm run build_server_pro",
-    "build_client_dev": "webpack --config=./config/webpack_client_dev.config.js && webpack --config=./config/webpack_client_dev_mobile.config.js",
+    "build_client_dev": "webpack --config=./config/webpack_client_dev.config.js",
     "build_server_dev": "webpack --display-error-details --config=./config/webpack_server_dev.config.js",
-    "build_client_pro": "webpack --config=./config/webpack_client_production.config.js && webpack --config=./config/webpack_client_production_mobile.config.js",
+    "build_client_pro": "webpack --config=./config/webpack_client_production.config.js",
     "build_server_pro": "webpack --config=./config/webpack_server_production.config.js",
     "eslint-checkAll": "eslint ./client --ext js && eslint ./server --ext js",
     "precommit": "lint-staged"

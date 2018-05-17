@@ -14,7 +14,7 @@ export default class MainLayout extends React.Component {
                 <div key='header' style={{backgroundColor: 'white'}}>
                     <header className='flex'>
 
-                        <img className='alignSelfCenter' src="http://www.bitnews360.com/img/logo.png"/>
+                        <img className='logo alignSelfCenter margin-left-md' src={require('../assets/logo.png')}/>
 
                         <ul className='ul-links flex_center_v alignSelfEnd'>
                             <li>

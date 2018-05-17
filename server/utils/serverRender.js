@@ -31,9 +31,9 @@ export function setCompiler(midware) {
 }
 
 let DEFAULT_STATE = {
-    description: "服务器渲染",
-    keywords: "react server side render,服务器渲染",
-    title: "react server side render",
+    description: "币快讯-资讯",
+    keywords: "币快讯-资讯",
+    title: "币快讯-资讯",
     content: "",
     initialState: "null",
 }

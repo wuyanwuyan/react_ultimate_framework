@@ -38,7 +38,7 @@ export default function serverEntry(devMiddleware, hotMiddleware, devMidware) {
         rewrite: function(path){
             return path.replace(/^\/fakeApi/, 'http://www.bitnews360.com');
         },
-        logs: true
+        logs: __DEV__ ? true : false
     }));
 
     app.use(async (ctx) => {

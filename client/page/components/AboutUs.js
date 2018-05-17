@@ -21,7 +21,7 @@ export default class AboutUs extends React.Component {
 
                     <div className='about-us-info'>
 
-                        <div className="logoimg2"><img src="http://www.bitnews360.com/img/logo2.png"/></div>
+                        <div className="logoimg2"><img style={{width:80}} src={require('../../assets/logo.png')}/></div>
 
                         <label>币快讯是一款可以领糖果的区块链快讯平台，读新闻还可领红包，阅读时间越长红包越大。随时随地一键提币，方便快捷。</label>
 

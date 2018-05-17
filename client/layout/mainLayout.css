@@ -9,6 +9,10 @@ header {
   margin: 0 auto;
   height: 7.4rem;
 
+  .logo{
+    width: 80px;
+  }
+
 }
 
 .ul-links {
