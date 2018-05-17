@@ -6,7 +6,7 @@ module.exports = {
     apps: [
         // First application
         {
-            name: 'cqcoin_web',
+            name: 'cq_biying_web',
             script: './release/server.js',
             instances: 2,
             error_file: "./logs/app-err.log",//错误输出日志
