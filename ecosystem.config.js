@@ -8,7 +8,7 @@ module.exports = {
         {
             name: 'cq_biying_web',
             script: './release/server.js',
-            instances: 2,
+            instances: 1,
             error_file: "./logs/app-err.log",//错误输出日志
             out_file: "./logs/app-out.log",  //日志
             env: {
@@ -16,7 +16,8 @@ module.exports = {
             },
             env_production: {
                 NODE_ENV: 'production'
-            }
+            },
+            exec_mode:"fork"
         }
     ],
 
