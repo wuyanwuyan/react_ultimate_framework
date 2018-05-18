@@ -121,7 +121,7 @@ externals: [nodeExternals({whitelist:[/^antd/]})], // in order to ignore all mod
 
 **服务端（重点）**
 
-当后端代码改变，我们同样需要重启后端，因为我们使用了webpack对后端代码进行打包，需要自己实现重启后端的工作。
+当后端代码改变，我们同样需要重启后端，由于我们使用了webpack对后端代码进行打包，需要自己实现重启后端的工作。
 
 **实现node服务器重启：**
 
