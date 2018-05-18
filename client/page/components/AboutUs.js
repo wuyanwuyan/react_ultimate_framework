@@ -23,7 +23,7 @@ export default class AboutUs extends React.Component {
 
                         <div className="logoimg2"><img style={{width:80}} src={require('../../assets/logo.png')}/></div>
 
-                        <label>币快讯是一款可以领糖果的区块链快讯平台，读新闻还可领红包，阅读时间越长红包越大。随时随地一键提币，方便快捷。</label>
+                        <label>币赢app是一款可以领糖果的区块链快讯平台，读新闻还可领红包，阅读时间越长红包越大。随时随地一键提币，方便快捷。</label>
 
                         <p>-&nbsp;全球快讯：链圈，币圈新闻实时更新，帮助用户快速入门，快人一步了解行业变化。</p>
 

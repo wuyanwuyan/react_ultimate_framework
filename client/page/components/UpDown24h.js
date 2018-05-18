@@ -15,7 +15,6 @@ export default class UpDown24h extends React.Component {
         }
     }
 
-
     componentDidMount() {
         this._fetchData();
     }

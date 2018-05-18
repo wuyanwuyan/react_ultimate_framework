@@ -17,7 +17,6 @@ export default class RealTimeView extends React.Component {
             coinPriceList: [],
             isLoading:true,
         }
-
     }
 
     componentDidMount() {
@@ -48,13 +47,13 @@ export default class RealTimeView extends React.Component {
 
         const slickContent = [
             {
-                src: 'http://www.bitnews360.com/img/banner01.png'
+                src: require('../../assets/1.png')
             },
             {
-                src: 'http://www.bitnews360.com/img/banner02.png'
+                src: require('../../assets/2.png')
             },
             {
-                src: 'http://www.bitnews360.com/img/banner03.png'
+                src: require('../../assets/3.png')
             },
         ]
 

@@ -31,9 +31,9 @@ export function setCompiler(midware) {
 }
 
 let DEFAULT_STATE = {
-    description: "币快讯-资讯",
-    keywords: "币快讯-资讯",
-    title: "币快讯-资讯",
+    description: "币赢app-资讯",
+    keywords: "币赢app-资讯",
+    title: "币赢app-资讯",
     content: "",
     initialState: "null",
 }

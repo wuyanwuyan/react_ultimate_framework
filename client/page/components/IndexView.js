@@ -38,7 +38,7 @@ export default class IndexView extends React.Component {
         return (
             <div className='flex'>
                 <section className='section left margin-right'>
-                    <img className='index-image' src='http://www.bitnews360.com/img/banner01.png' alt='banner'/>
+                    <img className='index-image' src={require('../../assets/1.png')} alt='banner'/>
                     <div className='flex_center_v margin-top-md'>
                         <div className="timel">
                             <h6>5月</h6>

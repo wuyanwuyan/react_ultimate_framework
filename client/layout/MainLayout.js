@@ -13,9 +13,7 @@ export default class MainLayout extends React.Component {
             [
                 <div key='header' style={{backgroundColor: 'white'}}>
                     <header className='flex'>
-
                         <img className='logo alignSelfCenter margin-left-md' src={require('../assets/logo.png')}/>
-
                         <ul className='ul-links flex_center_v alignSelfEnd'>
                             <li>
                                 <NavLink exact className='nav-link' activeClassName='nav-link-active'
@@ -34,11 +32,7 @@ export default class MainLayout extends React.Component {
                 </div>,
                 <main key='main'>
                     {this.props.children}
-                </main>,
-                <footer key='footer'>
-                    <p>京ICP备18019521号-1</p>
-                </footer>
-
+                </main>
             ]
 
         )
