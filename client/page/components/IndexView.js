@@ -41,12 +41,12 @@ export default class IndexView extends React.Component {
                     <img className='index-image' src={require('../../assets/1.png')} alt='banner'/>
                     <div className='flex_center_v margin-top-md'>
                         <div className="timel">
-                            <h6>5月</h6>
-                            <h5>16日</h5>
+                            <h6>{`${moment().format('M')}月`}</h6>
+                            <h5>{`${moment().format('D')}日`}</h5>
                         </div>
                         <div className="timez">
                             <h6>今天</h6>
-                            <h5>星期三</h5>
+                            <h5>星期*</h5>
                         </div>
                         <label className='time-label'>快讯</label>
                     </div>
