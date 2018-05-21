@@ -46,7 +46,7 @@ export default class IndexView extends React.Component {
                         </div>
                         <div className="timez">
                             <h6>今天</h6>
-                            <h5>星期*</h5>
+                            <h5>{`星期${"日一二三四五六 ".charAt(new Date().getDay())}`}</h5>
                         </div>
                         <label className='time-label'>快讯</label>
                     </div>
