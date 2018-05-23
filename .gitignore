@@ -5,5 +5,4 @@ release
 logs
 .idea
 .idea/workspace.xml
-ecosystem.config.js
 stats.generated.json
